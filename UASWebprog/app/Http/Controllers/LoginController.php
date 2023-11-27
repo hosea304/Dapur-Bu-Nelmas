@@ -35,6 +35,13 @@ class LoginController extends Controller
                 'status' => 400,
                 'error' => 'Pastikan Masukkan Email dan Password Dengan Valid!'
             ]);
+
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login.index');
     }
 }
