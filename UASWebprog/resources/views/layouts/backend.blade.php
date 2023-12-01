@@ -14,6 +14,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('admin/dist/css/adminlte.min.css')}}">
     @yield('headerScripts')
+    <link rel="stylesheet" href="/resources/css/app.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -61,20 +62,14 @@
             <a href="" class="brand-link">
                 <img src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">Ghost Kitchen</span>
+                <span class="brand-text font-weight-light">Dapur Bu Nelmas</span>
             </a>
 
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
-                            alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
-                    </div>
+
                 </div>
 
                 <!-- SidebarSearch Form -->
