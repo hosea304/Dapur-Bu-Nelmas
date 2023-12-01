@@ -20,6 +20,17 @@
             </ul>
         </li>
 
+        <!-- Menu Category -->
+        <li class="nav-item">
+            <a href="{{route('category')}}" class="nav-link {{request()->is('category')?'active':''}}">
+                <i class="nav-icon fas fa-address-book"></i>
+                <p>
+                    Category
+                    <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+            </a>
+        </li>
+
         <!-- Menu User -->
         <li class="nav-item">
             <a href="{{route('user')}}" class="nav-link {{request()->is('user')?'active':''}}">
@@ -30,5 +41,7 @@
                 </p>
             </a>
         </li>
+
+
     </ul>
 </nav>
