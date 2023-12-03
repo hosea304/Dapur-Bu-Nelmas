@@ -1,7 +1,7 @@
 @extends('layouts.backend')
 
 @section('title')
-Kategori
+Recycle Bin
 @endsection
 
 @section('headerScripts')
@@ -13,11 +13,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 @endsection
 
 @section('heading')
-Halaman Kategori
+Halaman Recycle Bin Kategori
 @endsection
 
 @section('subHeading')
-Kategori
+Recycle Bin Kategori
 @endsection
 
 @section('content')
@@ -29,13 +29,13 @@ Kategori
                     <div class="col-md-6">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <button class="btn btn-primary" id="btnAddKategori">
-                                    <span class="fas fa-plus"></span>
-                                    Tambah Kategori
-                                </button>
+                                <a class="nav-link" href="{{route('category')}}">
+                                    <span class="fas fa-trash-restore"></span>
+                                    Kategori
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('category.trashCategory')}}">
+                                <a class="nav-link active" href="{{route('category.trashCategory')}}">
                                     <span class="fas fa-trash-restore"></span>
                                     Recycle Bin
                                 </a>
@@ -47,11 +47,11 @@ Kategori
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 table-responsive">
-                        <table id="tableKategori" class="table table-bordered table-striped">
+                        <table id="tableKategoriTrash" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>
-                                        <input type="checkbox" name="main_checkbox" id="main_checkbox">
+                                        <input type="checkbox" name="mainTrash_checkbox" id="mainTrash_checkbox">
                                         <label for=""></label>
                                     </th>
                                     <th>No</th>
@@ -59,7 +59,7 @@ Kategori
                                     <th>Slug</th>
                                     <th>
                                         Action <br>
-                                        <button id="delAllBtn" type="submit" class="btn btn-danger">Hapus</button>
+                                        <button id="restoreAllBtn" type="submit" class="btn btn-danger">Hapus</button>
                                     </th>
                                 </tr>
                             </thead>
@@ -74,9 +74,6 @@ Kategori
     </div>
 </div>
 
-@include('backend.category.addModalKategori')
-
-@include('backend.category.editModalKategori')
 
 @endsection
 

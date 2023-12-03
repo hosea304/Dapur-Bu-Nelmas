@@ -28,8 +28,12 @@ Route::middleware('auth')->controller(CategoryController::class)->group(function
     Route::get('fetchCategory', 'fetchCategory')->name('category.fetch');
     Route::get('category/edit', 'edit')->name('category.edit');
     Route::post('category/edit', 'update')->name('category.update');
-    Route::get('category/destroy', 'destroy')->name('category.destroy');
-    Route::get('category/destroy/selected', 'destroySelected')->name('category.destroySelected');
+    Route::get('category/trash', 'trashCategory')->name('category.trashCategory');
+    Route::get('category/fetchTrashCategory', 'fetchTrashCategory')->name('category.fetchTrashCategory');
+    Route::post('category/restore', 'restore')->name('category.restore');
+    Route::post('category/restore/selected', 'restoreSelected')->name('category.restoreSelected');
+    Route::post('category/destroy', 'destroy')->name('category.destroy');
+    Route::post('category/destroy/selected', 'destroySelected')->name('category.destroySelected');
 });
 
 Route::middleware('auth')->controller(UserController::class)->group(function () {
