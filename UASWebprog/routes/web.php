@@ -54,3 +54,12 @@ Route::controller(LoginController::class)->group(function () {
 
     Route::post('logout', 'logout')->name('logout');
 });
+
+// USER //
+Route::get('/beranda', function () {
+    return view('user.homepage');
+});
+
+Route::get('/produk', function () {
+    return view('user.product');
+});
