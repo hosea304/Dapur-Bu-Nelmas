@@ -1,4 +1,5 @@
 <script>
+
     $(document).ready(function () {
         $.ajaxSetup({
             headers: {
@@ -319,7 +320,7 @@
 
     function toggleRestoreAllBtn() {
         if ($('input[name="kategoriTrash_checkbox"]:checked').length > 0) {
-            $('#restoreAllBtn').text('Kembalikan (' + $('input[name="kategoriTrash_checkbox"]:checked').length + ')').removeClass('d-none');
+            $('#restoreAllBtn').text('Restore (' + $('input[name="kategoriTrash_checkbox"]:checked').length + ')').removeClass('d-none');
         } else {
             $('#restoreAllBtn').addClass('d-none');
         }
@@ -383,6 +384,35 @@
         }
     });
 
+    $(document).on('click', '#btnDelPermanen', function (e) {
+        e.preventDefault();
+        let idKategori = $(this).data('id');
+
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Kamu Ingin Menghapus Data Kategori Secara Permanen !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus data!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post("{{ route('category.destroyPermanent') }}", { idKategori: idKategori },
+                    function (data) {
+                        console.log('Ajax response:', data);
+                        Swal.fire(
+                            'Success',
+                            data.message,
+                            'success'
+                        );
+                        $('#tableKategoriTrash').DataTable().ajax.reload(null, false);
+                    },
+                    "json"
+                );
+            }
+        });
+    });
 
 
 </script>

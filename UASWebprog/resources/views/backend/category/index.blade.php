@@ -29,10 +29,10 @@ Kategori
                     <div class="col-md-6">
                         <ul class="nav nav-pills">
                             <li class="nav-item">
-                                <button class="btn btn-primary" id="btnAddKategori">
-                                    <span class="fas fa-plus"></span>
-                                    Tambah Kategori
-                                </button>
+                                <a class="nav-link active" href="{{route('category')}}">
+                                    <span class="fas fa-trash-restore"></span>
+                                    Kategori
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('category.trashCategory')}}">
@@ -40,7 +40,6 @@ Kategori
                                     Recycle Bin
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -48,6 +47,11 @@ Kategori
                 <div class="row">
                     <div class="col-md-12 col-sm-12 table-responsive">
                         <table id="tableKategori" class="table table-bordered table-striped">
+                            <button class="btn btn-primary mb-3" id="btnAddKategori" data-toggle="modal"
+                                data-target="#addModalKategori">
+                                <span class="fas fa-plus"></span>
+                                Tambah Kategori
+                            </button>
                             <thead>
                                 <tr>
                                     <th>

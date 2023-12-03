@@ -120,7 +120,7 @@ class CategoryController extends Controller
                         <button class="btn btn-secondary btn-sm" id="btnRestoreKategori" data-id="' . $row['id'] . '">
                             <span class="fas fa-retweet"></span>
                         </button>
-                        <button class="btn btn-danger btn-sm" id="btnForceDelKategori" data-id="' . $row['id'] . '">
+                        <button class="btn btn-danger btn-sm" id="btnDelPermanen" data-id="' . $row['id'] . '">
                             <span class="fas fa-trash-alt"></span>
                         </button>
                     </div>';
@@ -193,4 +193,16 @@ class CategoryController extends Controller
             ]);
         }
     }
+
+    public function destroyPermanent(Request $request)
+    {
+        $dataKategori = Category::withTrashed()->findOrFail($request->get('idKategori'));
+        $dataKategori->forceDelete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Data Kategori Dengan Nama ' . '"' . $dataKategori->name . '"' . ' Berhasil Dihapus Permanen'
+        ]);
+    }
+
 }

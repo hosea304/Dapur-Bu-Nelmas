@@ -34,6 +34,7 @@ Route::middleware('auth')->controller(CategoryController::class)->group(function
     Route::post('category/restore/selected', 'restoreSelected')->name('category.restoreSelected');
     Route::post('category/destroy', 'destroy')->name('category.destroy');
     Route::post('category/destroy/selected', 'destroySelected')->name('category.destroySelected');
+    Route::post('category/destroy/permanent', 'destroyPermanent')->name('category.destroyPermanent');
 });
 
 Route::middleware('auth')->controller(UserController::class)->group(function () {
