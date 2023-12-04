@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,23 @@ Route::middleware('auth')->controller(CategoryController::class)->group(function
     Route::post('category/destroy/selected', 'destroySelected')->name('category.destroySelected');
     Route::post('category/destroy/permanent', 'destroyPermanent')->name('category.destroyPermanent');
 });
+
+// foods Controller
+Route::middleware('auth')->controller(FoodsController::class)->group(function () {
+    Route::get('foods', 'index')->name('foods');
+    Route::post('foods', 'store')->name('foods.store');
+    Route::get('fetchFoods', 'fetchFoods')->name('foods.fetch');
+    Route::get('foods/edit', 'edit')->name('foods.edit');
+    Route::post('foods/edit', 'update')->name('foods.update');
+    Route::get('foods/trash', 'trashFoods')->name('foods.trashFoods');
+    Route::get('foods/fetchTrashFoods', 'fetchTrashFoods')->name('foods.fetchTrashFoods');
+    Route::post('foods/restore', 'restore')->name('foods.restore');
+    Route::post('foods/restore/selected', 'restoreSelected')->name('foods.restoreSelected');
+    Route::post('foods/destroy', 'destroy')->name('foods.destroy');
+    Route::post('foods/destroy/selected', 'destroySelected')->name('foods.destroySelected');
+    Route::post('foods/destroy/permanent', 'destroyPermanent')->name('foods.destroyPermanent');
+});
+
 
 Route::middleware('auth')->controller(UserController::class)->group(function () {
     Route::get('user', 'index')->name('user');

@@ -31,17 +31,15 @@
             </a>
         </li>
 
-        <!-- Menu User -->
+        <!-- Menu Product -->
         <li class="nav-item">
-            <a href="{{route('user')}}" class="nav-link {{request()->is('user')?'active':''}}">
-                <i class="nav-icon fas fa-user-alt"></i>
+            <a href="{{route('foods')}}" class="nav-link {{request()->is('foods')?'active':''}}">
+                <i class="nav-icon fas fa-pizza-slice"></i>
                 <p>
-                    User
+                    Menu
                     <!-- <i class="right fas fa-angle-left"></i> -->
                 </p>
             </a>
-        </li>
-
 
     </ul>
 </nav>
