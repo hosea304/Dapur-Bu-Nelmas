@@ -109,4 +109,56 @@
             }
         });
     });
+
+    $(document).on('click', '#btnEditFood', function (e) {
+        e.preventDefault();
+        let idMenu = $(this).data('id');
+
+        $.get("{{ route('foods.edit') }}", { idMenu: idMenu },
+            function (data) {
+                $('#editModalMenu').modal('show');
+                $('#idMenu').val(idMenu);
+                $('#name').val(data.foods.name);
+                $('#photo').val(data.foods.photo);
+                $('#harga').val(data.foods.harga);
+                $('#stock').val(data.foods.stock);
+                $('#status').val(data.foods.status);
+                $('#kategori').val(data.foods.id_category);
+            },
+            "json"
+        );
+    });
+
+    $(document).on('submit', '#editFormMenu', function (e) {
+        e.preventDefault();
+        let dataForm = this;
+
+        $.ajax({
+            type: $("#editFormMenu").attr('method'),
+            url: $("#editFormMenu").attr('action'),
+            data: new FormData(dataForm),
+            dataType: 'JSON',
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                $("#editFormMenu").find('span.error-text').text('');
+            },
+            success: function (response) {
+                if (response.status == 400) {
+                    $.each(response.errors, function (prefix, val) {
+                        $("#editFormMenu").find('span.' + prefix + '_error').text(val[0]);
+                    });
+                } else {
+                    Swal.fire(
+                        'Success',
+                        response.message,
+                        'success'
+                    );
+                    $('#editModalMenu').modal('hide');
+                    $('#tableMenu').DataTable().ajax.reload(null, false);
+                    $("#editFormMenu")[0].reset();
+                }
+            }
+        });
+    });
 </script>

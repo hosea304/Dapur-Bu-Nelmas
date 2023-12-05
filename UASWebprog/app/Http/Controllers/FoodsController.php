@@ -96,7 +96,7 @@ class FoodsController extends Controller
 
     public function edit(Request $request)
     {
-        $Food = Foods::findOrFail($request->get('idFood'));
+        $Food = Foods::findOrFail($request->get('idMenu'));
 
         return response()->json([
             'status' => 200,

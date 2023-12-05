@@ -59,7 +59,8 @@ Recycle Bin Kategori
                                     <th>Slug</th>
                                     <th>
                                         Action <br>
-                                        <button id="restoreAllBtn" type="submit" class="btn btn-danger">Restore</button>
+                                        <button id="restoreAllBtn" type="submit"
+                                            class="btn btn-success">Restore</button>
                                     </th>
                                 </tr>
                             </thead>
