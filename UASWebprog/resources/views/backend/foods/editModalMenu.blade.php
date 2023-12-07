@@ -1,38 +1,39 @@
 <!-- Modal -->
 <div class="modal fade" id="editModalMenu" tabindex='-1' aria-labelledby="editModalMenuLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{route('foods.store')}}" id="editFormMenu" method="POST">
+        <form action="{{ route('foods.update') }}" id="editFormMenu" method="POST" enctype="multipart/form-data">>
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editModalMenuLabel">Tambah Menu</h5>
+                    <h5 class="modal-title" id="editModalMenuLabel">Edit Menu</h5>
                     <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12 col-sm-12">
                         <label for="">Nama</label>
-                        <input placeholder="Kue" type="text" name="name" class="form-control">
+                        <input placeholder="Kue" type="text" name="name" id="name" class="form-control">
                         <span class="text-danger error-text name_error"></span>
+                        <input type="hidden" name="idMenu" id="idMenu">
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="">Photo Menu</label>
-                        <input placeholder="Dessert" type="file" name="photo" class="form-control">
+                        <input placeholder="Dessert" type="file" name="photo" id="photo" class="form-control">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="">Harga</label>
-                        <input type="number" name="harga" class="form-control">
+                        <input type="number" name="harga" class="form-control" id="harga">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="">Stock</label>
-                        <input type="number" name="stock" class="form-control">
+                        <input type="number" name="stock" class="form-control" id="stock">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="">Status</label><br>
-                        <select id="status" name="status">
+                        <select id="status" name="status" id="status">
                             <option value="Tersedia">Tersedia</option>
                             <option value="Tidak Tersedia">Tidak Tersedia</option>
                         </select>

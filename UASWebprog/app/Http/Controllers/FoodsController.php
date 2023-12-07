@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FoodsController extends Controller
 {
@@ -31,23 +32,27 @@ class FoodsController extends Controller
                 ->addColumn('action', function ($row) {
                     return '<div class="btn-group">
                         <button class="btn btn-warning btn-sm" id="btnEditFood" data-id="' . $row->id . '">
-                            <span class="fas fa-edit"></span>
+                        <span class="fas fa-edit"></span>
                         </button>
                         <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->id . '">
-                            <span class="fas fa-trash-alt"></span>
+                        <span class="fas fa-trash-alt"></span>
                         </button>
-                    </div>';
+                        </div>';
                 })
                 ->addColumn('checkbox', function ($row) {
                     return '<input type="checkbox"  name="food_checkbox" id="food_checkbox" data-id="' . $row->id . '">';
                 })
+                ->editColumn('photo', function ($row) {
+                    return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
+                })
                 ->editColumn('id_category', function ($row) {
                     return $row->category_name; // Display category name instead of ID
                 })
-                ->rawColumns(['action', 'checkbox'])
+                ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);
         }
     }
+
 
 
     public function store(Request $request)
@@ -78,7 +83,10 @@ class FoodsController extends Controller
         } else {
             $dataFood = new Foods();
             $dataFood->name = $request->input('name');
-            $dataFood->photo = $request->file('photo')->store('foods');
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('foods', 'public');
+                $dataFood->photo = $photoPath;
+            }
             $dataFood->harga = $request->input('harga');
             $dataFood->stock = $request->input('stock');
             $dataFood->slug = Str::slug($request->input('name'));
@@ -96,11 +104,11 @@ class FoodsController extends Controller
 
     public function edit(Request $request)
     {
-        $Food = Foods::findOrFail($request->get('idMenu'));
+        $food = Foods::findOrFail($request->get('idMenu'));
 
         return response()->json([
             'status' => 200,
-            'food' => $Food
+            'food' => $food
         ]);
     }
 
@@ -108,9 +116,20 @@ class FoodsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'harga' => 'required|integer',
+            'stock' => 'required|integer',
+
         ], [
             'name.required' => 'Field Nama Food harus diisi',
             'name.string' => 'Field Nama Food harus Berupa string',
+            // 'photo.image' => 'Field Photo harus Berupa image',
+            'photo.mimes' => 'Field Photo harus Berupa jpeg,png,jpg,gif,svg',
+            'photo.max' => 'Field Photo Maksimal 2048',
+            'harga.required' => 'Field Harga harus diisi',
+            'harga.integer' => 'Field Harga harus Berupa integer',
+            'stock.required' => 'Field Stock harus diisi',
+            'stock.integer' => 'Field Stock harus Berupa integer',
         ]);
 
         if ($validator->fails()) {
@@ -121,6 +140,20 @@ class FoodsController extends Controller
         } else {
             $dataFood = Foods::findOrFail($request->get('idFood'));
             $dataFood->name = $request->get('name');
+            if ($request->hasFile('photo')) {
+                $oldPhotoPath = $dataFood->photo;
+
+                $photoPath = $request->file('photo')->store('foods', 'public');
+                $dataFood->photo = $photoPath;
+
+                if ($oldPhotoPath && Storage::exists('public/' . $oldPhotoPath)) {
+                    Storage::delete('public/' . $oldPhotoPath);
+                }
+            }
+            $dataFood->harga = $request->get('harga');
+            $dataFood->stock = $request->get('stock');
+            $dataFood->status = $request->get('status');
+            $dataFood->id_category = $request->get('kategori');
             $dataFood->slug = Str::slug($dataFood->name);
             $dataFood->update();
 

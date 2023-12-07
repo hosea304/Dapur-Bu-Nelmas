@@ -35,7 +35,7 @@ Menu
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{route('foods.trashFoods')}}">
                                     <span class="fas fa-trash-restore"></span>
                                     Recycle Bin
                                 </a>

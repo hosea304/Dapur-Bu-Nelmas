@@ -74,6 +74,74 @@
         }
 
         fetchFoods();
+
+        function fetchTrashFoods() {
+            let datatable = $('#tableFoodsTrash').DataTable({
+                processing: true,
+                info: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('foods.fetchTrashFoods') }}",
+                    type: "GET"
+                },
+                columns: [
+                    {
+                        data: 'checkbox',
+                        name: 'checkbox',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: null,
+                        name: 'no',
+                        render: function (data, type, full, meta) {
+                            return meta.row + 1;
+                        }
+                    },
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'photo',
+                        name: 'photo'
+                    },
+                    {
+                        data: 'harga',
+                        name: 'harga'
+                    },
+                    {
+                        data: 'stock',
+                        name: 'stock'
+                    },
+                    {
+                        data: 'slug',
+                        name: 'slug'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
+                    },
+                    {
+                        data: 'id_category',
+                        name: 'id_category'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+            }).on('draw', function () {
+                $('input[name="foodTrash_checkbox"]').each(function () {
+                    $(this).prop('checked', false);
+                })
+                $('input[name="foodTrash_checkbox"]').prop('checked', false);
+                $('#delAllBtn').addClass('d-none');
+            });
+        }
+        fetchTrashFoods();
     });
 
     $(document).on('submit', '#addFormMenu', function (e) {
@@ -118,12 +186,11 @@
             function (data) {
                 $('#editModalMenu').modal('show');
                 $('#idMenu').val(idMenu);
-                $('#name').val(data.foods.name);
-                $('#photo').val(data.foods.photo);
-                $('#harga').val(data.foods.harga);
-                $('#stock').val(data.foods.stock);
-                $('#status').val(data.foods.status);
-                $('#kategori').val(data.foods.id_category);
+                $('#name').val(data.food.name);
+                $('#harga').val(data.food.harga);
+                $('#stock').val(data.food.stock);
+                $('#status option[value="' + data.food.status + '"]').prop('selected', true);
+                $('#kategori option[value="' + data.food.id_category + '"]').prop('selected', true);
             },
             "json"
         );
@@ -160,5 +227,57 @@
                 }
             }
         });
+
+    });
+
+
+    $(document).on('click', '#btnDelFood', function (e) {
+        e.preventDefault();
+        let idMenu = $(this).data('id');
+
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Kamu Ingin Menghapus Menu Ini !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus data!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (result.isConfirmed) {
+                    $.post("{{ route('foods.destroy') }}", { idMenu: idMenu },
+                        function (data) {
+                            console.log('Ajax response:', data);
+                            Swal.fire(
+                                'Success',
+                                data.message,
+                                'success'
+                            );
+                            $('#tableMenu').DataTable().ajax.reload(null, false);
+                        },
+                        "json"
+                    );
+                }
+            }
+        })
+    });
+
+    $(document).on('click', '#main_checkbox', function () {
+        if ($(this).is(':checked')) {
+            $('input[name="foods_checkbox"]').prop('checked', true);
+            $('#delAllBtn').removeClass('d-none');
+        } else {
+            $('input[name="foods_checkbox"]').prop('checked', false);
+            $('#delAllBtn').addClass('d-none');
+        }
+    });
+
+    $(document).on('click', 'input[name="foods_checkbox"]', function () {
+        if ($('input[name="foods_checkbox"]:checked').length > 0) {
+            $('#delAllBtn').removeClass('d-none');
+        } else {
+            $('#delAllBtn').addClass('d-none');
+        }
     });
 </script>
