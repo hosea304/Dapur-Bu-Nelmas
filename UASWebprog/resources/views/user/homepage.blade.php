@@ -5,135 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beranda</title>
-    <link rel="stylesheet" href="{{ asset('../resources/views/user/styles.css') }}">
+    <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-
-        body {
-            background-image: url('{{ asset("user/asset gambar/backgroundweb.jpg") }}');
-            background-size: cover;  
-            font-family: monospace;
-            font-weight: bold;
-            padding: 0;
-        }
-
-        header {
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 2;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .sub-navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #eee;
-        }
-
-        .nav-option {
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-option:hover {
-            background-color: #ddd;
-        }
-        .showcase {
-        width: 100%;
-        height: 500px;
-        background-image: url('{{ asset("user/asset gambar/showcase home.gif") }}');
-        background-size: 100% 100%;
-        background-position: center center;
-        background-repeat: no-repeat;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin: 20px 0;
-    }
-
-    @media (max-width: 1500px) {
-
-        .showcase {
-            height: 250px; 
-            margin: 10px 0; 
-        }
-    }
-        hr {
-            border: 1px solid #ccc;
-        }
-
-        .category-container {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-
-        .category-box {
-            width: 100%;
-            max-width: 350px;
-            height: 200px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.3s;
-            margin-bottom: 25px;
-            background-color: white;
-        }
-
-        .category-box img {
-            margin-top: 11px;
-            width: 200px
-            object-fit: cover;
-            border-radius: 10px; 
-
-        }
-
-        .category-box:hover {
-            transform: scale(1.05);
-        }
-
-        .list-container {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-        }
-
-        .list-box {
-            width: 100%;
-            max-width: 200px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .list-box img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px 10px 0 0;
-        }
-
-        .list-box:hover {
-            transform: scale(1.05);
-        }
-
-        .text-center {
-            font-family: monospace;
-            font-weight: bold;
-            color: white;
-        }
-    </style>
+ 
 </head>
 
-<body>
+<body class="homepage" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
             <a class="navbar-brand" href="#">
@@ -169,7 +46,7 @@
         </div>
     </header>
 
-    <div class="showcase"></div>
+    <div class="showcase" style="background-image: url('user/asset gambar/showcase home.gif');"></div>
 
     <hr>
 

@@ -5,93 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produk</title>
-    <link rel="stylesheet" href="{{ asset('../resources/views/user/styles.css') }}">
+    <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        body {
-            background-image: url('{{ asset("user/asset gambar/backgroundweb.jpg") }}');
-            background-size: cover;  
-            font-family: monospace;
-            font-weight: bold;
-            padding: 0;
-        }
-
-        header {
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 2;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-        }
-
-        .sub-navbar {
-            display: flex;
-            justify-content: center;
-            background-color: #eee;
-        }
-
-        .nav-option {
-            padding: 10px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-option:hover {
-            background-color: #ddd;
-        }
-
-        .section-container {
-            margin: 20px 0;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #9EB8D9;
-            text-align: center;
-            border-radius: 10px; 
-
-        }
-
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-
-        .menu-item {
-            margin-bottom: 20px;
-            text-align: center;
-            transition: transform 0.3s ease-in-out;
-            display: inline-block;
-            width: 100%; 
-            max-width: 250px; 
-            box-sizing: border-box;
-            margin-bottom: 20px; 
-        }
-
-        .menu-item:hover {
-            transform: scale(1.05);
-        }
-
-        .menu-item img {
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 100%;
-            height: auto;
-        }
-
-        hr {
-            margin: 20px 0;
-            border: 0;
-            border-top: 1px solid #eee;
-        }
-    </style>
 </head>
 
-<body>
+<body class="product" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
             <a class="navbar-brand" href="#">

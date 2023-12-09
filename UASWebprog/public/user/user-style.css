@@ -1,0 +1,167 @@
+header {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.sub-navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #eee;
+}
+
+.nav-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-option:hover {
+    background-color: #ddd;
+}
+
+/*HOMEPAGE*/
+.homepage .showcase {
+width: 100%;
+height: 500px;
+background-image: url('/public/user/asset gambar/showcase home.gif');
+background-size: 100% 100%;
+background-position: center center;
+background-repeat: no-repeat;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+margin: 20px 0;
+}
+
+@media (max-width: 1500px) {
+
+.homepage .showcase {
+    height: 250px; 
+    margin: 10px 0; 
+}
+}
+
+hr {
+    border: none; 
+    height: 3px; 
+    background-color: #ffffff; 
+}
+
+
+.homepage .category-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.homepage .category-box {
+ 
+    width: 100%;
+    max-width: 350px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-bottom: 25px;
+    background-color: white;
+}
+
+.homepage .category-box img {
+    box-sizing: border-box;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.homepage .category-box:hover {
+    transform: scale(1.05);
+}
+
+
+.homepage .list-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.homepage .list-box {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.homepage .list-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+}
+
+.homepage .list-box:hover {
+    transform: scale(1.05);
+}
+
+.homepage .text-center {
+    font-family: monospace;
+    font-weight: bold;
+    color: white;
+}
+
+
+/*PRODUCT*/
+.product .section-container {
+    margin: 20px 0;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #9EB8D9;
+    text-align: center;
+    border-radius: 10px; 
+
+}
+
+.product .section-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.product .menu-item {
+    margin-bottom: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    display: inline-block;
+    width: 100%; 
+    max-width: 250px; 
+    box-sizing: border-box;
+    margin-bottom: 20px; 
+}
+
+.product .menu-item:hover {
+    transform: scale(1.05);
+}
+
+.product .menu-item img {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+}
+
+.product .hr {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
