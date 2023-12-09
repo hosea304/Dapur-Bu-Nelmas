@@ -77,3 +77,4 @@ Route::get('/produk', function () {
 });
 
 require __DIR__ . '/auth.php';
+

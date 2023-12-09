@@ -11,40 +11,7 @@
 </head>
 
 <body class="homepage" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('user/asset gambar/logo usaha.png') }}" alt="Logo Usaha" width="80" height="80">
-                <span>DAPUR BU NELMAS</span>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="openCart()">
-                            <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="30" height="30">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="openAccount()">
-                            <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="30" height="30">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="sub-navbar">
-            <div class="nav-option" onclick="scrollToSection('home')">BERANDA</div>
-            <div class="nav-option" onclick="scrollToSection('products')">PRODUK</div>
-            <div class="nav-option" onclick="scrollToSection('orders')">INFO PESANAN</div>
-            <div class="nav-option" onclick="toggleAbout()">TENTANG KAMI</div>
-        </div>
-    </header>
+@include('user.navbar')
 
     <div class="showcase" style="background-image: url('user/asset gambar/showcase home.gif');"></div>
 

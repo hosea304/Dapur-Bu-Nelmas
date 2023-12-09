@@ -10,42 +10,16 @@
 </head>
 
 <body class="product" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('user/asset gambar/logo usaha.png') }}" alt="Logo Usaha" width="80" height="80">
-                <span>DAPUR BU NELMAS</span>
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="openCart()">
-                            <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="30" height="30">
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="openAccount()">
-                            <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="30" height="30">
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div class="sub-navbar">
-            <div class="nav-option" onclick="scrollToSection('home')">BERANDA</div>
-            <div class="nav-option" onclick="scrollToSection('products')">PRODUK</div>
-            <div class="nav-option" onclick="scrollToSection('orders')">INFO PESANAN</div>
-            <div class="nav-option" onclick="toggleAbout()">TENTANG KAMI</div>
-        </div>
-    </header>
+@include('user.navbar')
     <br />
-    <h2 style="text-align: center; font-family: monospace; font-weight: bold; color: white;">PRODUK</h2>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <h2 style="text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">PRODUK</h2>
     <div class="container">
         <div class="section-container">
             <div class="section-title">KUE</div>
@@ -88,17 +62,17 @@
             <div class="row justify-content-center">
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/bento1.jpg') }}" alt="Menu 7">
-                    <p>BENTO (-)</p>
+                    <p>PAKET BENTO 1</p>
                 </div>
 
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/bento2.jpg') }}" alt="Menu 8">
-                    <p>BENTO (-)</p>
+                    <p>PAKET BENTO 2</p>
                 </div>
 
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/bento3.jpg') }}" alt="Menu 9">
-                    <p>BENTO (-)</p>
+                    <p>PAKET BENTO 3</p>
                 </div>
             </div>
         </div>
@@ -109,27 +83,27 @@
             <div class="row justify-content-center">
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/ricebowl1.jpg') }}" alt="Menu 10">
-                    <p>-</p>
+                    <p>PAKET RICE BOWL 1</p>
                 </div>
 
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/ricebowl2.jpg') }}" alt="Menu 11">
-                    <p>-</p>
+                    <p>PAKET RICE BOWL 2</p>
                 </div>
 
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/ricebowl3.jpg') }}" alt="Menu 12">
-                    <p>-</p>
+                    <p>PAKET RICE BOWL 3</p>
                 </div>
 
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/ricebowl4.jpg') }}" alt="Menu 13">
-                    <p>-</p>
+                    <p>PAKET RICE BOWL 4</p>
                 </div>
 
                 <div class="menu-item col-md-4">
                     <img src="{{ asset('user/asset gambar/ricebowl5.jpg') }}" alt="Menu 14">
-                    <p>-</p>
+                    <p>PAKET RICE BOWL 5</p>
                 </div>
             </div>
         </div>

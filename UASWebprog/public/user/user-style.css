@@ -1,10 +1,4 @@
-header {
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 2;
-}
-
+/*NAVBAR*/
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -12,32 +6,70 @@ header {
     padding: 10px;
 }
 
+.navbar-brand-container {
+    display: flex;
+    align-items: center;
+}
+
+.judul {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 40px;
+    color: transparent;
+    background: linear-gradient(45deg, #008cff, #ff0000);
+    -webkit-background-clip: text;
+    background-clip: text; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 5px; 
+    display: inline-block;
+}
+
+
 .sub-navbar {
     display: flex;
     justify-content: center;
-    background-color: #eee;
+    background-color: #4259ad;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    margin-top: 110px;
+    
 }
 
 .nav-option {
     padding: 10px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin: 0 40px; 
 }
 
 .nav-option:hover {
     background-color: #ddd;
 }
 
+.navbar-nav .nav-item {
+    margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+    .sub-navbar {
+        font-size: 11px;
+    }
+
+    .nav-option {
+        margin: 0 20px; 
+    }
+}
+
 /*HOMEPAGE*/
 .homepage .showcase {
 width: 100%;
 height: 500px;
-background-image: url('/public/user/asset gambar/showcase home.gif');
 background-size: 100% 100%;
 background-position: center center;
 background-repeat: no-repeat;
 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-margin: 20px 0;
+margin-top: 150px;
 }
 
 @media (max-width: 1500px) {
@@ -62,7 +94,7 @@ hr {
 }
 
 .homepage .category-box {
- 
+    box-sizing: border-box;
     width: 100%;
     max-width: 350px;
     height: 200px;
@@ -71,16 +103,19 @@ hr {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.3s;
-    margin-bottom: 25px;
+    margin-bottom: 25px; 
     background-color: white;
+    padding: 0;
+    margin-right: 20px;
 }
 
 .homepage .category-box img {
     box-sizing: border-box;
-    width: 100%; 
+    width: 100%;
     height: 100%;
-    object-fit: cover;
     border-radius: 10px;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -128,19 +163,30 @@ hr {
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #9EB8D9;
+    background-image: url("../user/asset gambar/backgroundproduk.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
     text-align: center;
     border-radius: 10px; 
-
 }
 
+
 .product .section-title {
-    font-size: 24px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 50px;
     margin-bottom: 15px;
+    color: white;
 }
 
 .product .menu-item {
     margin-bottom: 20px;
     text-align: center;
+    color: rgb(255, 255, 255);
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 20px;
     transition: transform 0.3s ease-in-out;
     display: inline-block;
     width: 100%; 
@@ -165,3 +211,4 @@ hr {
     border: 0;
     border-top: 1px solid #eee;
 }
+
