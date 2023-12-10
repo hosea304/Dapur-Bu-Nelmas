@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
+use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -59,9 +60,7 @@ Route::get('403', function () {
 })->name('403');
 
 
-Route::get('/beranda', function () {
-    return view('user.homepage');
-});
+Route::get('/beranda', [HomepageController::class, 'index']);
 
 Route::get('/produk', function () {
     return view('user.product');
