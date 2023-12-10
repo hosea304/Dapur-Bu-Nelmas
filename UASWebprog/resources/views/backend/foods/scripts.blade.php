@@ -67,10 +67,10 @@
                     },
                 ],
             }).on('draw', function () {
-                $('input[name="foods_checkbox"]').each(function () {
+                $('input[name="food_checkbox"]').each(function () {
                     $(this).prop('checked', false);
                 })
-                $('input[name="foods_checkbox"]').prop('checked', false);
+                $('input[name="food_checkbox"]').prop('checked', false);
                 $('#delAllBtn').addClass('d-none');
             });
         }
@@ -259,7 +259,7 @@
                         ).then(() => {
                             location.reload();
                         });
-                        $('#tableMenU').DataTable().ajax.reload(null, false);
+                        $('#tableMenu').DataTable().ajax.reload(null, false);
                     },
                     "json"
                 );
@@ -269,8 +269,8 @@
 
 
     function toggleDelAllBtn() {
-        if ($('input[name="foods_checkbox"]:checked').length > 0) {
-            $('#delAllBtn').text('Hapus (' + $('input[name="foods_checkbox"]:checked').length + ')').removeClass('d-none');
+        if ($('input[name="food_checkbox"]:checked').length > 0) {
+            $('#delAllBtn').text('Hapus (' + $('input[name="food_checkbox"]:checked').length + ')').removeClass('d-none');
         } else {
             $('#delAllBtn').addClass('d-none');
         }
@@ -278,19 +278,19 @@
 
     $(document).on('click', '#main_checkbox', function () {
         if (this.checked) {
-            $('input[name="foods_checkbox"]').each(function () {
+            $('input[name="food_checkbox"]').each(function () {
                 this.checked = true;
             });
         } else {
-            $('input[name="foods_checkbox"]').each(function () {
+            $('input[name="food_checkbox"]').each(function () {
                 this.checked = false;
             });
         }
         toggleDelAllBtn();
     });
 
-    $(document).on('click', '#foods_checkbox', function () {
-        if ($('input[name="foods_checkbox"]:checked').length == $('input[name="foods_checkbox"]').length) {
+    $(document).on('click', '#food_checkbox', function () {
+        if ($('input[name="food_checkbox"]:checked').length == $('input[name="food_checkbox"]').length) {
             $('#main_checkbox').prop('checked', true);
         } else {
             $('#main_checkbox').prop('checked', false);
@@ -302,7 +302,7 @@
         e.preventDefault();
         let idMenus = [];
 
-        $('input[name="foods_checkbox"]:checked').each(function () {
+        $('input[name="food_checkbox"]:checked').each(function () {
             idMenus.push($(this).data('id'));
         });
 
