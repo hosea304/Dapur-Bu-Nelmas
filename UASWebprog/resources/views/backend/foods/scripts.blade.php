@@ -136,10 +136,10 @@
                     },
                 ],
             }).on('draw', function () {
-                $('input[name="foodsTrash_checkbox"]').each(function () {
+                $('input[name="foodTrash_checkbox"]').each(function () {
                     $(this).prop('checked', false);
                 })
-                $('input[name="foodsTrash_checkbox"]').prop('checked', false);
+                $('input[name="foodTrash_checkbox"]').prop('checked', false);
                 $('#delAllBtn').addClass('d-none');
             });
         }
@@ -333,4 +333,131 @@
             });
         }
     });
+
+    $(document).on('click', '#btnRestoreFood', function (e) {
+        e.preventDefault();
+        let idMenu = $(this).data('id');
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Kamu Ingin Mengembalikan Data Menu !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, kembalikan data!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post("{{ route('foods.restore') }}", { idMenu: idMenu },
+                    function (data) {
+                        console.log('Ajax response:', data);
+                        Swal.fire(
+                            'Success',
+                            data.message,
+                            'success'
+                        );
+                        $('#tableFoodsTrash').DataTable().ajax.reload(null, false);
+                    },
+                    "json"
+                );
+            }
+        });
+    });
+
+    $(document).on('click', '#btnDelPermanen', function (e) {
+        e.preventDefault();
+        let idMenu = $(this).data('id');
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: "Kamu Ingin Menghapus Data Menu Secara Permanen !",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, hapus data!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post("{{ route('foods.destroyPermanent') }}", { idMenu: idMenu },
+                    function (data) {
+                        console.log('Ajax response:', data);
+                        Swal.fire(
+                            'Success',
+                            data.message,
+                            'success'
+                        );
+                        $('#tableFoodsTrash').DataTable().ajax.reload(null, false);
+                    },
+                    "json"
+                );
+            }
+        });
+    });
+
+    function toggleRestoreAllBtn() {
+        if ($('input[name="foodTrash_checkbox"]:checked').length > 0) {
+            $('#restoreSelectedFoodBtn').text('Restore (' + $('input[name="foodTrash_checkbox"]:checked').length + ')').removeClass('d-none');
+            $('#deleteSelectedFoodBtn').text('Delete (' + $('input[name="foodTrash_checkbox"]:checked').length + ')');
+        } else {
+            $('#restoreSelectedFoodBtn').addClass('d-none');
+            $('#deleteSelectedFoodBtn').addClass('d-none');
+        }
+    }
+
+    $(document).on('click', '#foodTrash_checkbox', function () {
+        if ($('input[name="foodTrash_checkbox"]:checked').length == $('input[name="foodTrash_checkbox"]').length) {
+            $('#mainTrash_checkbox').prop('checked', true);
+        } else {
+            $('#mainTrash_checkbox').prop('checked', false);
+        }
+        toggleRestoreAllBtn();
+    });
+
+    $(document).on('click', '#mainTrash_checkbox', function () {
+        if (this.checked) {
+            $('input[name="foodTrash_checkbox"]').each(function () {
+                this.checked = true;
+            });
+        } else {
+            $('input[name="foodTrash_checkbox"]').each(function () {
+                this.checked = false;
+            });
+        }
+        toggleRestoreAllBtn();
+    });
+
+    $(document).on('click', '#restoreSelectedFoodBtn', function (e) {
+        e.preventDefault();
+        let idMenus = [];
+
+        $('input[name="foodTrash_checkbox"]:checked').each(function () {
+            idMenus.push($(this).data('id'));
+        });
+
+        if (idMenus.length > 0) {
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Kamu Ingin Mengembalikan Data food !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, kembalikan data!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post("{{ route('foods.restoreSelected') }}", { idMenus: idMenus },
+                        function (data) {
+                            console.log('Ajax response:', data);
+                            Swal.fire(
+                                'Success',
+                                data.message,
+                                'success'
+                            );
+                            $('#tableFoodsTrash').DataTable().ajax.reload(null, false);
+                        },
+                        "json"
+                    );
+                }
+            });
+        }
+    });
+
 </script>

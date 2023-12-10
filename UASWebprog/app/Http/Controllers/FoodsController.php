@@ -167,24 +167,33 @@ class FoodsController extends Controller
 
     public function fetchTrashFoods(Request $request)
     {
-        $dataFood = Foods::onlyTrashed();
+        $dataFood = Foods::onlyTrashed()
+            ->select('foods.*', 'categories.name as category_name')
+            ->join('categories', 'foods.id_category', '=', 'categories.id')
+            ->get();
 
         if ($request->ajax()) {
             return datatables()->of($dataFood)
                 ->addColumn('action', function ($row) {
                     return '<div class="btn-group">
-                        <button class="btn btn-secondary btn-sm" id="btnRestoreFood" data-id="' . $row['id'] . '">
-                            <span class="fas fa-retweet"></span>
-                        </button>
-                        <button class="btn btn-danger btn-sm" id="btnDelPermanen" data-id="' . $row['id'] . '">
-                            <span class="fas fa-trash-alt"></span>
-                        </button>
+                    <button class="btn btn-secondary btn-sm" id="btnRestoreFood" data-id="' . $row->id . '">
+                    <span class="fas fa-retweet"></span>
+                    </button>
+                    <button class="btn btn-danger btn-sm" id="btnDelPermanen" data-id="' . $row->id . '">
+                    <span class="fas fa-trash-alt"></span>
+                    </button>
                     </div>';
                 })
                 ->addColumn('checkbox', function ($row) {
-                    return '<input type="checkbox"  name="foodTrash_checkbox" id="food_checkbox" data-id="' . $row['id'] . '">';
+                    return '<input type="checkbox"  name="foodTrash_checkbox" id="foodTrash_checkbox" data-id="' . $row->id . '">';
                 })
-                ->rawColumns(['action', 'checkbox'])
+                ->editColumn('photo', function ($row) {
+                    return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
+                })
+                ->editColumn('id_category', function ($row) {
+                    return $row->category_name;
+                })
+                ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);
         }
     }

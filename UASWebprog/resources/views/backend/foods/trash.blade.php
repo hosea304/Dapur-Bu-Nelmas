@@ -63,8 +63,8 @@ Recycle Bin Foods
                                     <th>Kategori</th>
                                     <th>
                                         Action <br>
-                                        <button id="restoreAllBtn" type="submit"
-                                            class="btn btn-success">Restore</button>
+                                        <button id="restoreSelectedFoodBtn" type="submit"
+                                            class="btn btn-success d-none">Restore</button>
                                     </th>
                                 </tr>
                             </thead>
