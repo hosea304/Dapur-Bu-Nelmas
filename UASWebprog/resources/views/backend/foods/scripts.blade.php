@@ -16,12 +16,14 @@
                     type: "GET"
                 },
                 columns: [
+
                     {
                         data: 'checkbox',
                         name: 'checkbox',
                         orderable: false,
                         searchable: false
                     },
+
                     {
                         data: null,
                         name: 'no',
@@ -134,13 +136,14 @@
                     },
                 ],
             }).on('draw', function () {
-                $('input[name="foodTrash_checkbox"]').each(function () {
+                $('input[name="foodsTrash_checkbox"]').each(function () {
                     $(this).prop('checked', false);
                 })
-                $('input[name="foodTrash_checkbox"]').prop('checked', false);
+                $('input[name="foodsTrash_checkbox"]').prop('checked', false);
                 $('#delAllBtn').addClass('d-none');
             });
         }
+
         fetchTrashFoods();
     });
 
@@ -200,6 +203,8 @@
         e.preventDefault();
         let dataForm = this;
 
+        console.log("Form action URL:", dataForm.method);
+
         $.ajax({
             type: $("#editFormMenu").attr('method'),
             url: $("#editFormMenu").attr('action'),
@@ -227,7 +232,6 @@
                 }
             }
         });
-
     });
 
 
@@ -245,8 +249,75 @@
             confirmButtonText: 'Ya, hapus data!'
         }).then((result) => {
             if (result.isConfirmed) {
+                $.post("{{ route('foods.destroy') }}", { idMenu: idMenu },
+                    function (data) {
+                        console.log('Ajax response:', data);
+                        Swal.fire(
+                            'Success',
+                            data.message,
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                        $('#tableMenU').DataTable().ajax.reload(null, false);
+                    },
+                    "json"
+                );
+            }
+        })
+    });
+
+
+    function toggleDelAllBtn() {
+        if ($('input[name="foods_checkbox"]:checked').length > 0) {
+            $('#delAllBtn').text('Hapus (' + $('input[name="foods_checkbox"]:checked').length + ')').removeClass('d-none');
+        } else {
+            $('#delAllBtn').addClass('d-none');
+        }
+    }
+
+    $(document).on('click', '#main_checkbox', function () {
+        if (this.checked) {
+            $('input[name="foods_checkbox"]').each(function () {
+                this.checked = true;
+            });
+        } else {
+            $('input[name="foods_checkbox"]').each(function () {
+                this.checked = false;
+            });
+        }
+        toggleDelAllBtn();
+    });
+
+    $(document).on('click', '#foods_checkbox', function () {
+        if ($('input[name="foods_checkbox"]:checked').length == $('input[name="foods_checkbox"]').length) {
+            $('#main_checkbox').prop('checked', true);
+        } else {
+            $('#main_checkbox').prop('checked', false);
+        }
+        toggleDelAllBtn();
+    });
+
+    $(document).on('click', '#delAllBtn', function (e) {
+        e.preventDefault();
+        let idMenus = [];
+
+        $('input[name="foods_checkbox"]:checked').each(function () {
+            idMenus.push($(this).data('id'));
+        });
+
+        if (idMenus.length > 0) {
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Kamu Ingin Menghapus Data Menu !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, hapus data!'
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    $.post("{{ route('foods.destroy') }}", { idMenu: idMenu },
+                    $.post("{{ route('foods.destroySelected') }}", { idMenus: idMenus },
                         function (data) {
                             console.log('Ajax response:', data);
                             Swal.fire(
@@ -259,25 +330,7 @@
                         "json"
                     );
                 }
-            }
-        })
-    });
-
-    $(document).on('click', '#main_checkbox', function () {
-        if ($(this).is(':checked')) {
-            $('input[name="foods_checkbox"]').prop('checked', true);
-            $('#delAllBtn').removeClass('d-none');
-        } else {
-            $('input[name="foods_checkbox"]').prop('checked', false);
-            $('#delAllBtn').addClass('d-none');
-        }
-    });
-
-    $(document).on('click', 'input[name="foods_checkbox"]', function () {
-        if ($('input[name="foods_checkbox"]:checked').length > 0) {
-            $('#delAllBtn').removeClass('d-none');
-        } else {
-            $('#delAllBtn').addClass('d-none');
+            });
         }
     });
 </script>

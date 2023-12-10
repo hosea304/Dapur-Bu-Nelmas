@@ -40,7 +40,6 @@ Recycle Bin Foods
                                     Recycle Bin
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>

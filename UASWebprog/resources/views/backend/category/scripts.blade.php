@@ -161,6 +161,8 @@
         e.preventDefault();
         let dataForm = this;
 
+        console.log("Form action URL:", dataForm);
+
         $.ajax({
             type: $("#editFormKategori").attr('method'),
             url: $("#editFormKategori").attr('action'),

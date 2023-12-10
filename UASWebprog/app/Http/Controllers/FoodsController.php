@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class FoodsController extends Controller
 {
@@ -17,14 +18,11 @@ class FoodsController extends Controller
         return view('backend.foods.index', compact('dataFood'));
     }
 
-
-
-
     public function fetchFoods(Request $request)
     {
+
         if ($request->ajax()) {
-            $dataFood = DB::table('foods')
-                ->select('foods.*', 'categories.name as category_name')
+            $dataFood = Foods::select('foods.*', 'categories.name as category_name')
                 ->join('categories', 'foods.id_category', '=', 'categories.id')
                 ->get();
 
@@ -116,14 +114,13 @@ class FoodsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            // 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'harga' => 'required|integer',
             'stock' => 'required|integer',
 
         ], [
             'name.required' => 'Field Nama Food harus diisi',
             'name.string' => 'Field Nama Food harus Berupa string',
-            // 'photo.image' => 'Field Photo harus Berupa image',
+            'photo.image' => 'Field Photo harus Berupa image',
             'photo.mimes' => 'Field Photo harus Berupa jpeg,png,jpg,gif,svg',
             'photo.max' => 'Field Photo Maksimal 2048',
             'harga.required' => 'Field Harga harus diisi',
@@ -138,7 +135,7 @@ class FoodsController extends Controller
                 'error' => $validator->errors()->toArray()
             ]);
         } else {
-            $dataFood = Foods::findOrFail($request->get('idFood'));
+            $dataFood = Foods::findOrFail($request->get('idMenu'));
             $dataFood->name = $request->get('name');
             if ($request->hasFile('photo')) {
                 $oldPhotoPath = $dataFood->photo;
@@ -156,7 +153,6 @@ class FoodsController extends Controller
             $dataFood->id_category = $request->get('kategori');
             $dataFood->slug = Str::slug($dataFood->name);
             $dataFood->update();
-
             return response()->json([
                 'status' => 200,
                 'message' => 'Data Food Dengan Nama ' . '"' . $dataFood->name . '"' . ' Berhasil Diubah'
@@ -195,7 +191,8 @@ class FoodsController extends Controller
 
     public function destroy(Request $request)
     {
-        $dataFood = Foods::findOrFail($request->get('idFood'));
+
+        $dataFood = Foods::findOrFail($request->get('idMenu'));
 
         $dataFood->delete();
 
@@ -207,7 +204,7 @@ class FoodsController extends Controller
 
     public function restore(Request $request)
     {
-        $dataFood = Foods::withTrashed()->findOrFail($request->get('idFood'));
+        $dataFood = Foods::withTrashed()->findOrFail($request->get('idMenu'));
 
         $dataFood->restore();
 
@@ -219,7 +216,7 @@ class FoodsController extends Controller
 
     public function destroySelected(Request $request)
     {
-        $dataFood = $request->get('idFoods');
+        $dataFood = $request->get('idMenus');
         $query = Foods::whereIn('id', $dataFood)->delete();
         ;
 
@@ -238,7 +235,7 @@ class FoodsController extends Controller
 
     public function restoreSelected(Request $request)
     {
-        $dataFood = $request->get('idFoods');
+        $dataFood = $request->get('idMenus');
         $query = Foods::whereIn('id', $dataFood)->restore();
 
         if ($query) {
@@ -256,7 +253,7 @@ class FoodsController extends Controller
 
     public function destroyPermanent(Request $request)
     {
-        $dataFood = Foods::withTrashed()->findOrFail($request->get('idFood'));
+        $dataFood = Foods::withTrashed()->findOrFail($request->get('idMenu'));
         $dataFood->forceDelete();
 
         return response()->json([

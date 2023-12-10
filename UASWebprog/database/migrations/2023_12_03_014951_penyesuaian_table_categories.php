@@ -13,6 +13,9 @@ return new class extends Migration {
         Schema::table('categories', function (Blueprint $table) {
             $table->softDeletes()->after('updated_at');
         });
+        Schema::table('foods', function (Blueprint $table) {
+            $table->softDeletes()->after('updated_at');
+        });
     }
 
     /**
@@ -20,6 +23,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
+        Schema::table('foods', function (Blueprint $table) {
+            $table->dropSoftDeletes();
+        });
     }
 };

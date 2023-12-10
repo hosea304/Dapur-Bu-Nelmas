@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade" id="editModalMenu" tabindex='-1' aria-labelledby="editModalMenuLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ route('foods.update') }}" id="editFormMenu" method="POST" enctype="multipart/form-data">>
+        <form action="{{ route('foods.update') }}" id="editFormMenu" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
