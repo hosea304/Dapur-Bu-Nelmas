@@ -14,7 +14,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('backend.dashboard.index');
+    if (auth()->user()->usertype === 'admin') {
+        return view('backend.dashboard.index');
+    } else {
+        return redirect('/beranda');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

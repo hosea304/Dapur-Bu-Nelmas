@@ -148,7 +148,7 @@ class CategoryController extends Controller
                     return '<input type="checkbox"  name="kategoriTrash_checkbox" id="kategori_checkbox" data-id="' . $row['id'] . '">';
                 })
                 ->editColumn('photo', function ($row) {
-                    return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
+                    return '<img src="' . asset('storage/' . $row->photo_path) . '" alt="Food Photo" width="200">';
                 })
                 ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);

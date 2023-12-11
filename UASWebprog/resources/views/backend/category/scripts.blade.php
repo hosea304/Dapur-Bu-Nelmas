@@ -177,7 +177,6 @@
             contentType: false,
             processData: false,
             beforeSend: function () {
-                // Corrected form ID
                 $("#editFormKategori").find('span.error-text').text('');
             },
             success: function (response) {
