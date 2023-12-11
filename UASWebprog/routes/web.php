@@ -70,4 +70,12 @@ Route::get('/produk', function () {
     return view('user.product');
 });
 
+Route::get('/beli', function () {
+    return view('user.buy');
+});
+
+Route::get('/tentangkami', function () {
+    return view('user.aboutus');
+});
+
 require __DIR__ . '/auth.php';
