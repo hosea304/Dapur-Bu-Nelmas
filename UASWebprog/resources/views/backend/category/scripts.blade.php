@@ -1,5 +1,4 @@
 <script>
-
     $(document).ready(function () {
         $.ajaxSetup({
             headers: {
@@ -33,6 +32,10 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'photo',
+                        name: 'photo'
                     },
                     {
                         data: 'slug',
@@ -82,6 +85,10 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'photo',
+                        name: 'photo'
                     },
                     {
                         data: 'slug',
@@ -146,7 +153,6 @@
     $(document).on('click', '#btnEditKategori', function (e) {
         e.preventDefault();
         let idKategori = $(this).data('id');
-
         $.get("{{ route('category.edit') }}", { idKategori: idKategori },
             function (data) {
                 $('#editModalKategori').modal('show');

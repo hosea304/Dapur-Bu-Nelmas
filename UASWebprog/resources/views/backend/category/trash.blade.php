@@ -56,6 +56,7 @@ Recycle Bin Kategori
                                     </th>
                                     <th>No</th>
                                     <th>Nama</th>
+                                    <th>Gambar</th>
                                     <th>Slug</th>
                                     <th>
                                         Action <br>

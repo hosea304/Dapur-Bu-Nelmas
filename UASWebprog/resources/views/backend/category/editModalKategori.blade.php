@@ -17,10 +17,16 @@
                         <span class="text-danger error-text name_error"></span>
                         <input type="hidden" name="idKategori" id="idKategori">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="">Gambar</label>
+                        <input type="file" name="photo" id="photo" class="form-control">
+                        <span class="text-danger error-text photo_error"></span>
+                        <input type="hidden" name="old_photo" id="old_photo">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
                 </div>
             </div>
         </form>
