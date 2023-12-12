@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('akun') }}" onclick="openAccount()">
+                <a class="nav-link" href="{{route('profile.edit')}}" onclick="openAccount()">
                     <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="40" height="40">
                 </a>
             </li>

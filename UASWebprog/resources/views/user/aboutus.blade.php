@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center mb-4">
-                <img src="user/asset gambar/logo usaha.png" alt="Logo" class="img-fluid"  style="width: 150px; height: 150px;">
+                <img src="user/asset gambar/logo usaha.png" alt="Logo" class="img-bu-nelmas">
             </div>
         </div>
         <div class="row">
@@ -24,6 +24,7 @@
                     <p>Email: bambachristoper9@gmail.com</p>
                 </div>
                 <div class="about-box">
+                    <img src="user/asset gambar/admin logo.jpg" alt="Our Team" class="img-fluid mb-2" style="width: 100%;">
                     <h2>Description</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec eros vel justo pellentesque facilisis.</p>
                 </div>
