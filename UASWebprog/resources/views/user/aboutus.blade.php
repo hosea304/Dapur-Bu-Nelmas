@@ -20,8 +20,8 @@
             <div class="col-md-8">
                 <div class="about-box">
                     <h2>Contact Information</h2>
-                    <p>Phone: 081319939500</p>
-                    <p>Email: bambachristoper9@gmail.com</p>
+                    <a class="kontak" style="color: antiquewhite;" href="tel:081319939500">Phone: 081319939500</a><br>
+                    <a class="kontak" style="color: antiquewhite;" href="bambachristoper9@gmail.com">Email: bambachristoper9@gmail.com</a>
                 </div>
                 <div class="about-box" style="display: flex; align-items: center;">
                     <img src="user/asset gambar/admin logo.jpg" alt="Logo" class="img-fluid" style="width: 50%; border-radius:10px; padding-right:10px;">
