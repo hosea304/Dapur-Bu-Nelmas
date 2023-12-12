@@ -238,7 +238,7 @@
 <!-- include in a container a heading, paragraph and svg for the keyhole -->
 <div class="container">
     <h1>403</h1>
-    <p>Mo ngapain Ngab?? Mending <a href="{{route('login.index')}}" style="color:white;">Balik Ke
+    <p>Mo ngapain Ngab?? Mending <a href="{{ route('login') }}" style="color:white;">Balik Ke
             Login</a>
     </p>
     <svg class="keyhole">
