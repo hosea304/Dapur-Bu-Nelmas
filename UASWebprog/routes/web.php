@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\BuyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -90,5 +91,7 @@ Route::middleware('auth')->group(function () {
         return view('user.aboutus');
     })->name('about');
 });
+
+Route::get('/beli', [BuyController::class, 'index'])->name('beli');
 
 require __DIR__ . '/auth.php';

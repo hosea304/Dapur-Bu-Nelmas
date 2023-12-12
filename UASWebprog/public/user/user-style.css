@@ -213,13 +213,14 @@ hr {
 /*BUY*/
 .buy .container {
     margin: 0 auto;
-    max-width: 960px;
+    max-width: 6000px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); 
     width: 800px;
     height: 500px;
     background-color: rgba(169, 169, 169, 0.5); 
     color: white;
+    text-align: center;
 }
 
 .buy .food-img, .buy .menu-img {
@@ -262,18 +263,6 @@ hr {
     margin-top: 20px;
 }
 
-.buy .section-divider {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #000000;
-}
-
-.buy .subsection-divider {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #000000;
-}
-
 @media (max-width: 768px) {
     .buy .container {
         width: 100%;
@@ -290,6 +279,12 @@ hr {
     .buy .order-md-1 {
         order: 2;
     }
+}
+
+.buy .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 

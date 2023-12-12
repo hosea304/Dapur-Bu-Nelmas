@@ -25,7 +25,7 @@
                 </div>
                 <div class="about-box" style="display: flex; align-items: center;">
                     <img src="user/asset gambar/admin logo.jpg" alt="Logo" class="img-fluid" style="width: 50%; border-radius:10px; padding-right:10px;">
-                    <p>"knapa kucing jago gitaran? soalnya bisa main meowsik"</p>
+                    <p style="text-align: justify;">Dapur Bu Nelmas merupakan usaha online tanpa fisik toko, yang menyediakan aneka macam masakan dengan berbagai variasi menu.</p>
                 </div>
             </div>
             <div class="col-md-4">
