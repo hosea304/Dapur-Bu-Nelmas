@@ -61,7 +61,7 @@
                 <div id="categoryCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @php
-                        $categories = $dataKategori->chunk(3); // Display 3 categories in a row for big
+                        $categories = $dataKategori->chunk(3);
                         $active = 'active';
                         @endphp
                         @foreach($categories as $categoryChunk)

@@ -40,6 +40,6 @@
                     <!-- <i class="right fas fa-angle-left"></i> -->
                 </p>
             </a>
-
+        </li>
     </ul>
 </nav>

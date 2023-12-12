@@ -5,7 +5,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\HomepageController;
-use App\Models\Foods;
 use Illuminate\Support\Facades\Route;
 
 
@@ -76,19 +75,20 @@ Route::get('/akun', function () {
 
 
 
-Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
+Route::middleware('auth')->group(function () {
+    Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
 
-Route::get('/produk', function () {
-    return view('user.product');
-})->name('produk');
+    Route::get('/produk', function () {
+        return view('user.product');
+    })->name('produk');
 
-Route::get('/beli', function () {
-    return view('user.buy');
-})->name('beli');
+    Route::get('/beli', function () {
+        return view('user.buy');
+    })->name('beli');
 
-Route::get('/tentangkami', function () {
-    return view('user.aboutus');
-})->name('about');
-
+    Route::get('/tentangkami', function () {
+        return view('user.aboutus');
+    })->name('about');
+});
 
 require __DIR__ . '/auth.php';
