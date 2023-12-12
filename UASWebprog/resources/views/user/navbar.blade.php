@@ -13,12 +13,12 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#" onclick="openCart()">
+                <a class="nav-link" href="{{ route('beli') }}" onclick="openCart()">
                     <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" onclick="openAccount()">
+                <a class="nav-link" href="{{ route('akun') }}" onclick="openAccount()">
                     <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="40" height="40">
                 </a>
             </li>
@@ -37,35 +37,10 @@
     </div>
 </nav>
 <div class="sub-navbar fixed-top">
-    <div class="nav-option" onclick="scrollToSection('home')"><a href="{{ url('/homepage') }}">BERANDA</a></div>
-    <div class="nav-option" onclick="scrollToSection('products')"><a href="{{ url('/produk') }}">PRODUK</a></div>
-    <div class="nav-option" onclick="scrollToSection('orders')"><a href="{{ url('#') }}">INFO PESANAN</a></div>
-    <div class="nav-option" onclick="toggleAbout()"><a href="{{ url('/tentangkami') }}">TENTANG KAMI</a>
+    <div class="nav-option" onclick="scrollToSection('home')"><a class=" text-decoration-none  text-white" href="{{ route('beranda') }}">BERANDA</a></div>
+    <div class="nav-option" onclick="scrollToSection('products')"><a class=" text-decoration-none  text-white" href="{{ route('produk') }}">PRODUK</a></div>
+    <div class="nav-option" onclick="scrollToSection('orders')"><a class=" text-decoration-none  text-white" href="{{ route('beli') }}">INFO PESANAN</a></div>
+    <div class="nav-option" onclick="toggleAbout()"><a class=" text-decoration-none  text-white" href="{{ route('about') }}">TENTANG KAMI</a>
     </div>
-</div>
-<link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
-
-
-
-<div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="openCart()">
-                <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" onclick="openAccount()">
-                <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="40" height="40">
-            </a>
-        </li>
-    </ul>
-</div>
-</nav>
-<div class="sub-navbar fixed-top">
-    <div class="nav-option" onclick="scrollToSection('home')">BERANDA</div>
-    <div class="nav-option" onclick="scrollToSection('products')">PRODUK</div>
-    <div class="nav-option" onclick="scrollToSection('orders')">INFO PESANAN</div>
-    <div class="nav-option" onclick="toggleAbout()">TENTANG KAMI</div>
 </div>
 <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">

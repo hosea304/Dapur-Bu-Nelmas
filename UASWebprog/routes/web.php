@@ -65,18 +65,30 @@ Route::get('403', function () {
 })->name('403');
 
 
-Route::get('/beranda', [HomepageController::class, 'index']);
+
+Route::get('/cart', function () {
+    return view('user.cart');
+})->name('cart');
+
+Route::get('/akun', function () {
+    return view('user.akun');
+})->name('akun');
+
+
+
+Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
 
 Route::get('/produk', function () {
     return view('user.product');
-});
+})->name('produk');
 
 Route::get('/beli', function () {
     return view('user.buy');
-});
+})->name('beli');
 
 Route::get('/tentangkami', function () {
     return view('user.aboutus');
-});
+})->name('about');
+
 
 require __DIR__ . '/auth.php';
