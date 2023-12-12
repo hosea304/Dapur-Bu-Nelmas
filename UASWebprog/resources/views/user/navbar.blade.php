@@ -37,10 +37,11 @@
     </div>
 </nav>
 <div class="sub-navbar fixed-top">
-    <div class="nav-option" onclick="scrollToSection('home')">BERANDA</div>
-    <div class="nav-option" onclick="scrollToSection('products')">PRODUK</div>
-    <div class="nav-option" onclick="scrollToSection('orders')">INFO PESANAN</div>
-    <div class="nav-option" onclick="toggleAbout()">TENTANG KAMI</div>
+    <div class="nav-option" onclick="scrollToSection('home')"><a href="{{ url('/homepage') }}">BERANDA</a></div>
+    <div class="nav-option" onclick="scrollToSection('products')"><a href="{{ url('/produk') }}">PRODUK</a></div>
+    <div class="nav-option" onclick="scrollToSection('orders')"><a href="{{ url('#') }}">INFO PESANAN</a></div>
+    <div class="nav-option" onclick="toggleAbout()"><a href="{{ url('/tentangkami') }}">TENTANG KAMI</a>
+    </div>
 </div>
 <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
 

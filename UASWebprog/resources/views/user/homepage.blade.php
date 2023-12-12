@@ -8,6 +8,43 @@
     <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+    <style>
+        .category-box {
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .category-box img {
+            width: 100%;
+            height: auto;
+        }
+
+        .category-box h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .list-box {
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .list-box img {
+            width: 100%;
+            height: auto;
+        }
+
+        .list-box p {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body class="homepage" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
@@ -32,11 +69,8 @@
                             <div class="row justify-content-center">
                                 @foreach($categoryChunk as $category)
                                 <div class="category-box col-lg-4 col-md-12 col-sm-12">
-                                    <img src="{{ asset('storage/' . $category->photo_path) }}" alt="Food Photo"
-                                        width="100%">
-                                    <h1 class="text-center"
-                                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                                        {{ $category->name }}</h1>
+                                    <img src="{{ asset('storage/' . $category->photo) }}" alt="Food Photo">
+                                    <h1 class="text-center">{{ $category->name }}</h1>
                                 </div>
                                 @endforeach
                             </div>
@@ -59,25 +93,17 @@
         </div>
     </section>
 
-
-
     <hr>
 
     <section id="list" class="container">
         <h2 class="text-center">LIST HARI INI</h2>
         <div class="list-container row">
-            <div class="list-box col-md-4" onclick="showList('item1')">
-                <img src="{{ asset('user/assets/item1.jpg') }}" alt="Item 1" class="img-fluid">
-                <p class="text-center">Nama Item 1</p>
+            @foreach($dataFood as $item)
+            <div class="list-box col-md-4" onclick="showList('{{ $item->name }}')">
+                <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->name }}" class="img-fluid">
+                <p class="text-center">{{ $item->name }}</p>
             </div>
-            <div class="list-box col-md-4" onclick="showList('item2')">
-                <img src="{{ asset('user/assets/item2.jpg') }}" alt="Item 2" class="img-fluid">
-                <p class="text-center">Nama Item 2</p>
-            </div>
-            <div class="list-box col-md-4" onclick="showList('item3')">
-                <img src="{{ asset('user/assets/item3.jpg') }}" alt="Item 3" class="img-fluid">
-                <p class="text-center">Nama Item 3</p>
-            </div>
+            @endforeach
         </div>
     </section>
 

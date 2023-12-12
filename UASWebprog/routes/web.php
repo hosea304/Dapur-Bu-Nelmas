@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\HomepageController;
+use App\Models\Foods;
 use Illuminate\Support\Facades\Route;
 
 

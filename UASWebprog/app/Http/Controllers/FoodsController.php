@@ -44,14 +44,12 @@ class FoodsController extends Controller
                     return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
                 })
                 ->editColumn('id_category', function ($row) {
-                    return $row->category_name; // Display category name instead of ID
+                    return $row->category_name;
                 })
                 ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);
         }
     }
-
-
 
     public function store(Request $request)
     {

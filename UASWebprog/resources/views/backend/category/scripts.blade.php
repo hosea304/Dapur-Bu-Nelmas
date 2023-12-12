@@ -118,7 +118,6 @@
     $(document).on('submit', '#addFormKategori', function (e) {
         e.preventDefault();
         let dataForm = this;
-
         $.ajax({
             url: $(dataForm).attr('action'),
             type: $(dataForm).attr('method'),
@@ -127,7 +126,6 @@
             contentType: false,
             processData: false,
             beforeSend: function () {
-                // Corrected form ID
                 $(dataForm).find('span.error-text').text('');
             },
             success: function (response) {
@@ -141,7 +139,6 @@
                         response.message,
                         'success'
                     );
-                    // Corrected form ID
                     $('#addModalKategori').modal('hide');
                     $('#tableKategori').DataTable().ajax.reload(null, false);
                     $(dataForm)[0].reset();
@@ -149,6 +146,7 @@
             }
         });
     });
+
 
     $(document).on('click', '#btnEditKategori', function (e) {
         e.preventDefault();

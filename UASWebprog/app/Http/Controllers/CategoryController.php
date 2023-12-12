@@ -37,7 +37,7 @@ class CategoryController extends Controller
                     return '<input type="checkbox"  name="kategori_checkbox" id="kategori_checkbox" data-id="' . $row['id'] . '">';
                 })
                 ->editColumn('photo', function ($row) {
-                    return '<img src="' . asset('storage/' . $row->photo_path) . '" alt="Food Photo" width="200">';
+                    return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
                 })
                 ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);
@@ -67,7 +67,7 @@ class CategoryController extends Controller
             $dataKategori->name = $request->get('name');
             if ($request->hasFile('photo')) {
                 $photoPath = $request->file('photo')->store('categories', 'public');
-                $dataKategori->photo_path = $photoPath;
+                $dataKategori->photo = $photoPath;
             }
             $dataKategori->slug = Str::slug($request->get('name'));
             $dataKategori->save();
