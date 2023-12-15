@@ -1,16 +1,8 @@
 <nav class="mt-2">
-    <ul
-        class="nav nav-pills nav-sidebar flex-column"
-        data-widget="treeview"
-        role="menu"
-        data-accordion="false"
-    >
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- menu Dashboard -->
         <li class="nav-item">
-            <a
-                href="#"
-                class="nav-link {{request()->is('dashboard')?'active':''}}"
-            >
+            <a href="#" class="nav-link {{request()->is('dashboard')?'active':''}}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                     Dashboard
@@ -29,10 +21,7 @@
 
         <!-- Menu Category -->
         <li class="nav-item">
-            <a
-                href="{{ route('category') }}"
-                class="nav-link {{request()->is('category')?'active':''}}"
-            >
+            <a href="{{ route('category') }}" class="nav-link {{request()->is('category')?'active':''}}">
                 <i class="nav-icon fas fa-address-book"></i>
                 <p>
                     Category
@@ -43,10 +32,7 @@
 
         <!-- Menu Product -->
         <li class="nav-item">
-            <a
-                href="{{ route('foods') }}"
-                class="nav-link {{request()->is('foods')?'active':''}}"
-            >
+            <a href="{{ route('foods') }}" class="nav-link {{request()->is('foods')?'active':''}}">
                 <i class="nav-icon fas fa-pizza-slice"></i>
                 <p>
                     Menu
@@ -57,10 +43,7 @@
 
         <!-- Per Day Menu Product -->
         <li class="nav-item">
-            <a
-                href="{{ route('perdaymenu') }}"
-                class="nav-link {{request()->is('foods')?'active':''}}"
-            >
+            <a href="{{ route('perdaymenu') }}" class="nav-link {{request()->is('perdaymenu')?'active':''}}">
                 <i class="nav-icon fas fa-pizza-slice"></i>
                 <p>
                     Per Day Menu

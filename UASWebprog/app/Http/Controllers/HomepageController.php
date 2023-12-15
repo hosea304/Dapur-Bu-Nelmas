@@ -13,7 +13,9 @@ class HomepageController extends Controller
     public function index()
     {
         $dataKategori = Category::all();
-        $dataFood = Foods::all();
+        $dataFood = Foods::whereHas('perday', function ($query) {
+            $query->where("date", date("Y-m-d"));
+        })->get();
         return view('user.homepage', compact('dataKategori', 'dataFood'));
     }
 
