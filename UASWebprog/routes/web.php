@@ -78,20 +78,10 @@ Route::get('/akun', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
-
-    Route::get('/produk', function () {
-        return view('user.product');
-    })->name('produk');
-
-    Route::get('/beli', function () {
-        return view('user.buy');
-    })->name('beli');
-
-    Route::get('/tentangkami', function () {
-        return view('user.aboutus');
-    })->name('about');
+    Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');
+    Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
+    Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
 });
 
-Route::get('/beli', [BuyController::class, 'index'])->name('beli');
 
 require __DIR__ . '/auth.php';

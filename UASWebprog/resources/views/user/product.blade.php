@@ -21,93 +21,24 @@
     <br />
     <h2 style="text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">PRODUK</h2>
     <div class="container">
+        @foreach ($dataKategori as $kategori)
         <div class="section-container">
-            <div class="section-title">KUE</div>
+            <div class="section-title">{{ $kategori->name }}</div>
             <div class="row justify-content-center">
+                @foreach ($dataFood as $food)
+                @if ($food->id_category == $kategori->id)
                 <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/pie1.jpg') }}" alt="Menu 1">
-                    <p>MINI PIE SUSU</p>
+                    <img src="{{ asset('storage/' . $food->photo) }}" alt="Menu">
+                    <p>{{$food->name}}</p>
                 </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/pie2.jpg') }}" alt="Menu 2">
-                    <p>MINI PIE COKELAT</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/pie3.jpg') }}" alt="Menu 3">
-                    <p>MINI PIE BUAH</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/pie4.jpg') }}" alt="Menu 4">
-                    <p>MINI PIE NANAS</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/risolmayo.jpg') }}" alt="Menu 5">
-                    <p>RISOL MAYO</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/pizza.jpg') }}" alt="Menu 6">
-                    <p>MINI PIZZA</p>
-                </div>
+                @endif
+                @endforeach
             </div>
         </div>
         <hr>
-
-        <div class="section-container">
-            <div class="section-title">PAKET NASI BENTO</div>
-            <div class="row justify-content-center">
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/bento1.jpg') }}" alt="Menu 7">
-                    <p>PAKET BENTO 1</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/bento2.jpg') }}" alt="Menu 8">
-                    <p>PAKET BENTO 2</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/bento3.jpg') }}" alt="Menu 9">
-                    <p>PAKET BENTO 3</p>
-                </div>
-            </div>
-        </div>
-        <hr>
-
-        <div class="section-container">
-            <div class="section-title">PAKET NASI RICE BOWL</div>
-            <div class="row justify-content-center">
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/ricebowl1.jpg') }}" alt="Menu 10">
-                    <p>PAKET RICE BOWL 1</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/ricebowl2.jpg') }}" alt="Menu 11">
-                    <p>PAKET RICE BOWL 2</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/ricebowl3.jpg') }}" alt="Menu 12">
-                    <p>PAKET RICE BOWL 3</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/ricebowl4.jpg') }}" alt="Menu 13">
-                    <p>PAKET RICE BOWL 4</p>
-                </div>
-
-                <div class="menu-item col-md-4">
-                    <img src="{{ asset('user/asset gambar/ricebowl5.jpg') }}" alt="Menu 14">
-                    <p>PAKET RICE BOWL 5</p>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

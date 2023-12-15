@@ -37,10 +37,14 @@
     </div>
 </nav>
 <div class="sub-navbar fixed-top">
-    <div class="nav-option" onclick="scrollToSection('home')"><a class=" text-decoration-none  text-white" href="{{ route('beranda') }}">BERANDA</a></div>
-    <div class="nav-option" onclick="scrollToSection('products')"><a class=" text-decoration-none  text-white" href="{{ route('produk') }}">PRODUK</a></div>
-    <div class="nav-option" onclick="scrollToSection('orders')"><a class=" text-decoration-none  text-white" href="{{ route('beli') }}">INFO PESANAN</a></div>
-    <div class="nav-option" onclick="toggleAbout()"><a class=" text-decoration-none  text-white" href="{{ route('about') }}">TENTANG KAMI</a>
+    <div class="nav-option" onclick="scrollToSection('home')"><a class=" text-decoration-none  text-white"
+            href="{{ route('beranda') }}">BERANDA</a></div>
+    <div class="nav-option" onclick="scrollToSection('products')"><a class=" text-decoration-none  text-white"
+            href="{{ route('produk') }}">PRODUK</a></div>
+    <div class="nav-option" onclick="scrollToSection('orders')"><a class=" text-decoration-none  text-white"
+            href="{{ route('beli') }}">INFO PESANAN</a></div>
+    <div class="nav-option" onclick="toggleAbout()"><a class=" text-decoration-none  text-white"
+            href="{{ route('tentangkami') }}">TENTANG KAMI</a>
     </div>
 </div>
 <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
