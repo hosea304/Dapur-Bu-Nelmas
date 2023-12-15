@@ -21,7 +21,12 @@
     <br />
     <h2 style="text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">PRODUK</h2>
     <div class="container">
+        @php
+        $selectedCategoryId = request()->input('selectedCategory');
+        @endphp
+
         @foreach ($dataKategori as $kategori)
+        @if (empty($selectedCategoryId) || $kategori->id == $selectedCategoryId)
         <div class="section-container">
             <div class="section-title">{{ $kategori->name }}</div>
             <div class="row justify-content-center">
@@ -36,6 +41,7 @@
             </div>
         </div>
         <hr>
+        @endif
         @endforeach
     </div>
 

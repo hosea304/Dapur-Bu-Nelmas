@@ -69,8 +69,10 @@
                             <div class="row justify-content-center">
                                 @foreach($categoryChunk as $category)
                                 <div class="category-box col-lg-4 col-md-12 col-sm-12">
-                                    <img src="{{ asset('storage/' . $category->photo) }}" alt="Food Photo">
-                                    <h1 class="text-center">{{ $category->name }}</h1>
+                                    <a href="{{ route('produk', ['selectedCategory' => $category->id]) }}">
+                                        <img src="{{ asset('storage/' . $category->photo) }}" alt="Food Photo">
+                                        <h1 class="text-center">{{ $category->name }}</h1>
+                                    </a>
                                 </div>
                                 @endforeach
                             </div>
@@ -91,21 +93,22 @@
                 </div>
             </div>
         </div>
+        </div>
     </section>
 
     <hr>
 
     <section id="list" class="container">
-    <h2 class="text-center">LIST HARI INI</h2>
-    <div class="list-container row">
-        @foreach($dataFood as $item)
+        <h2 class="text-center">LIST HARI INI</h2>
+        <div class="list-container row">
+            @foreach($dataFood as $item)
             <a href="{{ route('beli', ['selectedItem' => $item->id]) }}" class="list-box col-md-4">
                 <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->name }}" class="img-fluid">
                 <p class="text-center">{{ $item->name }}</p>
             </a>
-        @endforeach
-    </div>
-</section>
+            @endforeach
+        </div>
+    </section>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

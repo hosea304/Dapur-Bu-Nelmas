@@ -43,7 +43,6 @@ Route::middleware('auth')->controller(CategoryController::class)->group(function
     Route::post('category/destroy/permanent', 'destroyPermanent')->name('category.destroyPermanent');
 });
 
-// foods Controller
 Route::middleware('auth')->controller(FoodsController::class)->group(function () {
     Route::get('foods', 'index')->name('foods');
     Route::post('foods', 'store')->name('foods.store');
