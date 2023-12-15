@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
+use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,16 @@ Route::middleware('auth')->controller(FoodsController::class)->group(function ()
     Route::post('foods/destroy', 'destroy')->name('foods.destroy');
     Route::post('foods/destroy/selected', 'destroySelected')->name('foods.destroySelected');
     Route::post('foods/destroy/permanent', 'destroyPermanent')->name('foods.destroyPermanent');
+});
+
+// per day menu
+Route::middleware('auth')->controller(PerDayMenuController::class)->group(function () {
+    Route::get('perdaymenu', 'index')->name('perdaymenu');
+    Route::post('perdaymenu', 'store')->name('perdaymenu.store');
+    Route::get('perdaymenu/perday', 'perday')->name('perdaymenu.perday');
+    Route::get('perdaymenu/fetch', 'fetchFoods')->name('perdaymenu.fetch');
+    Route::post('perdaymenu/destroy', 'destroy')->name('perdaymenu.destroy');
+    Route::post('perdaymenu/destroy/selected', 'destroySelected')->name('perdaymenu.destroySelected');
 });
 
 
