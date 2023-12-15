@@ -83,9 +83,43 @@
             margin-left: auto;
             margin-right: auto;
         }
-
         .navbar {
+            font-size: 30px;
+            font-family: monospace;
+        }
+
+        .navbar-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px; 
+            list-style: none; 
+            padding: 0; 
+        }
+
+        .navbar-nav .nav-item {
+            white-space: nowrap;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;       
+            text-decoration: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+            transition: color 0.3s ease, text-shadow 0.3s ease; 
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #87CEFA; 
+            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.8); 
+        }
+
+        .navbar-nav .nav-link i {
+            display: none; 
+        }
+
+
+        .text-danger {
             font-size: 20px;
+            color: yellow;
         }
     </style>
 
@@ -100,15 +134,15 @@
                         @if (Route::has('login'))
                             @auth
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
+                                    <a class="nav-link" href="{{ url('/dashboard') }}">DASHBOARD</a>
                                 </li>
                             @else
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                                    <a class="nav-link" href="{{ route('login') }}">LOGIN</a>
                                 </li>
                                 @if (Route::has('register'))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                        <a class="nav-link" href="{{ route('register') }}">REGISTER</a>
                                     </li>
                                 @endif
                             @endauth
@@ -137,7 +171,8 @@
                                         <br>
                                         <input id="email" type="email" class="form-control" name="email" :value="old('email')" required autofocus>
                                         @error('email')
-                                            <span class="text-danger">{{ $message }}</span>
+                                        <br>    
+                                        <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
 
@@ -146,6 +181,7 @@
                                         <br>
                                         <input id="password" type="password" class="form-control" name="password" required autocomplete="current-password">
                                         @error('password')
+                                        <br>
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

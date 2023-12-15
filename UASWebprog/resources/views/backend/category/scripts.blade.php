@@ -1,5 +1,4 @@
 <script>
-
     $(document).ready(function () {
         $.ajaxSetup({
             headers: {
@@ -33,6 +32,10 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'photo',
+                        name: 'photo'
                     },
                     {
                         data: 'slug',
@@ -84,6 +87,10 @@
                         name: 'name'
                     },
                     {
+                        data: 'photo',
+                        name: 'photo'
+                    },
+                    {
                         data: 'slug',
                         name: 'slug'
                     },
@@ -111,7 +118,6 @@
     $(document).on('submit', '#addFormKategori', function (e) {
         e.preventDefault();
         let dataForm = this;
-
         $.ajax({
             url: $(dataForm).attr('action'),
             type: $(dataForm).attr('method'),
@@ -120,7 +126,6 @@
             contentType: false,
             processData: false,
             beforeSend: function () {
-                // Corrected form ID
                 $(dataForm).find('span.error-text').text('');
             },
             success: function (response) {
@@ -134,7 +139,6 @@
                         response.message,
                         'success'
                     );
-                    // Corrected form ID
                     $('#addModalKategori').modal('hide');
                     $('#tableKategori').DataTable().ajax.reload(null, false);
                     $(dataForm)[0].reset();
@@ -143,10 +147,10 @@
         });
     });
 
+
     $(document).on('click', '#btnEditKategori', function (e) {
         e.preventDefault();
         let idKategori = $(this).data('id');
-
         $.get("{{ route('category.edit') }}", { idKategori: idKategori },
             function (data) {
                 $('#editModalKategori').modal('show');
@@ -171,7 +175,6 @@
             contentType: false,
             processData: false,
             beforeSend: function () {
-                // Corrected form ID
                 $("#editFormKategori").find('span.error-text').text('');
             },
             success: function (response) {

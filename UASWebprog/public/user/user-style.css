@@ -22,8 +22,6 @@
     margin-top: 5px; 
     display: inline-block;
 }
-
-
 .sub-navbar {
     display: flex;
     justify-content: center;
@@ -35,7 +33,6 @@
     margin-top: 110px;
     
 }
-
 .nav-option {
     padding: 10px;
     cursor: pointer;
@@ -212,3 +209,107 @@ hr {
     border-top: 1px solid #eee;
 }
 
+
+/*BUY*/
+.buy .container {
+    margin: 0 auto;
+    max-width: 6000px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); 
+    width: 800px;
+    height: 500px;
+    background-color: rgba(169, 169, 169, 0.5); 
+    color: white;
+    text-align: center;
+}
+
+.buy .food-img, .buy .menu-img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+.buy .quantity-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buy .price {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.buy .cart-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.buy .btn-buy {
+    display: inline-block;
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease-in-out;
+}
+
+.buy .btn-buy:hover {
+    transform: translateX(10px);
+}
+
+.buy .food-description {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .buy .container {
+        width: 100%;
+    }
+
+    .buy .col-md-6 {
+        width: 100%;
+    }
+
+    .buy .order-md-2 {
+        order: 1;
+    }
+
+    .buy .order-md-1 {
+        order: 2;
+    }
+}
+
+.buy .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*ABOUT US*/
+.aboutus .container {
+    margin-top: 50px;
+    color: wheat;
+}
+
+.aboutus .about-box {
+    background-color: rgba(169, 169, 169, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.aboutus .about-box:hover {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.aboutus .map-container {
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}

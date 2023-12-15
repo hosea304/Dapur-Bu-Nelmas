@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
 {
@@ -35,7 +36,10 @@ class CategoryController extends Controller
                 ->addColumn('checkbox', function ($row) {
                     return '<input type="checkbox"  name="kategori_checkbox" id="kategori_checkbox" data-id="' . $row['id'] . '">';
                 })
-                ->rawColumns(['action', 'checkbox'])
+                ->editColumn('photo', function ($row) {
+                    return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
+                })
+                ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);
         }
     }
@@ -44,9 +48,13 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ], [
             'name.required' => 'Field Nama Kategori harus diisi',
             'name.string' => 'Field Nama Kategori harus Berupa string',
+            'photo.required' => 'Field Photo harus diisi',
+            'photo.image' => 'Field Photo harus Berupa image',
+
         ]);
 
         if ($validator->fails()) {
@@ -57,6 +65,10 @@ class CategoryController extends Controller
         } else {
             $dataKategori = new Category();
             $dataKategori->name = $request->get('name');
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('categories', 'public');
+                $dataKategori->photo = $photoPath;
+            }
             $dataKategori->slug = Str::slug($request->get('name'));
             $dataKategori->save();
 
@@ -81,9 +93,12 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ], [
             'name.required' => 'Field Nama Kategori harus diisi',
             'name.string' => 'Field Nama Kategori harus Berupa string',
+            'photo.image' => 'Field Photo harus Berupa image',
+            'photo.mimes' => 'Field Photo harus Berupa jpeg,png,jpg,gif,svg',
         ]);
 
         if ($validator->fails()) {
@@ -94,6 +109,10 @@ class CategoryController extends Controller
         } else {
             $dataKategori = Category::findOrFail($request->get('idKategori'));
             $dataKategori->name = $request->get('name');
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('categories', 'public');
+                $dataKategori->photo_path = $photoPath;
+            }
             $dataKategori->slug = Str::slug($dataKategori->name);
             $dataKategori->update();
 
@@ -128,7 +147,10 @@ class CategoryController extends Controller
                 ->addColumn('checkbox', function ($row) {
                     return '<input type="checkbox"  name="kategoriTrash_checkbox" id="kategori_checkbox" data-id="' . $row['id'] . '">';
                 })
-                ->rawColumns(['action', 'checkbox'])
+                ->editColumn('photo', function ($row) {
+                    return '<img src="' . asset('storage/' . $row->photo_path) . '" alt="Food Photo" width="200">';
+                })
+                ->rawColumns(['action', 'checkbox', 'photo'])
                 ->make(true);
         }
     }

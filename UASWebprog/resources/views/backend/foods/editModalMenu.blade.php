@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="">Photo Menu</label>
-                        <input placeholder="Dessert" type="file" name="photo" id="photo" class="form-control">
+                        <input type="file" name="photo" id="photo" class="form-control">
                         <span class="text-danger error-text name_error"></span>
                     </div>
                     <div class="col-md-12 col-sm-12">

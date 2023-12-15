@@ -2,7 +2,7 @@
 <div class="modal fade" id="editModalKategori" tabindex='-1' aria-labelledby="editModalKategoriLabel"
     aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{route('category.update')}}" id="editFormKategori" method="POST">
+        <form action="{{route('category.update')}}" id="editFormKategori" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -16,6 +16,11 @@
                         <input placeholder="Dessert" type="text" name="name" id="name" class="form-control">
                         <span class="text-danger error-text name_error"></span>
                         <input type="hidden" name="idKategori" id="idKategori">
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <label for="">Photo Kategori</label>
+                        <input type="file" name="photo" id="photo" class="form-control">
+                        <span class="text-danger error-text photo_error"></span>
                     </div>
                 </div>
                 <div class="modal-footer">

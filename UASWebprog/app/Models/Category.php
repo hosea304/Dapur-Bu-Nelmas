@@ -13,6 +13,7 @@ class Category extends Model
 
     protected $fillable = [
         'name',
+        'photo_path',
         'slug'
     ];
 

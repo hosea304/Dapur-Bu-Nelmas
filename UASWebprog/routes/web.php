@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\BuyController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -15,7 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('backend.dashboard.index');
+    if (auth()->user()->usertype === 'admin') {
+        return view('backend.dashboard.index');
+    } else {
+        return redirect('/beranda');
+    }
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -39,7 +44,6 @@ Route::middleware('auth')->controller(CategoryController::class)->group(function
     Route::post('category/destroy/permanent', 'destroyPermanent')->name('category.destroyPermanent');
 });
 
-// foods Controller
 Route::middleware('auth')->controller(FoodsController::class)->group(function () {
     Route::get('foods', 'index')->name('foods');
     Route::post('foods', 'store')->name('foods.store');
@@ -71,10 +75,23 @@ Route::get('403', function () {
 })->name('403');
 
 
-Route::get('/beranda', [HomepageController::class, 'index']);
 
-Route::get('/produk', function () {
-    return view('user.product');
+Route::get('/cart', function () {
+    return view('user.cart');
+})->name('cart');
+
+Route::get('/akun', function () {
+    return view('user.akun');
+})->name('akun');
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
+    Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');
+    Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
+    Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
 });
+
 
 require __DIR__ . '/auth.php';
