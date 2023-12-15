@@ -21,10 +21,11 @@
                 <hr class="section-divider">
                 <img class="food-img" src="{{ asset('storage/' . $selectedItem->photo) }}" alt="Food Image">
                 <div class="quantity-control">
-                    <button>-</button>
-                    <span>{{ $selectedItem->stock }}</span>
-                    <button>+</button>
+                    <button onclick="decreaseStock()">-</button>
+                    <span id="stock">0</span>
+                    <button onclick="increaseStock()">+</button>
                 </div>
+                <p id="stock-message"></p>
                 <p class="price">Harga: Rp. {{ $selectedItem->harga }}</p>
                 <img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon">
                 <button class="btn-buy">BELI</button>
@@ -36,6 +37,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function decreaseStock() {
+            var stockElement = document.getElementById('stock');
+            var stock = parseInt(stockElement.innerText);
+            if (stock > 0) {
+                stock--;
+            }
+            stockElement.innerText = stock;
+            displayStockMessage(stock); // Call function to display stock message
+        }
+
+        function increaseStock() {
+            var stockElement = document.getElementById('stock');
+            var stock = parseInt(stockElement.innerText);
+            if (stock < 5) {
+                stock++;
+            }
+            stockElement.innerText = stock;
+            displayStockMessage(stock); // Call function to display stock message
+        }
+
+        function displayStockMessage(stock) {
+            var stockMessageElement = document.getElementById('stock-message');
+            if (stock >= 5) {
+                stockMessageElement.innerText = "Maximal beli 5";
+                stockMessageElement.style.color = "red";
+                stockMessageElement.style.fontWeight = "bold";
+            } else {
+                stockMessageElement.innerText = "";
+            }
+        }
+    </script>
 </body>
 
 </html>
