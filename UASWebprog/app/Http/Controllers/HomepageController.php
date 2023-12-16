@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Foods;
 use Illuminate\Http\Request;
-
+use App\Models\Order;
 
 
 class HomepageController extends Controller
@@ -41,4 +41,9 @@ class HomepageController extends Controller
         return view('user.aboutus');
     }
 
+    public function infopesanan()
+    {
+        $orders = Order::all();
+        return view('user.infopesanan', compact('orders'));
+    }
 }

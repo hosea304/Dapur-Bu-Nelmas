@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
     Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');
     Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
+    Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
 });
 

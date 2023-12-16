@@ -42,7 +42,7 @@
     <div class="nav-option" onclick="scrollToSection('products')"><a class=" text-decoration-none  text-white"
             href="{{ route('produk') }}">PRODUK</a></div>
     <div class="nav-option" onclick="scrollToSection('orders')"><a class=" text-decoration-none  text-white"
-            href="{{ route('beli') }}">INFO PESANAN</a></div>
+            href="{{ route('infopesanan') }}">INFO PESANAN</a></div>
     <div class="nav-option" onclick="toggleAbout()"><a class=" text-decoration-none  text-white"
             href="{{ route('tentangkami') }}">TENTANG KAMI</a>
     </div>
