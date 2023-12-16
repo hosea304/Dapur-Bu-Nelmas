@@ -18,8 +18,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama Produk</th>
-                        <th>Gambar Produk</th>
+                        <th>Produk</th>
                         <th>Harga Produk</th>
                         <th>Status</th>
                     </tr>
@@ -32,7 +31,6 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <!-- Use the correct relationship to access the order's name -->
-                            <td>{{ $orderLine->orders->name }}</td>
                             <td>
                                 @if($orderLine->foods->photo)
                                     <!-- Use the correct asset path for the photo -->
