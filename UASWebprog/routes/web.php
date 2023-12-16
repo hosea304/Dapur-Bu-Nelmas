@@ -7,6 +7,7 @@ use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\BuyController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -84,7 +85,9 @@ Route::get('/akun', function () {
     return view('user.akun');
 })->name('akun');
 
-
+Route::get('/checkout', function () {
+    return view('user.checkout');
+})->name('checkout');
 
 Route::middleware('auth')->group(function () {
     Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
@@ -93,6 +96,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
 });
+
+
 
 
 require __DIR__ . '/auth.php';

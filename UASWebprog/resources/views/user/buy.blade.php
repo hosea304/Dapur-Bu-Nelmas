@@ -28,7 +28,8 @@
                 <p id="stock-message"></p>
                 <p class="price">Harga: Rp. {{ $selectedItem->harga }}</p>
                 <img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon">
-                <button class="btn-buy">BELI</button>
+                <button class="btn-buy" onclick="buyItem('{{ $selectedItem->id }}', '{{ $selectedItem->name }}', '{{ $selectedItem->harga }}', '{{ asset('storage/' . $selectedItem->photo) }}' )">BELI</button>
+
                 <hr class="subsection-divider">
                 <p class="food-description">{{ $selectedItem->keterangan }}</p>
                 @else
@@ -69,6 +70,22 @@
                 stockMessageElement.innerText = "";
             }
         }
+
+        function buyItem(id, name, harga, photo) {
+        // Capture selected item data
+        var selectedItem = {
+            id: id,
+            name: name,
+            harga: harga,
+            photo: photo
+        };
+
+        // Store selected item data in localStorage for use on the checkout page
+        localStorage.setItem('selectedItem', JSON.stringify(selectedItem));
+
+        // Redirect to the checkout page
+        window.location = '{{ route("checkout") }}';
+    }
     </script>
 </body>
 
