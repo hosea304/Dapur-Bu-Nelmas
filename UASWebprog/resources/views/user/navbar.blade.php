@@ -41,7 +41,7 @@
             href="{{ route('beranda') }}">BERANDA</a></div>
     <div class="nav-option" onclick="scrollToSection('products')"><a class=" text-decoration-none  text-white"
             href="{{ route('produk') }}">PRODUK</a></div>
-    <div class="nav-option" onclick="scrollToSection('orders')"><a class=" text-decoration-none  text-white"
+    <div class="nav-option" onclick="scrollToSection('infopesanan')"><a class=" text-decoration-none  text-white"
             href="{{ route('infopesanan') }}">INFO PESANAN</a></div>
     <div class="nav-option" onclick="toggleAbout()"><a class=" text-decoration-none  text-white"
             href="{{ route('tentangkami') }}">TENTANG KAMI</a>
