@@ -11,25 +11,27 @@
     @include('user.navbar')
     <br><br><br><br><br>
     <div class="container mt-5">
-        <h2 style="color: white;">Info Pesanan</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="color: white;">No</th>
-                    <th style="color: white;">Nama</th>
-                    <th style="color: white;">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($orders as $index => $order)
+        <h2 style="padding-top: 30px; text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">INFO PESANAN</h2>
+        <div class="table-responsive" style="border-radius: 10px;">
+            <table class="table table-bordered table-striped table-light">
+                <thead>
                     <tr>
-                        <td style="color: white;">{{ $index + 1 }}</td>
-                        <td style="color: white;">{{ $order->name }}</td>
-                        <td style="color: white;">{{ $order->status }}</td>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Status</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach($orders as $index => $order)
+                        <tr>
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{ $order->name }}</td>
+                            <td>{{ $order->status }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
