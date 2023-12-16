@@ -11,7 +11,7 @@
     @include('user.navbar')
     <br><br><br><br><br>
     <div class="container mt-5">
-        <h2 style="padding-top: 30px; text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">INFO PESANAN</h2>
+        <h2 style="padding-top: 25px; text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">INFO PESANAN</h2>
         <div class="table-responsive" style="border-radius: 10px;">
             <table class="table table-bordered table-striped table-light">
                 <thead>
