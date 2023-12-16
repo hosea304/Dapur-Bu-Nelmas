@@ -78,6 +78,12 @@
         });
 
         fetchFoods();
+
+        var now = new Date();
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+        var today = now.getFullYear() + "-" + month + "-" + day;
+        $("#date").val(today);
     });
 
     $(document).on("click", "#btnPerDay", function (e) {
@@ -111,6 +117,8 @@
                             .find("span." + prefix + "_error")
                             .text(val[0]);
                     });
+                } else if (response.status == 403) {
+                    Swal.fire("Warning", response.errors, "warning");
                 } else {
                     Swal.fire("Success", response.message, "success");
                     // Corrected form ID

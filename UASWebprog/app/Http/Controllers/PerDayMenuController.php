@@ -44,7 +44,7 @@ class PerDayMenuController extends Controller
                     ->where("foods.name", 'like', '%' . $request->get('search[value]') . '%')
                     ->get();
             } else {
-                $dataFood = Foods::select('foods.*', 'categories.name as category_name', 'per_day_menu.date as date')
+                $dataFood = Foods::select('foods.*', 'categories.name as category_name', 'per_day_menu.id as perday_id', 'per_day_menu.date as date')
                     ->join('categories', 'foods.id_category', '=', 'categories.id')
                     ->join('per_day_menu', 'foods.id', '=', 'per_day_menu.food_id')
                     // ->whereHas('perday', function ($query) use($request) {
@@ -85,7 +85,7 @@ class PerDayMenuController extends Controller
             'tanggal' => 'required|date',
             'makanan' => 'required|integer',
         ], [
-            'tanggal.required' => 'Field Nama Food harus diisi',
+            'tanggal.required' => 'Field Tanggal harus diisi',
         ]);
 
         if ($validator->fails()) {
@@ -94,15 +94,23 @@ class PerDayMenuController extends Controller
                 'errors' => $validator->errors()->toArray()
             ]);
         } else {
-            $dataFood = new PerDayMenu();
-            $dataFood->date = $request->input('tanggal');
-            $dataFood->food_id = $request->input('makanan');
-            $dataFood->save();
+            $dataCount = PerDayMenu::where("date", $request->input("tanggal"))->count();
+            if($dataCount < 3){
+                $dataFood = new PerDayMenu();
+                $dataFood->date = $request->input('tanggal');
+                $dataFood->food_id = $request->input('makanan');
+                $dataFood->save();
 
-            return response()->json([
-                'status' => 200,
-                'message' => 'Food berhasil ditambahkan'
-            ]);
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Food berhasil ditambahkan'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 403,
+                    'errors' => "Jumlah maksimal menu untuk satu hari adalah 3"
+                ]);
+            }
 
         }
     }
