@@ -18,124 +18,84 @@
         />
     </head>
 
-    <body
-        class="buy"
-        style="background-image: url('{{
-            asset('user/asset gambar/backgroundweb.jpg')
-        }}'); background-size: cover"
-    >
-        @include('user.navbar')
-        <br /><br /><br /><br /><br /><br /><br /><br />
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 order-md-2">
-                    @if(isset($selectedItem))
-                    <h1>{{ $selectedItem->name }}</h1>
-                    <hr class="section-divider" />
-                    <img
-                        class="food-img"
-                        src="{{ asset('storage/' . $selectedItem->photo) }}"
-                        alt="Food Image"
-                    />
+<body class="buy" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
+    @include('user.navbar')
+    <br><br><br><br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-2">
+                <h1>{{$buy->name}}</h1>
+                <hr class="section-divider">
+                <img class="food-img" alt="Food Image" src="{{ asset('storage/' . $buy->photo) }}">
+                <br><br>
+                <form action="{{ route('beli.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="foods" value="{{ $buy->id }}">
+                    <input type="hidden" name="harga" value="{{ $buy->harga }}">
                     <div class="quantity-control">
-                        <button onclick="decreaseStock()">-</button>
-                        <span id="stock">1</span>
-                        <button onclick="increaseStock()">+</button>
+                        <button type="button" onclick="decreaseQuantity()">-</button>
+                        <input type="number" id="qty" name="qty" value="1" readonly>
+                        <button type="button" onclick="increaseQuantity()">+</button>
                     </div>
-                    <p id="stock-message"></p>
-                    <p class="price">Harga: Rp. {{ $selectedItem->harga }}</p>
-                    <img
-                        class="cart-icon"
-                        src="{{ asset('user/asset gambar/shoppingcart.png') }}"
-                        alt="Cart Icon"
-                    />
-                    <button
-                        class="btn-buy"
-                        onclick="addtocart('{{ $selectedItem->id }}')"
-                    >
-                        Tambahkan ke kerajang
-                    </button>
-
-                    <hr class="subsection-divider" />
-                    <p class="food-description">
-                        {{ $selectedItem->keterangan }}
-                    </p>
-                    @else
-                    <p>No item selected</p>
-                    @endif
-                </div>
+                    <p id="-message"></p>
+                    <p class="price">Harga: Rp.{{$buy->harga}}</p>
+                    <button type="button" onclick="addtocart('{{ $buy->id }}')"><img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon"></button>
+                    <button type="submit" class="btn-buy">BELI</button>
+                <hr class="subsection-divider">
+                <h5>Keterangan</h5>
+                <p class="food-description">-</p>
+                </form>
             </div>
         </div>
 
         <script>
-            function decreaseStock() {
-                var stockElement = document.getElementById("stock");
-                var stock = parseInt(stockElement.innerText);
-                if (stock > 1) {
-                    stock--;
-                }
-                stockElement.innerText = stock;
-                displayStockMessage(stock); // Call function to display stock message
+        var quantity = 0;
+        var qtyElement = document.getElementById('qty');
+
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                qtyElement.value = quantity;
             }
+        }
 
-            function increaseStock() {
-                var stockElement = document.getElementById("stock");
-                var stock = parseInt(stockElement.innerText);
-                if (stock < 5) {
-                    stock++;
-                }
-                stockElement.innerText = stock;
-                displayStockMessage(stock); // Call function to display stock message
-            }
+        function increaseQuantity() {
+            quantity++;
+            qtyElement.value = quantity;
+        }
 
-            function displayStockMessage(stock) {
-                var stockMessageElement =
-                    document.getElementById("stock-message");
-                if (stock >= 5) {
-                    stockMessageElement.innerText = "Maximal beli 5";
-                    stockMessageElement.style.color = "red";
-                    stockMessageElement.style.fontWeight = "bold";
-                } else {
-                    stockMessageElement.innerText = "";
-                }
-            }
+        function addtocart(id) {
 
-            function addtocart(id) {
-                var selectedItem = {
-                    foods: id,
-                    qty: document.getElementById("stock").innerHTML,
-                };
+            const formData = new FormData();
+            formData.append("foods", id);
+            formData.append(
+                "qty",
+                $("#qty").val()
+            );
 
-                const formData = new FormData();
-                formData.append("foods", id);
-                formData.append(
-                    "qty",
-                    document.getElementById("stock").innerHTML
-                );
-
-                $.ajax({
-                    url: "{{ route('addtocart') }}",
-                    type: "POST",
-                    data: formData,
-                    dataType: "JSON",
-                    contentType: false,
-                    processData: false,
-                    headers: {
-                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                            "content"
-                        ),
-                    },
-                    beforeSend: function () {},
-                    success: function (response) {
-                        if (response.status == 404) {
-                        } else if (response.status == 403) {
-                            Swal.fire("Warning", response.errors, "warning");
-                        } else {
-                            Swal.fire("Success", response.message, "success");
-                        }
-                    },
-                });
-            }
+            $.ajax({
+                url: "{{ route('addtocart') }}",
+                type: "POST",
+                data: formData,
+                dataType: "JSON",
+                contentType: false,
+                processData: false,
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                beforeSend: function () {},
+                success: function (response) {
+                    if (response.status == 404) {
+                    } else if (response.status == 403) {
+                        Swal.fire("Warning", response.errors, "warning");
+                    } else {
+                        Swal.fire("Success", response.message, "success");
+                    }
+                },
+            });
+        }
         </script>
         <script src="{{
                 asset('admin/plugins/jquery/jquery.min.js')
