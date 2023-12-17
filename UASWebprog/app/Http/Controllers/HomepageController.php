@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Foods;
 use App\Models\Order_line;
+use App\Models\Orders;
+use App\Models\Carts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 class HomepageController extends Controller
@@ -47,5 +50,70 @@ class HomepageController extends Controller
             ->join('foods', 'foods.id', '=', 'order_line.foods')
             ->get();
         return view('user.infopesanan', compact('order_line'));
+    }
+
+    // carts
+
+    public function addtocart(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'foods' => 'required|integer',
+            'qty' => 'required|integer',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 404,
+                'errors' => $validator->errors()->toArray()
+            ]);
+        } else {
+            $dataFood = new Carts();
+            $dataFood->foods = $request->input('foods');
+            $dataFood->qty = $request->input('qty');
+            $dataFood->save();
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Pesanan berhasil ditambahkan ke keranjang'
+            ]);
+        }
+    }
+
+    public function removefromcart(Request $request)
+    {
+
+        $dataFood = Carts::findOrFail($request->get('id'));
+
+        $dataFood->delete();
+
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
+
+    // checkout
+    public function checkout(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        //     'foods' => 'required|integer',
+        //     'qty' => 'required|integer',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return response()->json([
+        //         'status' => 404,
+        //         'errors' => $validator->errors()->toArray()
+        //     ]);
+        // } else {
+        //     $dataFood = new Carts();
+        //     $dataFood->foods = $request->input('foods');
+        //     $dataFood->qty = $request->input('qty');
+        //     $dataFood->save();
+
+        //     return response()->json([
+        //         'status' => 200,
+        //         'message' => 'Pesanan berhasil ditambahkan ke keranjang'
+        //     ]);
+        // }
     }
 }

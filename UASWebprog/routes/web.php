@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\BuyController;
 use App\Http\Controllers\CheckoutController;
@@ -70,6 +71,17 @@ Route::middleware('auth')->controller(PerDayMenuController::class)->group(functi
     Route::post('perdaymenu/destroy/selected', 'destroySelected')->name('perdaymenu.destroySelected');
 });
 
+// order
+Route::middleware('auth')->controller(OrderController::class)->group(function () {
+    Route::get('order', 'index')->name('order');
+    Route::post('perdaymenu', 'store')->name('perdaymenu.store');
+    Route::get('perdaymenu/perday', 'perday')->name('perdaymenu.perday');
+    Route::get('perdaymenu/fetch', 'fetchFoods')->name('perdaymenu.fetch');
+    Route::post('perdaymenu/destroy', 'destroy')->name('perdaymenu.destroy');
+    Route::post('perdaymenu/destroy/selected', 'destroySelected')->name('perdaymenu.destroySelected');
+});
+
+
 
 Route::get('403', function () {
     abort(403);
@@ -95,6 +107,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
     Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
+    Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
+    Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
 });
 
 
