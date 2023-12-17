@@ -89,6 +89,11 @@ Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
 
+Route::get('/cart', function () {
+    return view('user.cart');
+})->name('cart');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
     Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');

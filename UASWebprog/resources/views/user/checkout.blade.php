@@ -18,19 +18,19 @@
     <button class="btn-go-back">
     <i class="fas fa-arrow-left"></i> KEMBALI
 </button>
-
+<br><br>
 
         <div class="checkout-box">
-            <div class="checkout-header">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Checkout</p>
+            <div class="checkout-image-container img">
+  <img src="{{ asset('user/asset gambar/checkouttitle.png') }}" alt="Checkout">
             </div>
             <hr>
 
-           <!-- Kolom-kolom table untuk data makanan -->
-<!-- Checkout header table -->
-<div class="checkout-header-table">
-    <div class="checkout-row checkout-header-row">
+<!-- Checkout table -->
+<div class="checkout-table">
+
+    <!-- Checkout header table -->
+    <div class="checkout-header">
         <div class="checkout-col checkout-number-header">Nomer</div>
         <div class="checkout-col checkout-image-header">Gambar Makanan</div>
         <div class="checkout-col checkout-name-header">Nama Barang</div>
@@ -39,11 +39,8 @@
         <div class="checkout-col checkout-total-header">Total Harga</div>
         <div class="checkout-col checkout-action-header">Aksi</div>
     </div>
-</div>
 
-<!-- Checkout data table -->
-<div class="checkout-data-table">
-
+    <!-- Checkout data -->
     <div class="checkout-row">
         <div class="checkout-col checkout-number">1</div>
         <div class="checkout-col checkout-image">
@@ -53,14 +50,12 @@
         <div class="checkout-col checkout-quantity" id="quantity"></div>
         <div class="checkout-col checkout-price" id="harga"></div>
         <div class="checkout-col checkout-total" id="total"></div>
-        <div class="checkout-col checkout-payment" id="pembayaran"></div>
         <div class="checkout-col checkout-action">
-        <buttonn class="remove-button">
-            <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
-        </button>
+            <button class="remove-button">
+                <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
+            </button>
         </div>
     </div>
-
 
 </div>
             <div class="total-price">
