@@ -18,6 +18,7 @@
                 <h1>{{$buy->name}}</h1>
                 <hr class="section-divider">
                 <img class="food-img" alt="Food Image" src="{{ asset('storage/' . $buy->photo) }}">
+                <br><br>
                 <form action="{{ route('beli.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="foods" value="{{ $buy->id }}">
@@ -31,9 +32,10 @@
                     <p class="price">Harga: Rp.{{$buy->harga}}</p>
                     <img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon">
                     <button type="submit" class="btn-buy">BELI</button>
-                </form>
                 <hr class="subsection-divider">
-                <p class="food-description"></p>
+                <h5>Keterangan</h5>
+                <p class="food-description">-</p>
+                </form>
             </div>
         </div>
     </div>

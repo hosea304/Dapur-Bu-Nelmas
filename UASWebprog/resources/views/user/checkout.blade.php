@@ -38,8 +38,6 @@
                     <div class="checkout-col checkout-total-header">Total Harga</div>
                     <div class="checkout-col checkout-action-header">Aksi</div>
                 </div>
-            </div>
-
             <!-- Checkout data table -->
             <div class="checkout-data-table">
                 <div class="checkout-row">
@@ -56,10 +54,10 @@
                             <img src="{{asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
                         </button>
                     </div>
+</div>
                 </div>
-
-
             </div>
+
             <div class="total-price">
                 <p>Total Harga Keseluruhan: Rp. {{$beli->total}}</p>
             </div>
@@ -76,7 +74,7 @@
                 </div>
 
             </form>
-            <h6><span style="color: red;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya ongkir
+            <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya ongkir
                     yang akan ditanggung oleh penerima. Terima kasih.</span></h6>
             <button class="btn-checkout">
                 CHECKOUT
