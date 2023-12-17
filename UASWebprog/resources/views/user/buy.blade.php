@@ -9,35 +9,50 @@
     <link rel="stylesheet" href="{{ asset('user/user-style.css') }}">
 </head>
 
-<body class="buy"
-    style="background-image: url('{{ asset('user/asset gambar/backgroundweb.jpg') }}'); background-size: cover">
+<body class="buy" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
     @include('user.navbar')
     <br><br><br><br><br><br><br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-6 order-md-2">
-                <h1></h1>
+                <h1>{{$buy->name}}</h1>
                 <hr class="section-divider">
-                <img class="food-img" alt="Food Image">
-                <div class="quantity-control">
-                    <button onclick="decreaseStock()">-</button>
-                    <span id="stock">0</span>
-                    <button onclick="increaseStock()">+</button>
-                </div>
-                <p id="stock-message"></p>
-                <p class="price">Harga: Rp.</p>
-                <img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon">
-                <button class="btn-buy">BELI</button>
-
+                <img class="food-img" alt="Food Image" src="{{ asset('storage/' . $buy->photo) }}">
+                <form action="{{ route('beli.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="foods" value="{{ $buy->id }}">
+                    <input type="hidden" name="harga" value="{{ $buy->harga }}">
+                    <div class="quantity-control">
+                        <button type="button" onclick="decreaseQuantity()">-</button>
+                        <input type="number" id="qty" name="qty" value="0" readonly>
+                        <button type="button" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <p id="-message"></p>
+                    <p class="price">Harga: Rp.{{$buy->harga}}</p>
+                    <img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon">
+                    <button type="submit" class="btn-buy">BELI</button>
+                </form>
                 <hr class="subsection-divider">
                 <p class="food-description"></p>
-                <p>No item selected</p>
             </div>
         </div>
     </div>
 
     <script>
-       
+        var quantity = 0;
+        var qtyElement = document.getElementById('qty');
+
+        function decreaseQuantity() {
+            if (quantity > 0) {
+                quantity--;
+                qtyElement.value = quantity;
+            }
+        }
+
+        function increaseQuantity() {
+            quantity++;
+            qtyElement.value = quantity;
+        }
     </script>
 </body>
 

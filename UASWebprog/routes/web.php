@@ -1,13 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\BuyController;
-use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -98,8 +95,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
     Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');
     Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
+    Route::post('/beli/store', [HomepageController::class, 'beliStore'])->name('beli.store');
     Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
+
+    Route::get('/checkout', [HomepageController::class, 'checkout'])->name('checkout');
 });
 
 
