@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Foods;
+use App\Models\Order_line;
 use Illuminate\Http\Request;
 
 
@@ -42,7 +43,9 @@ class HomepageController extends Controller
 
     public function infopesanan()
     {
-        $orderLines = Foods::all();
-        return view('user.infopesanan', ['order_line' => $orderLines]);
+        $order_line = Order_line::join('orders', 'orders.id', '=', 'order_line.orders')
+            ->join('foods', 'foods.id', '=', 'order_line.foods')
+            ->get();
+        return view('user.infopesanan', compact('order_line'));
     }
 }
