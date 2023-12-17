@@ -16,6 +16,7 @@ return new class extends Migration
             $table->boolean('checked_out')->default(false);
             $table->integer('foods');
             $table->integer('qty');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

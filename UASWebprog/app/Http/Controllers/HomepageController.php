@@ -9,6 +9,7 @@ use App\Models\Orders;
 use App\Models\Carts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomepageController extends Controller
@@ -70,6 +71,7 @@ class HomepageController extends Controller
             $dataFood = new Carts();
             $dataFood->foods = $request->input('foods');
             $dataFood->qty = $request->input('qty');
+            $dataFood->user_id = Auth::id();
             $dataFood->save();
 
             return response()->json([

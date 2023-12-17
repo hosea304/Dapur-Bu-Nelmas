@@ -14,5 +14,6 @@ class Carts extends Model
     protected $fillable = [
         'foods',
         'checked_out',
+        'user_id'
     ];
 }
