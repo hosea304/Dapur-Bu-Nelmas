@@ -100,25 +100,6 @@
                 }
             }
 
-            // function buyItem(id, name, harga, photo) {
-            //     // Capture selected item data
-            //     var selectedItem = {
-            //         id: id,
-            //         name: name,
-            //         harga: harga,
-            //         photo: photo,
-            //     };
-
-            //     // Store selected item data in localStorage for use on the checkout page
-            //     localStorage.setItem(
-            //         "selectedItem",
-            //         JSON.stringify(selectedItem)
-            //     );
-
-            //     // Redirect to the checkout page
-            //     window.location = '{{ route("checkout") }}';
-            // }
-
             function addtocart(id) {
                 var selectedItem = {
                     foods: id,

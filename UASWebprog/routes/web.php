@@ -71,26 +71,12 @@ Route::middleware('auth')->controller(PerDayMenuController::class)->group(functi
     Route::post('perdaymenu/destroy/selected', 'destroySelected')->name('perdaymenu.destroySelected');
 });
 
-// order
-Route::middleware('auth')->controller(OrderController::class)->group(function () {
-    Route::get('order', 'index')->name('order');
-    Route::post('perdaymenu', 'store')->name('perdaymenu.store');
-    Route::get('perdaymenu/perday', 'perday')->name('perdaymenu.perday');
-    Route::get('perdaymenu/fetch', 'fetchFoods')->name('perdaymenu.fetch');
-    Route::post('perdaymenu/destroy', 'destroy')->name('perdaymenu.destroy');
-    Route::post('perdaymenu/destroy/selected', 'destroySelected')->name('perdaymenu.destroySelected');
-});
-
-
-
 Route::get('403', function () {
     abort(403);
 })->name('403');
 
-
-
 Route::get('/cart', function () {
-    return view('user.cart');
+    return view('user.cart.index');
 })->name('cart');
 
 Route::get('/akun', function () {
@@ -101,6 +87,7 @@ Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/beranda', [HomepageController::class, 'index'])->name('beranda');
     Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');
@@ -109,8 +96,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
     Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
+    Route::get('/getcart', [HomepageController::class, 'getcart'])->name('getcart');
+    Route::get('/getsubtotal', [HomepageController::class, 'getsubtotal'])->name('getsubtotal');
 });
-
 
 
 

@@ -55,6 +55,31 @@ class HomepageController extends Controller
 
     // carts
 
+    public function getcart()
+    {
+        $data = Carts::where("user_id", Auth::id())
+                    ->where("checked_out", false)
+                    ->join('foods', 'carts.foods', '=', 'foods.id')
+                    ->get();
+
+        return datatables()->of($data)
+        ->addColumn('action', function ($row) {
+            return '<div class="btn-group">
+                <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->id . '">
+                <span class="fas fa-trash-alt"></span>
+                </button>
+                </div>';
+        })
+        ->editColumn('gambar', function ($row) {
+            return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
+        })
+        ->editColumn('total', function ($row) {
+            return $row->qty * $row->harga;
+        })
+        ->rawColumns(['action', 'gambar'])
+        ->make(true);
+    }
+
     public function addtocart(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -93,29 +118,21 @@ class HomepageController extends Controller
         ]);
     }
 
-    // checkout
-    public function checkout(Request $request)
+    public function getsubtotal(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'foods' => 'required|integer',
-        //     'qty' => 'required|integer',
-        // ]);
+        $data = Carts::where("user_id", Auth::id())
+        ->where("checked_out", false)
+        ->join('foods', 'carts.foods', '=', 'foods.id')
+        ->get();
 
-        // if ($validator->fails()) {
-        //     return response()->json([
-        //         'status' => 404,
-        //         'errors' => $validator->errors()->toArray()
-        //     ]);
-        // } else {
-        //     $dataFood = new Carts();
-        //     $dataFood->foods = $request->input('foods');
-        //     $dataFood->qty = $request->input('qty');
-        //     $dataFood->save();
+        $total = 0;
+        foreach($data as $value){
+            $total = $total + ($value->harga * $value->qty);
+        }
 
-        //     return response()->json([
-        //         'status' => 200,
-        //         'message' => 'Pesanan berhasil ditambahkan ke keranjang'
-        //     ]);
-        // }
+        return response()->json([
+            'status' => 200,
+            'total' => $total
+        ]);
     }
 }

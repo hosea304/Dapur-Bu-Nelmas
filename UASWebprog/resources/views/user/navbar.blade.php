@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('beli') }}" onclick="openCart()">
+                <a class="nav-link" href="{{ route('cart') }}" onclick="openCart()">
                     <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
                 </a>
             </li>
