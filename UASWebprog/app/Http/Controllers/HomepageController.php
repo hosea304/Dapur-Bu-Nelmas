@@ -77,6 +77,7 @@ class HomepageController extends Controller
     {
         $data = Carts::where("user_id", Auth::id())
                     ->where("checked_out", false)
+                    ->whereDay("carts.created_at", now()->day)
                     ->join('foods', 'carts.foods', '=', 'foods.id')
                     ->get();
 
@@ -140,6 +141,7 @@ class HomepageController extends Controller
     {
         $data = Carts::where("user_id", Auth::id())
         ->where("checked_out", false)
+        ->whereDay("carts.created_at", now()->day)
         ->join('foods', 'carts.foods', '=', 'foods.id')
         ->get();
 
@@ -151,6 +153,35 @@ class HomepageController extends Controller
         return response()->json([
             'status' => 200,
             'total' => $total
+        ]);
+    }
+
+    public function checkoutcart(Request $request){
+        $cart = Carts::where("user_id", Auth::id())
+        ->where("checked_out", false)
+        ->whereDay("carts.created_at", now()->day)
+        ->get();
+
+        $order = new Orders();
+        $order->name = $request->input('name');
+        $order->alamat = $request->input('alamat');
+        $order->save();
+
+        foreach($cart as $value){
+            $food = Foods::where('id', $value->foods)->first();
+            $order_line = new Order_line();
+            $order_line->orders = $order->id;
+            $order_line->foods = $value->foods;
+            $order_line->harga = $food->harga;
+            $order_line->qty = $value->qty;
+            $order_line->subtotal = $value->qty * $food->harga;
+            $order_line->save();
+
+            Carts::where('id', $value->id)->update(['checked_out' => true]);
+        }
+
+        return response()->json([
+            'status' => 200,
         ]);
     }
 }
