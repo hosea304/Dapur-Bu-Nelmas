@@ -12,10 +12,10 @@ class Order_line extends Model
     protected $table = 'order_line';
 
     protected $fillable = [
-        'orders',
+        'beli',
         'foods',
-        'harga',
-        'qty',
+        'nama_penerima',
+        'alamat',
         'subtotal',
     ];
 }

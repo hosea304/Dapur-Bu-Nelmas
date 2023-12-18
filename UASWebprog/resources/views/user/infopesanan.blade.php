@@ -22,14 +22,23 @@
             <table class="table table-bordered table-striped table-light">
                 <thead>
                     <tr>
-                        <th>No</th>
-                        <th>Produk</th>
-                        <th>Harga Produk</th>
-                        <th>Status</th>
+                        <th scope="col">No</th>
+                        <th scope="col">Nama Penerima</th>
+                        <th scope="col">Alamat</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Tanggal</th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach($dataOrder as $order)
+                    <tr>
+                        <th scope="row">{{$loop->iteration}}</th>
+                        <td>{{$order->nama_penerima}}</td>
+                        <td>{{$order->alamat}}</td>
+                        <td>{{$order->subtotal}}</td>
+                        <td>{{$order->created_at}}</td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

@@ -38,23 +38,23 @@
                     <div class="checkout-col checkout-total-header">Total Harga</div>
                     <div class="checkout-col checkout-action-header">Aksi</div>
                 </div>
-            <!-- Checkout data table -->
-            <div class="checkout-data-table">
-                <div class="checkout-row">
-                    <div class="checkout-col checkout-number">1</div>
-                    <div class="checkout-col checkout-image">
-                        <img src="{{ asset('storage/'.$beli->photo) }}" alt="Food Image">
+                <!-- Checkout data table -->
+                <div class="checkout-data-table">
+                    <div class="checkout-row">
+                        <div class="checkout-col checkout-number">1</div>
+                        <div class="checkout-col checkout-image">
+                            <img src="{{ asset('storage/'.$beli->photo) }}" alt="Food Image">
+                        </div>
+                        <div class="checkout-col checkout-name">{{$beli->name}}</div>
+                        <div class="checkout-col checkout-quantity" id="quantity">{{$beli->qty}}</div>
+                        <div class="checkout-col checkout-price" id="harga">{{$beli->harga}}</div>
+                        <div class="checkout-col checkout-total" id="total">{{$beli->total}}</div>
+                        <div class="checkout-col checkout-action">
+                            <button class="remove-button" onclick="deleteItem()">
+                                <img src="{{asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
+                            </button>
+                        </div>
                     </div>
-                    <div class="checkout-col checkout-name">{{$beli->name}}</div>
-                    <div class="checkout-col checkout-quantity" id="quantity">{{$beli->qty}}</div>
-                    <div class="checkout-col checkout-price" id="harga">{{$beli->harga}}</div>
-                    <div class="checkout-col checkout-total" id="total">{{$beli->total}}</div>
-                    <div class="checkout-col checkout-action">
-                        <button class="remove-button" onclick="deleteItem()">
-                            <img src="{{asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
-                        </button>
-                    </div>
-</div>
                 </div>
             </div>
 
@@ -62,7 +62,11 @@
                 <p>Total Harga Keseluruhan: Rp. {{$beli->total}}</p>
             </div>
 
-            <form method="post" action="">
+            <form method="post" action="{{ route('checkout.store') }}">
+                @csrf
+                <input type="hidden" name="beli" value="{{ request('id') }}">
+                <input type="hidden" name="foods" value="{{$beli->food_id}}">
+                <input type="hidden" name="subtotal" value="{{$beli->total}}">
                 <div class="checkout-nama-info">
                     <h3>Nama Penerima</h3>
                     <input type="text" name="nama_penerima" placeholder="Nama Penerima" required>
@@ -72,12 +76,12 @@
                     <h3>Alamat</h3>
                     <input type="text" name="alamat" placeholder="Alamat Tempat" required>
                 </div>
-
-            </form>
-            <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya ongkir
-                    yang akan ditanggung oleh penerima. Terima kasih.</span></h6>
-            <button class="btn-checkout">
+                <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya
+                        ongkir
+                        yang akan ditanggung oleh penerima. Terima kasih.</span></h6>
                 CHECKOUT
+                <button class="btn-checkout" type="submit">
+            </form>
             </button>
         </div>
     </div>

@@ -58,17 +58,31 @@ class HomepageController extends Controller
         return view('user.checkout', compact('beli'));
     }
 
+    public function checkoutStore(Request $request)
+    {
+        $dataOrder = new Order_line();
+        $dataOrder->beli = $request->input('beli');
+        $dataOrder->foods = $request->input('foods');
+        $dataOrder->nama_penerima = $request->input('nama_penerima');
+        $dataOrder->alamat = $request->input('alamat');
+        $dataOrder->subtotal = $request->input('subtotal');
+        $dataOrder->save();
+
+        return redirect()->action([HomepageController::class, 'infopesanan']);
+    }
+    public function infopesanan(Request $request)
+    {
+        $dataOrder = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
+            ->join('beli', 'order_line.beli', '=', 'beli.id');
+        $dataOrder = $dataOrder->get();
+
+        return view('user.infopesanan', compact('dataOrder'));
+    }
+
+
     public function tentangkami()
     {
         return view('user.aboutus');
-    }
-
-    public function infopesanan()
-    {
-        $order_line = Order_line::join('orders', 'orders.id', '=', 'order_line.orders')
-            ->join('foods', 'foods.id', '=', 'order_line.foods')
-            ->get();
-        return view('user.infopesanan', compact('order_line'));
     }
 
     // carts
@@ -76,26 +90,26 @@ class HomepageController extends Controller
     public function getcart()
     {
         $data = Carts::where("user_id", Auth::id())
-                    ->where("checked_out", false)
-                    ->join('foods', 'carts.foods', '=', 'foods.id')
-                    ->get();
+            ->where("checked_out", false)
+            ->join('foods', 'carts.foods', '=', 'foods.id')
+            ->get();
 
         return datatables()->of($data)
-        ->addColumn('action', function ($row) {
-            return '<div class="btn-group">
+            ->addColumn('action', function ($row) {
+                return '<div class="btn-group">
                 <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->id . '">
                 <span class="fas fa-trash-alt"></span>
                 </button>
                 </div>';
-        })
-        ->editColumn('gambar', function ($row) {
-            return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
-        })
-        ->editColumn('total', function ($row) {
-            return $row->qty * $row->harga;
-        })
-        ->rawColumns(['action', 'gambar'])
-        ->make(true);
+            })
+            ->editColumn('gambar', function ($row) {
+                return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
+            })
+            ->editColumn('total', function ($row) {
+                return $row->qty * $row->harga;
+            })
+            ->rawColumns(['action', 'gambar'])
+            ->make(true);
     }
 
     public function addtocart(Request $request)
@@ -139,12 +153,12 @@ class HomepageController extends Controller
     public function getsubtotal(Request $request)
     {
         $data = Carts::where("user_id", Auth::id())
-        ->where("checked_out", false)
-        ->join('foods', 'carts.foods', '=', 'foods.id')
-        ->get();
+            ->where("checked_out", false)
+            ->join('foods', 'carts.foods', '=', 'foods.id')
+            ->get();
 
         $total = 0;
-        foreach($data as $value){
+        foreach ($data as $value) {
             $total = $total + ($value->harga * $value->qty);
         }
 

@@ -90,14 +90,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/produk', [HomepageController::class, 'produk'])->name('produk');
     Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
     Route::post('/beli/store', [HomepageController::class, 'beliStore'])->name('beli.store');
-    Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
     Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
     Route::get('/getcart', [HomepageController::class, 'getcart'])->name('getcart');
     Route::get('/getsubtotal', [HomepageController::class, 'getsubtotal'])->name('getsubtotal');
 
+    Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/checkout', [HomepageController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout/store', [HomepageController::class, 'checkoutStore'])->name('checkout.store');
 });
 
 
