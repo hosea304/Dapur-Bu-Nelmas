@@ -41,10 +41,12 @@ class HomepageController extends Controller
 
     public function beliStore(Request $request)
     {
-        $dataBeli = new Beli();
-        $dataBeli->food_id = $request->input('foods');
+        $food = Foods::where('id', $request->input('foods'))->first();
+        $dataBeli = new Order_line();
+        $dataBeli->foods = $request->input('foods');
         $dataBeli->qty = $request->input('qty');
-        $dataBeli->total = $request->input('qty') * $request->input('harga');
+        $dataBeli->harga = $food->harga;
+        $dataBeli->subtotal = $food->harga * $request->input('qty');
         $dataBeli->save();
 
         return redirect()->action([HomepageController::class, 'checkout'], ['id' => $dataBeli->id]);
@@ -53,7 +55,8 @@ class HomepageController extends Controller
 
     public function checkout(Request $request)
     {
-        $beli = Beli::join('foods', 'beli.food_id', '=', 'foods.id')
+        $beli = Order_line::select('order_line.*', 'foods.*', 'order_line.id as od_id')
+        ->join('foods', 'order_line.foods', '=', 'foods.id')
             ->find(request()->query('id'));
         return view('user.checkout', compact('beli'));
     }
@@ -179,6 +182,19 @@ class HomepageController extends Controller
 
             Carts::where('id', $value->id)->update(['checked_out' => true]);
         }
+
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
+
+    public function directcheckout(Request $request){
+        $order = new Orders();
+        $order->name = $request->input('name');
+        $order->alamat = $request->input('alamat');
+        $order->save();
+
+        Order_line::where('id', $request->input('id'))->update(['orders' => $order->id]);
 
         return response()->json([
             'status' => 200,
