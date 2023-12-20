@@ -71,7 +71,7 @@
                                 <div class="category-box col-lg-4 col-md-12 col-sm-12">
                                     <a href="{{ route('produk', ['selectedCategory' => $category->id]) }}">
                                         <img src="{{ asset('storage/' . $category->photo) }}" alt="Food Photo">
-                                        <h1 class="text-center">{{ $category->name }}</h1>
+                                        <h1 class="text-center1">{{ $category->name }}</h1>
                                     </a>
                                 </div>
                                 @endforeach
@@ -104,7 +104,7 @@
             @foreach($dataFood as $item)
             <a href="{{ route('beli', ['selectedItem' => $item->id]) }}" class="list-box col-md-4">
                 <img src="{{ asset('storage/' . $item->photo) }}" alt="{{ $item->name }}" class="img-fluid">
-                <p class="text-center">{{ $item->name }}</p>
+                <p class="text-center3">{{ $item->name }}</p>
             </a>
             @endforeach
         </div>
