@@ -73,7 +73,7 @@
                             alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="{{route('profile.edit')}}" class="d-block">{{ auth()->user()->name }}</a>
+                        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
                     </div>
                 </div>
 
