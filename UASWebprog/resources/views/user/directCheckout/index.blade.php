@@ -68,8 +68,7 @@
                 <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya
                         ongkir
                         yang akan ditanggung oleh penerima. Terima kasih.</span></h6>
-                CHECKOUT
-                <button class="btn-checkout" type="submit">
+                <input class="btn-checkout" type="submit" value="Checkout">
             </form>
             </button>
         </div>
