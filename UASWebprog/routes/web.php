@@ -93,10 +93,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
     Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
+
     Route::get('/getcart', [HomepageController::class, 'getcart'])->name('getcart');
     Route::get('/getsubtotal', [HomepageController::class, 'getsubtotal'])->name('getsubtotal');
     Route::post('/checkoutcart', [HomepageController::class, 'checkoutcart'])->name('checkoutcart');
-    Route::post('/directcheckout', [HomepageController::class, 'directcheckout'])->name('directcheckout');
+
+    Route::get('/getDirectCheckout', [HomepageController::class, 'getDirectCheckout'])->name('getDirectCheckout');
+    Route::get('/directCheckout', [HomepageController::class, 'directCheckout'])->name('directCheckout');
+
+
 
     Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/checkout', [HomepageController::class, 'checkout'])->name('checkout');

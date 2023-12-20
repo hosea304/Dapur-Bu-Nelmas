@@ -36,21 +36,8 @@ class HomepageController extends Controller
     {
         $id = request()->query('selectedItem');
         $buy = Foods::find($id);
-        return view('user.buy', compact('buy'));
-    }
 
-    public function beliStore(Request $request)
-    {
-        $food = Foods::where('id', $request->input('foods'))->first();
-        $dataBeli = new Order_line();
-        $dataBeli->foods = $request->input('foods');
-        $dataBeli->qty = $request->input('qty');
-        $dataBeli->harga = $food->harga;
-        $dataBeli->subtotal = $food->harga * $request->input('qty');
-        $dataBeli->save();
-
-        return redirect()->action([HomepageController::class, 'checkout'], ['id' => $dataBeli->id]);
-
+        return view('user.buy', compact('buy', 'id'));
     }
 
     public function checkout(Request $request)
@@ -70,6 +57,11 @@ class HomepageController extends Controller
         $dataOrder->alamat = $request->input('alamat');
         $dataOrder->subtotal = $request->input('subtotal');
         $dataOrder->save();
+
+        $order = new Orders();
+        $order->name = $request->input('nama_penerima');
+        $order->alamat = $request->input('alamat');
+        $order->save();
 
         return redirect()->action([HomepageController::class, 'infopesanan']);
     }
@@ -204,17 +196,27 @@ class HomepageController extends Controller
         ]);
     }
 
-    public function directcheckout(Request $request)
+    public function getDirectCheckout(Request $request)
     {
-        $order = new Orders();
-        $order->name = $request->input('name');
-        $order->alamat = $request->input('alamat');
-        $order->save();
+        $beli = new Beli();
+        $beli->food_id = $request->input('foods');
+        $beli->qty = $request->input('qty');
+        $beli->total = $request->input('harga') * $request->input('qty');
+        $beli->save();
 
-        Order_line::where('id', $request->input('id'))->update(['orders' => $order->id]);
-
-        return response()->json([
-            'status' => 200,
-        ]);
+        // Redirect to the directCheckout method with the id parameter
+        return redirect()->route('directCheckout', ['id' => $beli->id]);
     }
+
+    public function directCheckout(Request $request)
+    {
+        $beli = Beli::select('beli.*', 'foods.*', 'beli.id as beli_id')
+            ->join('foods', 'beli.food_id', '=', 'foods.id')
+            ->find($request->query('id'));
+
+        return view('user.directCheckout.index', compact('beli'));
+    }
+
+
+
 }

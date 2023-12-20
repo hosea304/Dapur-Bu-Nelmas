@@ -48,7 +48,7 @@
                         <div class="checkout-col checkout-name">{{$beli->name}}</div>
                         <div class="checkout-col checkout-quantity" id="quantity">{{$beli->qty}}</div>
                         <div class="checkout-col checkout-price" id="harga">{{$beli->harga}}</div>
-                        <div class="checkout-col checkout-total" id="total">{{$beli->total}}</div>
+                        <div class="checkout-col checkout-total" id="total">{{$beli->harga*$beli->qty}}</div>
                         <div class="checkout-col checkout-action">
                             <button class="remove-button" onclick="deleteItem()">
                                 <img src="{{asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
@@ -59,14 +59,14 @@
             </div>
 
             <div class="total-price">
-                <p>Total Harga Keseluruhan: Rp. {{$beli->total}}</p>
+                <p>Total Harga Keseluruhan: Rp. {{$beli->harga*$beli->qty}}</p>
             </div>
 
             <form method="post" action="{{ route('checkout.store') }}">
                 @csrf
                 <input type="hidden" name="beli" value="{{ request('id') }}">
                 <input type="hidden" name="foods" value="{{$beli->food_id}}">
-                <input type="hidden" name="subtotal" value="{{$beli->total}}">
+                <input type="hidden" name="subtotal" value="{{$beli->harga*$beli->qty}}">
                 <div class="checkout-nama-info">
                     <h3>Nama Penerima</h3>
                     <input type="text" name="nama_penerima" placeholder="Nama Penerima" required>
