@@ -78,7 +78,8 @@ class HomepageController extends Controller
 
     public function getcart()
     {
-        $data = Carts::where("user_id", Auth::id())
+        $data = Carts::select("carts.*", "foods.*", "carts.id as cart_id")
+                    ->where("user_id", Auth::id())
                     ->where("checked_out", false)
                     ->whereDay("carts.created_at", now()->day)
                     ->join('foods', 'carts.foods', '=', 'foods.id')
@@ -87,7 +88,7 @@ class HomepageController extends Controller
         return datatables()->of($data)
         ->addColumn('action', function ($row) {
             return '<div class="btn-group">
-                <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->id . '">
+                <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->cart_id . '">
                 <span class="fas fa-trash-alt"></span>
                 </button>
                 </div>';
