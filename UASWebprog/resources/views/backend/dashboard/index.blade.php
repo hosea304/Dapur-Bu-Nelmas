@@ -34,12 +34,9 @@ dashboard
         <!-- small box -->
         <div class="small-box bg-success">
             <div class="inner">
-                <h3>Menu hari ini</h3>
-                @foreach ($menu as $menu )
-                <ul>
-                    <li>{{$menu->name}}</li>
-                </ul>
-                @endforeach
+                <h3>{{$totalMenu}}</h3>
+
+                <p>Jumlah Menu</p>
             </div>
         </div>
     </div>
@@ -129,16 +126,16 @@ dashboard
     // Initial update
     updateCalendar();
 
-    function getMenu(){
+    function getMenu() {
         $.get("{{ route('dashboard.perday') }}",
             function (data) {
                 console.log(data);
-                Object.keys(data).forEach(function(key, idx, arr){
-                    console.log("Value:", $("[data-day="+data[key].day+"]").html().length);
-                    if($("[data-day="+data[key].day+"]").html().length > 3){
-                        $("[data-day="+data[key].day+"]").append(", " + data[key].food.name)
+                Object.keys(data).forEach(function (key, idx, arr) {
+                    console.log("Value:", $("[data-day=" + data[key].day + "]").html().length);
+                    if ($("[data-day=" + data[key].day + "]").html().length > 3) {
+                        $("[data-day=" + data[key].day + "]").append(", " + data[key].food.name)
                     } else {
-                        $("[data-day="+data[key].day+"]").append(" " + data[key].food.name)
+                        $("[data-day=" + data[key].day + "]").append(" " + data[key].food.name)
                     }
                 });
             },
