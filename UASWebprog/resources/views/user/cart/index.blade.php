@@ -25,7 +25,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
             <img src="{{ asset('user/asset gambar/carttitle.png') }}" alt="Chef Woman" />
         </div>
         <hr />
-        <button class="cart-button">KEMBALI</button>
+        <button class="cart-button" onclick="window.location.href='/beranda'">KEMBALI</button>
         <br /><br />
         <div class="table-responsive">
             <table class="cart-table" id="tableMenu">
@@ -56,19 +56,21 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
             </table>
         </div>
         <div class="cart-subtotal">
-            Subtotal: Rp. <span id="subtotal"></span>
+            Subtotal: Rp. <span id="subtotal"></span><br><br>
         </div>
         <form method="post" action="{{ route('checkoutcart') }}" id="checkoutform">
             <input type="hidden" name="name" value="{{$user->name}}">
             <input type="hidden" name="alamat" value="{{$user->alamat}}">
+            <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui nomor WhatsApp atau dengan memindai QR code di bawah ini:</h6>
+                <center><img src="{{ asset('user/asset gambar/qrwa.jpg') }}" style: width="120px"></center><br>
             <h6>
-                <span style="color: black">Makanan akan disampaikan melalui layanan pengiriman
+               <center> <span style="color: black">Makanan akan disampaikan melalui layanan pengiriman
                     Grab dengan biaya ongkir yang akan ditanggung oleh
-                    penerima. Terima kasih.</span>
+                    penerima. Terima kasih.</span><center>
             </h6>
-            <button type="submit" class="cart-checkout-button">
+            <center><button type="submit" class="cart-checkout-button">
                 CHECKOUT
-            </button>
+            </button><center>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
