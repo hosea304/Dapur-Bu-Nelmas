@@ -68,6 +68,14 @@ Route::middleware('auth')->controller(PerDayMenuController::class)->group(functi
     Route::post('perdaymenu/destroy/selected', 'destroySelected')->name('perdaymenu.destroySelected');
 });
 
+// orders
+Route::middleware('auth')->controller(OrderController::class)->group(function () {
+    Route::get('orders', 'index')->name('orders');
+    Route::get('orders/fetch', 'fetchFoods')->name('orders.fetch');
+    Route::get('orders/detail', 'fetchDetail')->name('orders.detail');
+    Route::post('orders/changestatus', 'changestatus')->name('orders.changestatus');
+});
+
 Route::get('403', function () {
     abort(403);
 })->name('403');

@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Foods;
 use App\Models\PerDayMenu;
 use App\Models\Orders;
+use App\Models\Order_line;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -34,104 +36,62 @@ class OrderController extends Controller
         if ($request->ajax()) {
             if($request->get('date')){
                 $dataFood = Orders::select('orders.*')
-                    ->where("date", $request->get('date'))
-                    ->where("foods.name", 'like', '%' . $request->get('search[value]') . '%')
+                    ->whereDay("created_at", Carbon::parse($request->get('date'))->day)
+                    ->where("orders.name", 'like', '%' . $request->get('search[value]') . '%')
                     ->get();
             } else {
                 $dataFood = Orders::select('orders.*')
-                    ->where("date", date("Y-m-d"))
-                    ->where("foods.name", 'like', '%' . $request->get('search[value]') . '%')
+                    ->where("orders.name", 'like', '%' . $request->get('search[value]') . '%')
                     ->get();
             }
 
             return datatables()->of($dataFood)
                 ->addColumn('action', function ($row) {
                     return '<div class="btn-group">
-                        <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->perday_id . '">
-                        <span class="fas fa-trash-alt"></span>
+                        <button class="btn btn-warning btn-sm" id="detail" data-id="' . $row->id . '">
+                        Detail
                         </button>
                         </div>';
                 })
-                ->addColumn('checkbox', function ($row) {
-                    return '<input type="checkbox"  name="food_checkbox" id="food_checkbox" data-id="' . $row->perday_id . '">';
+                ->editColumn('status', function ($row) {
+                    if($row->status == 0){
+                        return "Pesanan diproses";
+                    } else if($row->status == 1){
+                        return "Pesanan diantar";
+                    } else {
+                        return "Pesanan selesai";
+                    }
                 })
-                ->editColumn('photo', function ($row) {
-                    return '<img src="' . asset('storage/' . $row->photo) . '" alt="Food Photo" width="200">';
-                })
-                ->editColumn('id_category', function ($row) {
-                    return $row->category_name; // Display category name instead of ID
-                })
-                ->rawColumns(['action', 'checkbox', 'photo'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
     }
 
-
-
-    public function store(Request $request)
+    public function fetchDetail(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'tanggal' => 'required|date',
-            'makanan' => 'required|integer',
-        ], [
-            'tanggal.required' => 'Field Tanggal harus diisi',
-        ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 404,
-                'errors' => $validator->errors()->toArray()
-            ]);
-        } else {
-            $dataCount = PerDayMenu::where("date", $request->input("tanggal"))->count();
-            if($dataCount < 3){
-                $dataFood = new PerDayMenu();
-                $dataFood->date = $request->input('tanggal');
-                $dataFood->food_id = $request->input('makanan');
-                $dataFood->save();
+        if ($request->ajax()) {
+            $dataFood = Order_line::where("orders", $request->get("id"))
+                ->where("foods.name", 'like', '%' . $request->get('search[value]') . '%')
+                ->join('foods', 'order_line.foods', '=', 'foods.id')
+                ->get();
 
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'Food berhasil ditambahkan'
-                ]);
-            } else {
-                return response()->json([
-                    'status' => 403,
-                    'errors' => "Jumlah maksimal menu untuk satu hari adalah 3"
-                ]);
-            }
 
+            return datatables()->of($dataFood)
+                ->make(true);
         }
     }
 
-    public function destroy(Request $request)
+    public function changestatus(Request $request)
     {
-
-        $dataFood = PerDayMenu::findOrFail($request->get('idMenu'));
-
-        $dataFood->delete();
+        $data = Orders::where("id", $request->get("id"))
+            ->update([
+                'status' => $request->get("status")
+            ]);
 
         return response()->json([
             'status' => 200,
+            'message' => 'Status berhasil diubah'
         ]);
-    }
-
-    public function destroySelected(Request $request)
-    {
-        $dataFood = $request->get('idMenus');
-        $query = PerDayMenu::whereIn('id', $dataFood)->delete();
-        ;
-
-        if ($query) {
-            return response()->json([
-                'status' => 200,
-                'message' => 'Data Food Berhasil Dihapus'
-            ]);
-        } else {
-            return response()->json([
-                'status' => 400,
-                'message' => 'Data Food Gagal Dihapus'
-            ]);
-        }
     }
 }
