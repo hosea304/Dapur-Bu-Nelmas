@@ -25,7 +25,6 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 400px;
             margin: 0 auto;
-            padding: 20px;
         }
 
         .form-control {
@@ -161,6 +160,13 @@
                                 <br>
                                 <input id="email" type="email" class="form-control" name="email" :value="old('email')" required autocomplete="username">
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="alamat" class="form-label">ALAMAT</label>
+                                <br>
+                                <input id="alamat" type="text" class="form-control" name="alamat" :value="old('alamat')" required autofocus>
+                                <x-input-error :messages="$errors->get('alamat')" class="mt-2" />
                             </div>
 
                             <div class="mb-3">
