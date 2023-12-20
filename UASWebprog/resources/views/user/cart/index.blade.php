@@ -61,15 +61,8 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
             Subtotal: Rp. <span id="subtotal"></span>
         </div>
         <form method="post" action="{{ route('checkoutcart') }}" id="checkoutform">
-            <div class="checkout-nama-info">
-                <h3>Nama Penerima</h3>
-                <input type="text" name="name" placeholder="Nama Penerima" required />
-            </div>
-
-            <div class="checkout-address-info">
-                <h3>Alamat</h3>
-                <input type="text" name="alamat" placeholder="Alamat Tempat" required />
-            </div>
+            <input type="hidden" name="name" value="{{$user->name}}">
+            <input type="hidden" name="alamat" value="{{$user->alamat}}">
             <h6>
                 <span style="color: black">Makanan akan disampaikan melalui layanan pengiriman
                     Grab dengan biaya ongkir yang akan ditanggung oleh

@@ -5,8 +5,14 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\OrderController;
+use App\Models\Order_line;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
+use App\Models\PerDayMenu;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,7 +23,14 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     if (auth()->user()->usertype === 'admin') {
-        return view('backend.dashboard.index');
+        $totalPenghasilan = Order_line::sum('harga');
+        $totalOrders = Order_line::count();
+        $totalUser = User::count() - 1;
+        $menu = PerDayMenu::join('foods', 'foods.id', '=', 'per_day_menu.food_id')
+            ->select('foods.name')
+            ->where('per_day_menu.date', date('Y-m-d'))
+            ->get();
+        return view('backend.dashboard.index', compact('totalPenghasilan', 'totalOrders', 'totalUser', 'menu'));
     } else {
         return redirect('/beranda');
     }
@@ -83,17 +96,9 @@ Route::get('403', function () {
     abort(403);
 })->name('403');
 
-Route::get('/cart', function () {
-    return view('user.cart.index');
-})->name('cart');
-
 Route::get('/akun', function () {
     return view('user.akun');
 })->name('akun');
-
-Route::get('/checkout', function () {
-    return view('user.checkout');
-})->name('checkout');
 
 
 Route::middleware('auth')->group(function () {
@@ -102,6 +107,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
     Route::post('/beli/store', [HomepageController::class, 'beliStore'])->name('beli.store');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
+
+    Route::get('/cart', function () {
+        $user = Auth::user();
+        return view('user.cart.index', compact('user'));
+    })->name('cart');
     Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
 
