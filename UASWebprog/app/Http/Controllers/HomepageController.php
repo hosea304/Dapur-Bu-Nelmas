@@ -222,6 +222,7 @@ class HomepageController extends Controller
     {
         $dataOrderLine = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
             ->join('orders', 'order_line.orders', '=', 'orders.id')
+            ->where('orders.name', Auth::user()->name)
             ->get();
         return view('user.infopesanan', compact('dataOrderLine'));
     }
