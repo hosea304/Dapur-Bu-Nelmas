@@ -27,36 +27,34 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
         <hr />
         <button class="cart-button">KEMBALI</button>
         <br /><br />
-        <table class="cart-table" id="tableMenu">
-            <thead>
-                <tr>
-                    <th>Gambar Makanan</th>
-                    <th>Nama Makanan</th>
-                    <th>Jumlah</th>
-                    <th>Harga</th>
-                    <th>Hapus</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="cart-image">
-                        <img src="path/to/your/image.jpg" alt="Food Image" />
-                    </td>
-                    <td class="cart-name">Nama Makanan</td>
-                    <td class="cart-quantity">0</td>
-                    <td class="cart-price">Rp.</td>
-                    <td class="cart-delete">
-                        <button class="remove-button">
-                            <img src="{{
-                                        asset(
-                                            'user/asset gambar/remove-icon.png'
-                                        )
-                                    }}" alt="Remove Item" />
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="cart-table" id="tableMenu">
+                <thead>
+                    <tr>
+                        <th>Gambar Makanan</th>
+                        <th>Nama Makanan</th>
+                        <th>Jumlah</th>
+                        <th>Harga</th>
+                        <th>Hapus</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="cart-image">
+                            <img src="path/to/your/image.jpg" alt="Food Image" />
+                        </td>
+                        <td class="cart-name">Nama Makanan</td>
+                        <td class="cart-quantity">0</td>
+                        <td class="cart-price">Rp.</td>
+                        <td class="cart-delete">
+                            <button class="remove-button">
+                                <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item" />
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="cart-subtotal">
             Subtotal: Rp. <span id="subtotal"></span>
         </div>

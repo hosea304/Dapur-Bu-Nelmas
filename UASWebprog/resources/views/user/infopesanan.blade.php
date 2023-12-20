@@ -25,6 +25,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Penerima</th>
                         <th scope="col">Alamat</th>
+
                         <th scope="col">Status</th>
                         <th scope="col">Tanggal Pesan</th>
                     </tr>
