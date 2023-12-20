@@ -79,6 +79,7 @@ class FoodsController extends Controller
         } else {
             $dataFood = new Foods();
             $dataFood->name = $request->input('name');
+            $dataFood->description = $request->input('description');
             if ($request->hasFile('photo')) {
                 $photoPath = $request->file('photo')->store('foods', 'public');
                 $dataFood->photo = $photoPath;
@@ -135,6 +136,7 @@ class FoodsController extends Controller
         } else {
             $dataFood = Foods::findOrFail($request->get('idMenu'));
             $dataFood->name = $request->get('name');
+            $dataFood->description = $request->get('description');
             if ($request->hasFile('photo')) {
                 $oldPhotoPath = $dataFood->photo;
 

@@ -206,6 +206,17 @@ class HomepageController extends Controller
         return view('user.directCheckout.index', compact('beli'));
     }
 
+    public function removefromdirect(Request $request)
+    {
+        $dataFood = Order_line::findOrFail($request->get('id'));
+
+        $dataFood->delete();
+
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
+
 
     public function infopesanan(Request $request)
     {

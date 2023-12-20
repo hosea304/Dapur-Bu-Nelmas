@@ -17,6 +17,12 @@
                         <input type="hidden" name="idMenu" id="idMenu">
                     </div>
                     <div class="col-md-12 col-sm-12">
+                        <label for="">Deskripsi</label>
+                        <textarea placeholder="Deskripsi" name="description" id="description"
+                            class="form-control"></textarea>
+                        <span class="text-danger error-text name_error"></span>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
                         <label for="">Photo Menu</label>
                         <input type="file" name="photo" id="photo" class="form-control">
                         <span class="text-danger error-text name_error"></span>

@@ -38,8 +38,8 @@
                             src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon"></button>
                     <button type="submit" class="btn-buy">BELI</button>
                     <hr class="subsection-divider">
-                    <h5>Keterangan</h5>
-                    <p class="food-description">-</p>
+                    <h5>Food Desciption</h5>
+                    <p class="food-description">{{$buy->description}}</p>
                 </form>
             </div>
         </div>

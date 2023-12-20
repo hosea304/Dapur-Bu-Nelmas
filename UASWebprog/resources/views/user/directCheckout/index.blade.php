@@ -36,7 +36,6 @@
                     <div class="checkout-col checkout-quantity-header">Jumlah</div>
                     <div class="checkout-col checkout-price-header">Harga</div>
                     <div class="checkout-col checkout-total-header">Total Harga</div>
-                    <div class="checkout-col checkout-action-header">Aksi</div>
                 </div>
                 <!-- Checkout data table -->
                 <div class="checkout-data-table">
@@ -49,11 +48,7 @@
                         <div class="checkout-col checkout-quantity" id="quantity">{{$beli->qty}}</div>
                         <div class="checkout-col checkout-price" id="harga">{{$beli->harga}}</div>
                         <div class="checkout-col checkout-total" id="total">{{$beli->harga*$beli->qty}}</div>
-                        <div class="checkout-col checkout-action">
-                            <button class="remove-button" onclick="deleteItem()">
-                                <img src="{{asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
-                            </button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -87,7 +82,5 @@
         </div>
     </div>
 </body>
-
-
 
 </html>
