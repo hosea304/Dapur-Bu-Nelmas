@@ -16,7 +16,7 @@ class AdministratorSeeder extends Seeder
         $adminstrator = new User;
         $adminstrator->name = 'Andi';
         $adminstrator->email = 'hosea@student.umn.ac.id';
-        $adminstrator->roles = 'admin';
+        $adminstrator->usertype = 'admin';
         $adminstrator->password = bcrypt('hosea@student.umn.ac.id');
         $adminstrator->save();
         $this->command->info('Data Berhasil di Insert!');

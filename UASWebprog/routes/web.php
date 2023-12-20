@@ -95,6 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
     Route::get('/getcart', [HomepageController::class, 'getcart'])->name('getcart');
     Route::get('/getsubtotal', [HomepageController::class, 'getsubtotal'])->name('getsubtotal');
+    Route::post('/checkoutcart', [HomepageController::class, 'checkoutcart'])->name('checkoutcart');
+    Route::post('/directcheckout', [HomepageController::class, 'directcheckout'])->name('directcheckout');
 
     Route::get('/infopesanan', [HomepageController::class, 'infopesanan'])->name('infopesanan');
     Route::get('/checkout', [HomepageController::class, 'checkout'])->name('checkout');

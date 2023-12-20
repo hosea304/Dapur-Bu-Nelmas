@@ -88,78 +88,29 @@
         });
     });
 
-    function toggleDelAllBtn() {
-        if ($('input[name="food_checkbox"]:checked').length > 0) {
-            $("#delAllBtn")
-                .text(
-                    "Hapus (" +
-                        $('input[name="food_checkbox"]:checked').length +
-                        ")"
-                )
-                .removeClass("d-none");
-        } else {
-            $("#delAllBtn").addClass("d-none");
-        }
-    }
-
-    $(document).on("click", "#main_checkbox", function () {
-        if (this.checked) {
-            $('input[name="food_checkbox"]').each(function () {
-                this.checked = true;
-            });
-        } else {
-            $('input[name="food_checkbox"]').each(function () {
-                this.checked = false;
-            });
-        }
-        toggleDelAllBtn();
-    });
-
-    $(document).on("click", "#food_checkbox", function () {
-        if (
-            $('input[name="food_checkbox"]:checked').length ==
-            $('input[name="food_checkbox"]').length
-        ) {
-            $("#main_checkbox").prop("checked", true);
-        } else {
-            $("#main_checkbox").prop("checked", false);
-        }
-        toggleDelAllBtn();
-    });
-
-    $(document).on("click", "#delAllBtn", function (e) {
+    $(document).on("submit", "#checkoutform", function (e) {
         e.preventDefault();
-        let idMenus = [];
+        let dataForm = this;
 
-        $('input[name="food_checkbox"]:checked').each(function () {
-            idMenus.push($(this).data("id"));
-        });
-
-        if (idMenus.length > 0) {
-            Swal.fire({
-                title: "Apakah anda yakin?",
-                text: "Kamu Ingin Menghapus Data Menu !",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#6c757d",
-                confirmButtonText: "Ya, hapus data!",
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.post(
-                        "{{ route('perdaymenu.destroySelected') }}",
-                        { idMenus: idMenus },
-                        function (data) {
-                            console.log("Ajax response:", data);
-                            Swal.fire("Success", data.message, "success");
-                            $("#tableMenu")
-                                .DataTable()
-                                .ajax.reload(null, false);
-                        },
-                        "json"
-                    );
+        $.ajax({
+            url: $(dataForm).attr("action"),
+            type: $(dataForm).attr("method"),
+            data: new FormData(dataForm),
+            dataType: "JSON",
+            contentType: false,
+            processData: false,
+            beforeSend: function () {
+                $(dataForm).find("span.error-text").text("");
+            },
+            success: function (response) {
+                if (response.status == 404) {
+                } else if (response.status == 403) {
+                    Swal.fire("Warning", response.errors, "warning");
+                } else {
+                    Swal.fire("Success", response.message, "success");
+                    $("#tableMenu").DataTable().ajax.reload(null, false);
                 }
-            });
-        }
+            },
+        });
     });
 </script>

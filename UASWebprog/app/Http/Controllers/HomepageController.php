@@ -41,10 +41,12 @@ class HomepageController extends Controller
 
     public function beliStore(Request $request)
     {
-        $dataBeli = new Beli();
-        $dataBeli->food_id = $request->input('foods');
+        $food = Foods::where('id', $request->input('foods'))->first();
+        $dataBeli = new Order_line();
+        $dataBeli->foods = $request->input('foods');
         $dataBeli->qty = $request->input('qty');
-        $dataBeli->total = $request->input('qty') * $request->input('harga');
+        $dataBeli->harga = $food->harga;
+        $dataBeli->subtotal = $food->harga * $request->input('qty');
         $dataBeli->save();
 
         return redirect()->action([HomepageController::class, 'checkout'], ['id' => $dataBeli->id]);
@@ -53,7 +55,8 @@ class HomepageController extends Controller
 
     public function checkout(Request $request)
     {
-        $beli = Beli::join('foods', 'beli.food_id', '=', 'foods.id')
+        $beli = Order_line::select('order_line.*', 'foods.*', 'order_line.id as od_id')
+            ->join('foods', 'order_line.foods', '=', 'foods.id')
             ->find(request()->query('id'));
         return view('user.checkout', compact('beli'));
     }
@@ -89,15 +92,17 @@ class HomepageController extends Controller
 
     public function getcart()
     {
-        $data = Carts::where("user_id", Auth::id())
+        $data = Carts::select("carts.*", "foods.*", "carts.id as cart_id")
+            ->where("user_id", Auth::id())
             ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
             ->join('foods', 'carts.foods', '=', 'foods.id')
             ->get();
 
         return datatables()->of($data)
             ->addColumn('action', function ($row) {
                 return '<div class="btn-group">
-                <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->id . '">
+                <button class="btn btn-danger btn-sm" id="btnDelFood" data-id="' . $row->cart_id . '">
                 <span class="fas fa-trash-alt"></span>
                 </button>
                 </div>';
@@ -154,6 +159,7 @@ class HomepageController extends Controller
     {
         $data = Carts::where("user_id", Auth::id())
             ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
             ->join('foods', 'carts.foods', '=', 'foods.id')
             ->get();
 
@@ -165,6 +171,50 @@ class HomepageController extends Controller
         return response()->json([
             'status' => 200,
             'total' => $total
+        ]);
+    }
+
+    public function checkoutcart(Request $request)
+    {
+        $cart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->get();
+
+        $order = new Orders();
+        $order->name = $request->input('name');
+        $order->alamat = $request->input('alamat');
+        $order->save();
+
+        foreach ($cart as $value) {
+            $food = Foods::where('id', $value->foods)->first();
+            $order_line = new Order_line();
+            $order_line->orders = $order->id;
+            $order_line->foods = $value->foods;
+            $order_line->harga = $food->harga;
+            $order_line->qty = $value->qty;
+            $order_line->subtotal = $value->qty * $food->harga;
+            $order_line->save();
+
+            Carts::where('id', $value->id)->update(['checked_out' => true]);
+        }
+
+        return response()->json([
+            'status' => 200,
+        ]);
+    }
+
+    public function directcheckout(Request $request)
+    {
+        $order = new Orders();
+        $order->name = $request->input('name');
+        $order->alamat = $request->input('alamat');
+        $order->save();
+
+        Order_line::where('id', $request->input('id'))->update(['orders' => $order->id]);
+
+        return response()->json([
+            'status' => 200,
         ]);
     }
 }

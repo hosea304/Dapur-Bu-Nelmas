@@ -2,74 +2,94 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Checkout</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('user/user-style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ asset('user/user-style.css') }}" />
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
+" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="checkout" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
+<body class="checkout" style="
+            background-image: url('user/asset gambar/backgroundweb.jpg');
+            background-size: cover;
+        ">
     @include('user.navbar')
-    <br><br><br><br><br><br><br><br>
+    <br /><br /><br /><br /><br /><br /><br /><br />
 
     <div class="container checkout-container">
         <button class="btn-go-back">
             <i class="fas fa-arrow-left"></i> KEMBALI
         </button>
 
-
         <div class="checkout-box">
             <div class="checkout-image-container img">
-                <img src="{{ asset('user/asset gambar/checkouttitle.png') }}" alt="Checkout">
+                <img src="{{ asset('user/asset gambar/checkouttitle.png') }}" alt="Checkout" />
             </div>
-            <hr>
+            <hr />
 
             <!-- Kolom-kolom table untuk data makanan -->
             <!-- Checkout header table -->
             <div class="checkout-header-table">
                 <div class="checkout-row checkout-header-row">
-                    <div class="checkout-col checkout-number-header">Nomer</div>
-                    <div class="checkout-col checkout-image-header">Gambar Makanan</div>
-                    <div class="checkout-col checkout-name-header">Nama Barang</div>
-                    <div class="checkout-col checkout-quantity-header">Jumlah</div>
-                    <div class="checkout-col checkout-price-header">Harga</div>
-                    <div class="checkout-col checkout-total-header">Total Harga</div>
-                    <div class="checkout-col checkout-action-header">Aksi</div>
+                    <div class="checkout-col checkout-number-header">
+                        Nomer
+                    </div>
+                    <div class="checkout-col checkout-image-header">
+                        Gambar Makanan
+                    </div>
+                    <div class="checkout-col checkout-name-header">
+                        Nama Barang
+                    </div>
+                    <div class="checkout-col checkout-quantity-header">
+                        Jumlah
+                    </div>
+                    <div class="checkout-col checkout-price-header">
+                        Harga
+                    </div>
+                    <div class="checkout-col checkout-total-header">
+                        Total Harga
+                    </div>
+                    <div class="checkout-col checkout-action-header">
+                        Aksi
+                    </div>
                 </div>
                 <!-- Checkout data table -->
                 <div class="checkout-data-table">
                     <div class="checkout-row">
                         <div class="checkout-col checkout-number">1</div>
                         <div class="checkout-col checkout-image">
-                            <img src="{{ asset('storage/'.$beli->photo) }}" alt="Food Image">
+                            <img src="{{ asset('storage/'.$beli->photo) }}" alt="Food Image" />
                         </div>
-                        <div class="checkout-col checkout-name">{{$beli->name}}</div>
-                        <div class="checkout-col checkout-quantity" id="quantity">{{$beli->qty}}</div>
-                        <div class="checkout-col checkout-price" id="harga">{{$beli->harga}}</div>
-                        <div class="checkout-col checkout-total" id="total">{{$beli->total}}</div>
-                        <div class="checkout-col checkout-action">
-                            <button class="remove-button" onclick="deleteItem()">
-                                <img src="{{asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item">
-                            </button>
+                        <div class="checkout-col checkout-name">
+                            {{$beli->name}}
+                        </div>
+                        <div class="checkout-col checkout-quantity" id="quantity">
+                            {{$beli->qty}}
+                        </div>
+                        <div class="checkout-col checkout-price" id="harga">
+                            {{$beli->harga}}
+                        </div>
+                        <div class="checkout-col checkout-total" id="total">
+                            {{$beli->subtotal}}
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="total-price">
-                <p>Total Harga Keseluruhan: Rp. {{$beli->total}}</p>
+                <p>Total Harga Keseluruhan: Rp. {{$beli->subtotal}}</p>
             </div>
 
-            <form method="post" action="{{ route('checkout.store') }}">
-                @csrf
-                <input type="hidden" name="beli" value="{{ request('id') }}">
-                <input type="hidden" name="foods" value="{{$beli->food_id}}">
-                <input type="hidden" name="subtotal" value="{{$beli->total}}">
+            <form method="post" action="{{ route('directcheckout') }}" id="checkoutform">
+                <input type="hidden" name="id" value="{{$beli->od_id}}" />
                 <div class="checkout-nama-info">
                     <h3>Nama Penerima</h3>
-                    <input type="text" name="nama_penerima" placeholder="Nama Penerima" required>
+                    <input type="text" name="name" placeholder="Nama Penerima" required />
                 </div>
 
                 <div class="checkout-address-info">
