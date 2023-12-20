@@ -203,7 +203,9 @@ class HomepageController extends Controller
             ->join('foods', 'order_line.foods', '=', 'foods.id')
             ->find(request()->query('id'));
 
-        return view('user.directCheckout.index', compact('beli'));
+        $user = Auth::user();
+
+        return view('user.directCheckout.index', compact('beli', 'user'));
     }
 
     public function removefromdirect(Request $request)

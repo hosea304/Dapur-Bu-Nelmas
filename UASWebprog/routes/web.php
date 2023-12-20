@@ -7,6 +7,8 @@ use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\OrderController;
 use App\Models\Order_line;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Http\Controllers\HomepageController;
 use App\Models\PerDayMenu;
@@ -92,7 +94,8 @@ Route::get('403', function () {
 })->name('403');
 
 Route::get('/cart', function () {
-    return view('user.cart.index');
+    $user = Auth::user();
+    return view('user.cart.index', compact('user'));
 })->name('cart');
 
 Route::get('/akun', function () {

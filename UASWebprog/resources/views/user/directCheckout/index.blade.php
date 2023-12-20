@@ -63,15 +63,8 @@
                 <input type="hidden" name="foods" value="{{$beli->food_id}}">
                 <input type="hidden" name="harga" value="{{$beli->harga}}">
                 <input type="hidden" name="subtotal" value="{{$beli->harga*$beli->qty}}">
-                <div class="checkout-nama-info">
-                    <h3>Nama Penerima</h3>
-                    <input type="text" name="nama_penerima" placeholder="Nama Penerima" required>
-                </div>
-
-                <div class="checkout-address-info">
-                    <h3>Alamat</h3>
-                    <input type="text" name="alamat" placeholder="Alamat Tempat" required>
-                </div>
+                <input type="hidden" name="nama_penerima" value="{{$user->name}}">
+                <input type="hidden" name="alamat" value="{{$user->alamat}}">
                 <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya
                         ongkir
                         yang akan ditanggung oleh penerima. Terima kasih.</span></h6>
