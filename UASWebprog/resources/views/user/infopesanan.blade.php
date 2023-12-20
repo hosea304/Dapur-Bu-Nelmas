@@ -25,18 +25,26 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Penerima</th>
                         <th scope="col">Alamat</th>
-                        <th scope="col">Subtotal</th>
-                        <th scope="col">Tanggal</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Tanggal Pesan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($dataOrder as $order)
+                    @foreach ($dataOrderLine as $order)
                     <tr>
-                        <th scope="row">{{$loop->iteration}}</th>
-                        <td>{{$order->name}}</td>
-                        <td>{{$order->alamat}}</td>
-                        <td>{{$order->subtotal}}</td>
-                        <td>{{$order->created_at}}</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $order->name }}</td>
+                        <td>{{ $order->alamat }}</td>
+                        <td>
+                            @if ($order->status == 0)
+                            Pesanan diproses
+                            @elseif ($order->status == 1)
+                            Pesanan diantar
+                            @else
+                            Pesanan selesai
+                            @endif
+                        </td>
+                        <td>{{ $order->created_at }}</td>
                     </tr>
                     @endforeach
                 </tbody>

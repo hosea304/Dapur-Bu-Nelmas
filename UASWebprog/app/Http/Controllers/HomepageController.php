@@ -220,11 +220,10 @@ class HomepageController extends Controller
 
     public function infopesanan(Request $request)
     {
-        $dataOrder = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
-            ->join('orders', 'order_line.orders', '=', 'orders.id');
-        $dataOrder = $dataOrder->get();
-
-        return view('user.infopesanan', compact('dataOrder'));
+        $dataOrderLine = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
+            ->join('orders', 'order_line.orders', '=', 'orders.id')
+            ->get();
+        return view('user.infopesanan', compact('dataOrderLine'));
     }
 
     public function tentangkami()
