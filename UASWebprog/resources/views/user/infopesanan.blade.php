@@ -25,7 +25,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Nama Penerima</th>
                         <th scope="col">Alamat</th>
-
+                        <th scope="col">Jumlah Bayar</th>
                         <th scope="col">Status</th>
                         <th scope="col">Tanggal Pesan</th>
                     </tr>
@@ -36,6 +36,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $order->name }}</td>
                         <td>{{ $order->alamat }}</td>
+                        <td>Rp. {{ number_format($order->subtotal, 0, ',', '.') }}</td>
                         <td>
                             @if ($order->status == 0)
                             Pesanan diproses
@@ -45,7 +46,7 @@
                             Pesanan selesai
                             @endif
                         </td>
-                        <td>{{ $order->created_at }}</td>
+                        <td>{{ $order->created_at->format('d F Y H:i:s') }}</td>
                     </tr>
                     @endforeach
                 </tbody>
