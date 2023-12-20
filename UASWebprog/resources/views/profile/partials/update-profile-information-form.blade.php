@@ -46,6 +46,12 @@
                 </div>
             @endif
         </div>
+        <div>
+    <x-input-label for="alamat" :value="__('Alamat')" />
+    <x-text-input id="alamat" name="alamat" type="text" class="mt-1 block w-full form-control" :value="old('alamat', $user->alamat)" required />
+    <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
+</div>
+
 <br>
         <div class="flex items-center gap-4">
     <x-primary-button style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s; background-color: blue">
