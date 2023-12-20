@@ -93,18 +93,9 @@ Route::get('403', function () {
     abort(403);
 })->name('403');
 
-Route::get('/cart', function () {
-    $user = Auth::user();
-    return view('user.cart.index', compact('user'));
-})->name('cart');
-
 Route::get('/akun', function () {
     return view('user.akun');
 })->name('akun');
-
-Route::get('/checkout', function () {
-    return view('user.checkout');
-})->name('checkout');
 
 
 Route::middleware('auth')->group(function () {
@@ -113,6 +104,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/beli', [HomepageController::class, 'beli'])->name('beli');
     Route::post('/beli/store', [HomepageController::class, 'beliStore'])->name('beli.store');
     Route::get('/tentangkami', [HomepageController::class, 'tentangkami'])->name('tentangkami');
+
+    Route::get('/cart', function () {
+        $user = Auth::user();
+        return view('user.cart.index', compact('user'));
+    })->name('cart');
     Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');
 
