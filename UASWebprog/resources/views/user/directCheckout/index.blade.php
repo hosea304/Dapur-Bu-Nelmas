@@ -64,8 +64,9 @@
 
             <form method="post" action="{{ route('checkout.store') }}">
                 @csrf
-                <input type="hidden" name="beli" value="{{ request('id') }}">
+                <input type="hidden" name="orders" value="{{ request('id') }}">
                 <input type="hidden" name="foods" value="{{$beli->food_id}}">
+                <input type="hidden" name="harga" value="{{$beli->harga}}">
                 <input type="hidden" name="subtotal" value="{{$beli->harga*$beli->qty}}">
                 <div class="checkout-nama-info">
                     <h3>Nama Penerima</h3>

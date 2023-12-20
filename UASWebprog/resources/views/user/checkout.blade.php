@@ -66,6 +66,7 @@
                 @csrf
                 <input type="hidden" name="beli" value="{{ request('id') }}">
                 <input type="hidden" name="foods" value="{{$beli->food_id}}">
+                <input type="hidden" name="harga" value="{{$beli->harga}}">
                 <input type="hidden" name="subtotal" value="{{$beli->total}}">
                 <div class="checkout-nama-info">
                     <h3>Nama Penerima</h3>

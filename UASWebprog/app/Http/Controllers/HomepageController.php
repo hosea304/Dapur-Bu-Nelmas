@@ -40,45 +40,6 @@ class HomepageController extends Controller
         return view('user.buy', compact('buy', 'id'));
     }
 
-    public function checkout(Request $request)
-    {
-        $beli = Order_line::select('order_line.*', 'foods.*', 'order_line.id as od_id')
-            ->join('foods', 'order_line.foods', '=', 'foods.id')
-            ->find(request()->query('id'));
-        return view('user.checkout', compact('beli'));
-    }
-
-    public function checkoutStore(Request $request)
-    {
-        $dataOrder = new Order_line();
-        $dataOrder->beli = $request->input('beli');
-        $dataOrder->foods = $request->input('foods');
-        $dataOrder->nama_penerima = $request->input('nama_penerima');
-        $dataOrder->alamat = $request->input('alamat');
-        $dataOrder->subtotal = $request->input('subtotal');
-        $dataOrder->save();
-
-        $order = new Orders();
-        $order->name = $request->input('nama_penerima');
-        $order->alamat = $request->input('alamat');
-        $order->save();
-
-        return redirect()->action([HomepageController::class, 'infopesanan']);
-    }
-    public function infopesanan(Request $request)
-    {
-        $dataOrder = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
-            ->join('beli', 'order_line.beli', '=', 'beli.id');
-        $dataOrder = $dataOrder->get();
-
-        return view('user.infopesanan', compact('dataOrder'));
-    }
-
-
-    public function tentangkami()
-    {
-        return view('user.aboutus');
-    }
 
     // carts
 
@@ -196,27 +157,69 @@ class HomepageController extends Controller
         ]);
     }
 
+
+    public function checkout(Request $request)
+    {
+        $beli = Order_line::select('order_line.*', 'foods.*', 'order_line.id as od_id')
+            ->join('foods', 'order_line.foods', '=', 'foods.id')
+            ->find(request()->query('id'));
+        return view('user.checkout', compact('beli'));
+    }
+
+
     public function getDirectCheckout(Request $request)
     {
-        $beli = new Beli();
-        $beli->food_id = $request->input('foods');
+        $beli = new Order_line();
+        $beli->foods = $request->input('foods');
+        $beli->harga = $request->input('harga');
         $beli->qty = $request->input('qty');
-        $beli->total = $request->input('harga') * $request->input('qty');
+        $beli->subtotal = $request->input('harga') * $request->input('qty');
         $beli->save();
 
-        // Redirect to the directCheckout method with the id parameter
         return redirect()->route('directCheckout', ['id' => $beli->id]);
     }
 
+
+    public function checkoutStore(Request $request)
+    {
+        // Membuat order baru
+        $order = new Orders();
+        $order->name = $request->input('nama_penerima');
+        $order->alamat = $request->input('alamat');
+        $order->save();
+
+        $orderId = $order->id;
+
+        Order_line::whereNull('orders')
+            ->update(['orders' => $orderId]);
+
+        return redirect()->action([HomepageController::class, 'infopesanan']);
+    }
+
+
     public function directCheckout(Request $request)
     {
-        $beli = Beli::select('beli.*', 'foods.*', 'beli.id as beli_id')
-            ->join('foods', 'beli.food_id', '=', 'foods.id')
-            ->find($request->query('id'));
+        $beli = Order_line::select('order_line.*', 'foods.*', 'order_line.id as od_id')
+            ->join('foods', 'order_line.foods', '=', 'foods.id')
+            ->find(request()->query('id'));
 
         return view('user.directCheckout.index', compact('beli'));
     }
 
+
+    public function infopesanan(Request $request)
+    {
+        $dataOrder = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
+            ->join('orders', 'order_line.orders', '=', 'orders.id');
+        $dataOrder = $dataOrder->get();
+
+        return view('user.infopesanan', compact('dataOrder'));
+    }
+
+    public function tentangkami()
+    {
+        return view('user.aboutus');
+    }
 
 
 }

@@ -33,7 +33,7 @@
                     @foreach($dataOrder as $order)
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
-                        <td>{{$order->nama_penerima}}</td>
+                        <td>{{$order->name}}</td>
                         <td>{{$order->alamat}}</td>
                         <td>{{$order->subtotal}}</td>
                         <td>{{$order->created_at}}</td>

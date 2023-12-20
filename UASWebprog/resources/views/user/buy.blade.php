@@ -26,6 +26,7 @@
                 <form action="{{ route('getDirectCheckout') }}" method="GET">
                     @csrf
                     <input type="hidden" name="foods" value="{{ $buy->id }}">
+                    <input type="hidden" name="harga" value="{{$buy->harga}}">
                     <div class="quantity-control">
                         <button type="button" onclick="decreaseQuantity()">-</button>
                         <input type="number" id="qty" name="qty" value="1" readonly>
