@@ -119,6 +119,7 @@ dashboard
     </div>
 </div>
 
+<script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
 
 <script>
     function updateCalendar() {
@@ -140,6 +141,25 @@ dashboard
 
     // Initial update
     updateCalendar();
+
+    function getMenu(){
+        $.get("{{ route('dashboard.perday') }}",
+            function (data) {
+                console.log(data);
+                Object.keys(data).forEach(function(key, idx, arr){
+                    console.log("Value:", $("[data-day="+data[key].day+"]").html().length);
+                    if($("[data-day="+data[key].day+"]").html().length > 3){
+                        $("[data-day="+data[key].day+"]").append(", " + data[key].food.name)
+                    } else {
+                        $("[data-day="+data[key].day+"]").append(" " + data[key].food.name)
+                    }
+                });
+            },
+            "json"
+        );
+    }
+
+    getMenu();
 </script>
 
 @endsection

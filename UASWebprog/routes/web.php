@@ -6,6 +6,7 @@ use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,6 +22,8 @@ Route::get('/dashboard', function () {
         return redirect('/beranda');
     }
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard/perday', [DashboardController::class, 'perday'])->name('dashboard.perday');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
