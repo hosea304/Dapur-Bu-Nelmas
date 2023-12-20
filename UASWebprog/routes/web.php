@@ -5,7 +5,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\OrderController;
+use App\Models\Order_line;
+use App\Models\User;
+
 use App\Http\Controllers\HomepageController;
+use App\Models\PerDayMenu;
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,7 +20,14 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     if (auth()->user()->usertype === 'admin') {
-        return view('backend.dashboard.index');
+        $totalPenghasilan = Order_line::sum('harga');
+        $totalOrders = Order_line::count();
+        $totalUser = User::count() - 1;
+        $menu = PerDayMenu::join('foods', 'foods.id', '=', 'per_day_menu.food_id')
+            ->select('foods.name')
+            ->where('per_day_menu.date', date('Y-m-d'))
+            ->get();
+        return view('backend.dashboard.index', compact('totalPenghasilan', 'totalOrders', 'totalUser', 'menu'));
     } else {
         return redirect('/beranda');
     }
