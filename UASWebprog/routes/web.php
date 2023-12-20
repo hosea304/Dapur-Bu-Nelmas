@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Foods;
 use App\Models\PerDayMenu;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +27,8 @@ Route::get('/dashboard', function () {
         $totalPenghasilan = Order_line::sum('harga');
         $totalOrders = Order_line::count();
         $totalUser = User::count() - 1;
-        $menu = PerDayMenu::join('foods', 'foods.id', '=', 'per_day_menu.food_id')
-            ->select('foods.name')
-            ->where('per_day_menu.date', date('Y-m-d'))
-            ->get();
-        return view('backend.dashboard.index', compact('totalPenghasilan', 'totalOrders', 'totalUser', 'menu'));
+        $totalMenu = Foods::count();
+        return view('backend.dashboard.index', compact('totalPenghasilan', 'totalOrders', 'totalUser', 'totalMenu'));
     } else {
         return redirect('/beranda');
     }
