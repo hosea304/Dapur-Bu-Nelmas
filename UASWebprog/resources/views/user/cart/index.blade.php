@@ -47,10 +47,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
                         <td class="cart-quantity">0</td>
                         <td class="cart-price">Rp.</td>
                         <td class="cart-delete">
-                            <button class="remove-button">
-                                <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item" />
-                            </button>
-                        </td>
+    <button class="remove-button" onclick="removeItem()">
+        <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item" />
+    </button>
+</td>
+
+<script>
+    function removeItem() {
+        reduceNotification();
+    }
+</script>
                     </tr>
                 </tbody>
             </table>
@@ -69,10 +75,15 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
             <h6>
                 <center><span style="color: black">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya ongkir yang akan ditanggung oleh penerima. Terima kasih.</span><center>
             </h6>
-            <center><button type="submit" class="cart-checkout-button">
-                CHECKOUT
-            </button><center>
+            <center><button type="submit" class="cart-checkout-button" onclick="handleCheckoutClick()">
+            CHECKOUT
+        </button><center>
         </form>
+        <script>
+    function handleCheckoutClick() {
+        reduceNotification();
+    }
+</script>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
