@@ -1,3 +1,7 @@
+<?php
+$jumlahDataCart = DB::table('carts')->count();
+?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
     <div class="navbar-brand-container">
         <img src="{{ asset('user/asset gambar/logo usaha.png') }}" alt="Logo Usaha" width="90" height="90">
@@ -12,11 +16,14 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('cart') }}" onclick="openCart()">
-                    <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
-                </a>
-            </li>
+        <li class="nav-item">
+    <a class="nav-link" href="{{ route('cart') }}" onclick="openCart()">
+        <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
+        @if($jumlahDataCart > 0)
+            <span class="notification-badge">{{ $jumlahDataCart }}</span>
+        @endif
+    </a>
+</li>
             <li class="nav-item">
                 <a class="nav-link" href="{{route('profile.edit')}}" onclick="openAccount()">
                     <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="40" height="40">

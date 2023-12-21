@@ -62,7 +62,7 @@
         }
 
         .card-header {
-            font-size: 80px;
+            font-size: 60px;
             text-align: center;
         }
 
