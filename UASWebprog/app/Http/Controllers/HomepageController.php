@@ -222,7 +222,8 @@ class HomepageController extends Controller
 
     public function infopesanan(Request $request)
     {
-        $dataOrderLine = Order_line::join('foods', 'order_line.foods', '=', 'foods.id')
+        $dataOrderLine = Order_line::select("order_line.*", "foods.name as namaMakanan", "orders.*")
+            ->join('foods', 'order_line.foods', '=', 'foods.id')
             ->join('orders', 'order_line.orders', '=', 'orders.id')
             ->where('orders.name', Auth::user()->name)
             ->get();
