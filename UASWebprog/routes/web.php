@@ -7,6 +7,7 @@ use App\Http\Controllers\PerDayMenuController;
 use App\Http\Controllers\OrderController;
 use App\Models\Order_line;
 use App\Models\User;
+use App\Models\Carts;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -108,7 +109,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/cart', function () {
         $user = Auth::user();
-        return view('user.cart.index', compact('user'));
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
+        return view('user.cart.index', compact('user', 'jumlahDataCart'));
     })->name('cart');
     Route::post('/addtocart', [HomepageController::class, 'addtocart'])->name('addtocart');
     Route::post('/removefromcart', [HomepageController::class, 'removefromcart'])->name('removefromcart');

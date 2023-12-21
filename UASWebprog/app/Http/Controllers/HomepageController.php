@@ -22,22 +22,35 @@ class HomepageController extends Controller
         $dataFood = Foods::whereHas('perday', function ($query) {
             $query->where("date", date("Y-m-d"));
         })->get();
-        return view('user.homepage', compact('dataKategori', 'dataFood'));
+
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
+        return view('user.homepage', compact('dataKategori', 'dataFood', 'jumlahDataCart'));
     }
 
     public function produk()
     {
         $dataFood = Foods::all();
         $dataKategori = Category::all();
-        return view('user.product', compact('dataKategori', 'dataFood'));
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
+        return view('user.product', compact('dataKategori', 'dataFood', 'jumlahDataCart'));
     }
 
     public function beli(Request $request)
     {
         $id = request()->query('selectedItem');
         $buy = Foods::find($id);
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
 
-        return view('user.buy', compact('buy', 'id'));
+        return view('user.buy', compact('buy', 'id', 'jumlahDataCart'));
     }
 
 
@@ -225,14 +238,14 @@ class HomepageController extends Controller
             ->where('orders.name', Auth::user()->name)
             ->get();
 
-        foreach($dataOrderLine as $value){
+        foreach ($dataOrderLine as $value) {
             $value->namaMakanan = null;
             $value->subtotal = 0;
-            foreach($value->orderline as $value2){
-                if($value->namaMakanan == null){
-                    $value->namaMakanan = $value2->food->name." (".$value2->qty.")";
-                }else{
-                    $value->namaMakanan = $value->namaMakanan.", ".$value2->food->name." (".$value2->qty.")";
+            foreach ($value->orderline as $value2) {
+                if ($value->namaMakanan == null) {
+                    $value->namaMakanan = $value2->food->name . " (" . $value2->qty . ")";
+                } else {
+                    $value->namaMakanan = $value->namaMakanan . ", " . $value2->food->name . " (" . $value2->qty . ")";
                 }
                 $value->subtotal = $value->subtotal + $value2->subtotal;
             }
@@ -245,6 +258,7 @@ class HomepageController extends Controller
     {
         return view('user.aboutus');
     }
+
 
 
 }

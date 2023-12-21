@@ -12,12 +12,13 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-        <a class="nav-link" href="{{ route('cart') }}" onclick="openCart()">
-    <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
-    <span id="cartNotification" class="cart-notification">0</span>
-</a>
-</li>     <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('cart') }}" onclick="openCart()">
+                    <img src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Keranjang" width="40" height="40">
+                    <span id="cartNotification" class="cart-notification">{{$jumlahDataCart}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{route('profile.edit')}}" onclick="openAccount()">
                     <img src="{{ asset('user/asset gambar/usericon.png') }}" alt="Pengguna" width="40" height="40">
                 </a>
@@ -48,4 +49,3 @@
     </div>
 </div>
 <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">
-
