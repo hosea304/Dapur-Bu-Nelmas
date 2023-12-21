@@ -219,14 +219,25 @@ class HomepageController extends Controller
         ]);
     }
 
-
     public function infopesanan(Request $request)
     {
-        $dataOrderLine = Order_line::select("order_line.*", "foods.name as namaMakanan", "orders.*")
-            ->join('foods', 'order_line.foods', '=', 'foods.id')
-            ->join('orders', 'order_line.orders', '=', 'orders.id')
+        $dataOrderLine = Orders::with(["orderline", "orderline.food"])
             ->where('orders.name', Auth::user()->name)
             ->get();
+
+        foreach($dataOrderLine as $value){
+            $value->namaMakanan = null;
+            $value->subtotal = 0;
+            foreach($value->orderline as $value2){
+                if($value->namaMakanan == null){
+                    $value->namaMakanan = $value2->food->name." (".$value2->qty.")";
+                }else{
+                    $value->namaMakanan = $value->namaMakanan.", ".$value2->food->name." (".$value2->qty.")";
+                }
+                $value->subtotal = $value->subtotal + $value2->subtotal;
+            }
+        }
+
         return view('user.infopesanan', compact('dataOrderLine'));
     }
 
