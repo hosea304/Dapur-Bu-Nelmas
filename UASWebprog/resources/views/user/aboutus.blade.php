@@ -42,8 +42,8 @@
                         <a
                             class="kontak"
                             style="color: antiquewhite"
-                            href="bambachristoper9@gmail.com"
-                            >Email: bambachristoper9@gmail.com</a
+                            href="johannaagustina78@gmail.com"
+                            >Email: johannaagustina78@gmail.com</a
                         >
                     </div>
                     <div
