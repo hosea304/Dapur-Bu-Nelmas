@@ -15,7 +15,7 @@
             background-attachment: fixed; 
             font-family: monospace;
             font-weight: bold;
-            font-size: 20px;    
+            font-size: 15px;    
             color: white;
         }
 
@@ -25,13 +25,15 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 400px;
             margin: 0 auto;
+            margin-bottom: 20px;
+            height: 520px;
         }
 
         .form-control {
             border-radius: 5px;
             transition: all 0.3s;
             margin-bottom: 10px;
-            width: 240px;
+            width: 290px;
             height: 30px;
         }
 
@@ -62,7 +64,7 @@
         }
 
         .card-header {
-            font-size: 60px;
+            font-size: 50px;
             text-align: center;
         }
 
@@ -115,6 +117,40 @@
             font-size: 20px;
             color: yellow;
         }
+
+        @media (max-width: 767px) {
+        body {
+            font-size: 16px;
+        }
+
+        .card {
+            width: 95%;
+            height: 500px;
+            margin: 20px auto;
+            margin-right: 150px;
+            margin-left: 10px;
+        }
+
+        .form-control {
+            width: 80%;
+        }
+
+        .btn-primary {
+            width: 80%;
+        }
+
+        .navbar {
+            font-size: 20px;
+        }
+
+        .navbar-brand img {
+            width: 80px; 
+        }
+
+        .card-header {
+            font-size: 40px;
+        }
+    }
     </style>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -195,7 +231,7 @@
                                     Register
                                 </button>
                             </div>
-
+                            <br>
                             <div class="flex items-center justify-end mt-4">
                             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}" style="font-size: 15px;">
                                 {{ __('Already registered?') }}

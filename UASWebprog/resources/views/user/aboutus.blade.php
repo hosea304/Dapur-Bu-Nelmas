@@ -85,6 +85,10 @@
                                 referrerpolicy="no-referrer-when-downgrade"
                             ></iframe>
                         </div>
+                        <br><br>
+                        <center>
+    <img class="food-img" alt="Food Image" src="{{ asset('user/asset gambar/gambartempat.jpg') }}" style="width: 300px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
+</center>
                     </div>
                 </div>
             </div>

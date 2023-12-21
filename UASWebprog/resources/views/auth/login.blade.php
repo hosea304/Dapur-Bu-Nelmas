@@ -121,6 +121,40 @@
             font-size: 20px;
             color: yellow;
         }
+
+        @media (max-width: 767px) {
+    body {
+        font-size: 16px;
+    }
+
+    .card {
+        width: 80%;
+        margin: 20px auto;
+        margin-right: 150px;
+        margin-left: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .navbar {
+        font-size: 20px;
+    }
+
+    .navbar-brand img {
+        width: 10px; 
+    }
+
+    .card-header {
+        font-size: 40px;
+    }
+}
+
     </style>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
