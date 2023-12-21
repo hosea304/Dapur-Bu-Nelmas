@@ -30,12 +30,14 @@ class OrderController extends Controller
 
         if ($request->ajax()) {
             if ($request->get('date')) {
-                $dataFood = Orders::select('orders.*')
-                    ->whereDay("created_at", Carbon::parse($request->get('date'))->day)
+                $dataFood = Orders::select('orders.*', 'users.noTelp as noTelp')
+                    ->join("users", "orders.name", "=", "users.name")
+                    ->whereDay("orders.created_at", Carbon::parse($request->get('date'))->day)
                     ->where("orders.name", 'like', '%' . $request->get('search[value]') . '%')
                     ->get();
             } else {
-                $dataFood = Orders::select('orders.*')
+                $dataFood = Orders::select('orders.*', 'users.noTelp as noTelp')
+                    ->join("users", "orders.name", "=", "users.name")
                     ->where("orders.name", 'like', '%' . $request->get('search[value]') . '%')
                     ->get();
             }

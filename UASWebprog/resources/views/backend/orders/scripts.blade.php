@@ -35,6 +35,10 @@
                         name: "alamat",
                     },
                     {
+                        data: "noTelp",
+                        name: "noTelp",
+                    },
+                    {
                         data: "action",
                         name: "action",
                         orderable: false,

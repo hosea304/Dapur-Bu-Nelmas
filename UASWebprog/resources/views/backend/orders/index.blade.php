@@ -50,6 +50,7 @@ Menu @endsection @section('content')
                                     <th>Status</th>
                                     <th>Tanggal</th>
                                     <th>Alamat</th>
+                                    <th>No Telp</th>
                                     <th>
                                         Action <br />
                                         <button
