@@ -55,7 +55,7 @@
                         <input
                             placeholder="Dessert"
                             type="file"
-                            accept=".png"
+                            accept="image/png, image/jpg, image/jpeg"
                             name="photo"
                             class="form-control"
                         />

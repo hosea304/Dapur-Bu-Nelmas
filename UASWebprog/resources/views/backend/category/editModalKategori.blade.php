@@ -52,7 +52,7 @@
                             name="photo"
                             id="photo"
                             class="form-control"
-                            accept=".png"
+                            accept="image/png, image/jpg, image/jpeg"
                         />
                         <span class="text-danger error-text photo_error"></span>
                     </div>
