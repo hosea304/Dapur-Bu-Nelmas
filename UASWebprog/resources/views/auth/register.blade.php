@@ -170,6 +170,13 @@
                             </div>
 
                             <div class="mb-3">
+                                <label for="noTelp" class="form-label">NO TELEPON</label>
+                                <br>
+                                <input id="noTelp" type="text" class="form-control" name="noTelp" :value="old('noTelp')" required autofocus>
+                                <x-input-error :messages="$errors->get('noTelp')" class="mt-2" />
+                            </div>
+
+                            <div class="mb-3">
                                 <label for="password" class="form-label">PASSWORD</label>
                                 <br>
                                 <input id="password" type="password" class="form-control" name="password" required autocomplete="new-password">

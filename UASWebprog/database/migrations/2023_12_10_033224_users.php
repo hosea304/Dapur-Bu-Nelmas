@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('alamat');
+            $table->integer('noTelp')->unsigned();
             $table->string('password');
             $table->string('usertype')->default('user');
             $table->timestamps();

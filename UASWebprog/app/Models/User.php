@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'alamat',
+        'noTelp',
         'password',
     ];
 
@@ -40,6 +41,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'noTelp' => 'integer',
         'password' => 'hashed',
     ];
 }
