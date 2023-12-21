@@ -61,12 +61,14 @@
                 <input type="hidden" name="subtotal" value="{{$beli->harga*$beli->qty}}">
                 <input type="hidden" name="nama_penerima" value="{{$user->name}}">
                 <input type="hidden" name="alamat" value="{{$user->alamat}}">
-                <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui nomor WhatsApp atau dengan memindai QR code di bawah ini:</h6>
-                <center><img src="{{ asset('user/asset gambar/qrwa.jpg') }}" style: width="120px"></center><br>
-               <center> <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya
+                <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui WhatsApp di bawah ini:</h6>
+                <center><a href="https://wa.link/9m74qt" target="_blank">
+                    <img src="{{ asset('user/asset gambar/whatsapp.jpg') }}" alt="WhatsApp QR Code">
+                </a></center>
+                <center> <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya
                         ongkir
                         yang akan ditanggung oleh penerima. Terima kasih.</span></h6><center>
-               <center> <input class="btn-checkout" type="submit" value="Checkout"></center>
+                <center> <input class="btn-checkout" type="submit" value="Checkout"></center>
             </form>
             </button>
         </div>

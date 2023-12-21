@@ -61,10 +61,12 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
         <form method="post" action="{{ route('checkoutcart') }}" id="checkoutform">
             <input type="hidden" name="name" value="{{$user->name}}">
             <input type="hidden" name="alamat" value="{{$user->alamat}}">
-            <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui nomor WhatsApp atau dengan memindai QR code di bawah ini:</h6>
-                <center><img src="{{ asset('user/asset gambar/qrwa.jpg') }}" style: width="120px"></center><br>
+            <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui WhatsApp di bawah ini:</h6>
+                <center><a href="https://wa.link/9m74qt" target="_blank">
+                    <img src="{{ asset('user/asset gambar/whatsapp.jpg') }}" alt="WhatsApp QR Code">
+                </a></center>
             <h6>
-               <center> <span style="color: black">Makanan akan disampaikan melalui layanan pengiriman
+                <center> <span style="color: black">Makanan akan disampaikan melalui layanan pengiriman
                     Grab dengan biaya ongkir yang akan ditanggung oleh
                     penerima. Terima kasih.</span><center>
             </h6>
