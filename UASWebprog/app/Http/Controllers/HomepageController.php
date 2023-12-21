@@ -251,12 +251,21 @@ class HomepageController extends Controller
             }
         }
 
-        return view('user.infopesanan', compact('dataOrderLine'));
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
+
+        return view('user.infopesanan', compact('dataOrderLine', 'jumlahDataCart'));
     }
 
     public function tentangkami()
     {
-        return view('user.aboutus');
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
+        return view('user.aboutus', compact('jumlahDataCart'));
     }
 
 
