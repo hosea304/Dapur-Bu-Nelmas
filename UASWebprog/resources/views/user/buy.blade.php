@@ -34,8 +34,9 @@
                     </div>
                     <p id="-message"></p>
                     <p class="price">Harga: Rp.{{$buy->harga}}</p>
-                    <button type="button" onclick="addtocart('{{ $buy->id }}')"><img class="cart-icon"
-                            src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon"></button>
+                    <button type="button" onclick="addtocart('{{ $buy->id }}')">
+    <img class="cart-icon" src="{{ asset('user/asset gambar/shoppingcart.png') }}" alt="Cart Icon">
+</button>
                     <button type="submit" class="btn-buy">BELI</button>
                     <hr class="subsection-divider">
                     <h5>Food Desciption</h5>
