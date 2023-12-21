@@ -54,7 +54,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $order->name }}</td>
                             <td>{{ $order->alamat }}</td>
-                            <td>{{ $order->namaMakanan }} ({{$order->qty}})</td>
+                            <td>{{ $order->namaMakanan }}</td>
                             <td>
                                 Rp.
                                 {{ number_format($order->subtotal, 0, ',', '.') }}

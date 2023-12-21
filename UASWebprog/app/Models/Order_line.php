@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Order_line extends Model
 {
@@ -18,4 +19,9 @@ class Order_line extends Model
         'alamat',
         'subtotal',
     ];
+
+    public function food(): HasOne
+    {
+        return $this->hasOne(Foods::class, "id", "foods");
+    }
 }
