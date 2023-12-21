@@ -11,14 +11,7 @@
 
 <body class="product" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
     @include('user.navbar')
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <br>
     <h2 style="text-align: center; font-family: monospace; font-weight: bold; color: white; font-size: 90px">PRODUK</h2>
     <div class="container">
         @php

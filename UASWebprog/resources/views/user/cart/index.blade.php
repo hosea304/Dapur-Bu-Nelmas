@@ -19,7 +19,7 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
 <body class="checkout"
     style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover; color:white;">
     @include('user.navbar')
-    <br /><br /><br /><br /><br /><br /><br /><br />
+    <br />
     <div class="cart">
         <div class="cart-title img">
             <img src="{{ asset('user/asset gambar/carttitle.png') }}" alt="Chef Woman" />
