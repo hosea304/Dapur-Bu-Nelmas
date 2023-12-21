@@ -47,10 +47,11 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
                         <td class="cart-quantity">0</td>
                         <td class="cart-price">Rp.</td>
                         <td class="cart-delete">
-                            <button class="remove-button">
-                                <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item" />
-                            </button>
-                        </td>
+    <button class="remove-button">
+        <img src="{{ asset('user/asset gambar/remove-icon.png') }}" alt="Remove Item" />
+    </button>
+</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -62,17 +63,16 @@ https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
             <input type="hidden" name="name" value="{{$user->name}}">
             <input type="hidden" name="alamat" value="{{$user->alamat}}">
             <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui WhatsApp di bawah ini:</h6>
-                <center><a href="https://wa.link/9m74qt" target="_blank">
-                    <img src="{{ asset('user/asset gambar/wa.png') }}" alt="WhatsApp QR Code">
-                </a></center>
+                <center><a href="https://wa.link/3dk41t" target="_blank">
+                            <img src="{{ asset('user/asset gambar/wa.png') }}" alt="081319939500" width="40" height="40">
+                        </a>
+                </center>
             <h6>
-                <center> <span style="color: black">Makanan akan disampaikan melalui layanan pengiriman
-                    Grab dengan biaya ongkir yang akan ditanggung oleh
-                    penerima. Terima kasih.</span><center>
+                <center><span style="color: black">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya ongkir yang akan ditanggung oleh penerima. Terima kasih.</span><center>
             </h6>
             <center><button type="submit" class="cart-checkout-button">
-                CHECKOUT
-            </button><center>
+            CHECKOUT
+        </button><center>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

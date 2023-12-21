@@ -62,12 +62,11 @@
                 <input type="hidden" name="nama_penerima" value="{{$user->name}}">
                 <input type="hidden" name="alamat" value="{{$user->alamat}}">
                 <h6><span style="color: black;">Mohon melakukan transfer ke nomor rekening BCA berikut: <span style="color: red;">8840820069 a.n. JOHANNA AGUSTINA W BAMBA</span>, dan kemudian kirimkan bukti transfer melalui WhatsApp di bawah ini:</h6>
-                <center><a href="https://wa.link/9m74qt" target="_blank">
-                    <img src="{{ asset('user/asset gambar/wa.png') }}" alt="WhatsApp QR Code">
-                </a></center>
-                <center> <h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya
-                        ongkir
-                        yang akan ditanggung oleh penerima. Terima kasih.</span></h6><center>
+                <center><a href="https://wa.link/3dk41t" target="_blank">
+                            <img src="{{ asset('user/asset gambar/wa.png') }}" alt="081319939500" width="40" height="40">
+                        </a>
+                </center>
+                <center><h6><span style="color: black;">Makanan akan disampaikan melalui layanan pengiriman Grab dengan biaya ongkir yang akan ditanggung oleh penerima. Terima kasih.</span></h6><center>
                 <center> <input class="btn-checkout" type="submit" value="Checkout"></center>
             </form>
             </button>
