@@ -55,12 +55,15 @@ class FoodsController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'description' => 'required|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'harga' => 'required|integer',
             'stock' => 'required|integer',
         ], [
             'name.required' => 'Field Nama Food harus diisi',
             'name.string' => 'Field Nama Food harus Berupa string',
+            'description.required' => 'Field Deskripsi harus diisi',
+            'description.string' => 'Field Deskripsi harus Berupa string',
             'photo.required' => 'Field Photo harus diisi',
             'photo.image' => 'Field Photo harus Berupa image',
             'photo.mimes' => 'Field Photo harus Berupa jpeg,png,jpg,gif,svg',
