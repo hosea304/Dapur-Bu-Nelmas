@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
+<div class="sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
     <div class="navbar-brand-container">
         <img src="{{ asset('user/asset gambar/logo usaha.png') }}" alt="Logo Usaha" width="90" height="90">
         <span class="judul">DAPUR BU NELMAS</span>
@@ -37,7 +38,7 @@
         </ul>
     </div>
 </nav>
-<div class="sub-navbar fixed-top">
+<div class="sub-navbar mt-0">
     <div class="nav-option" onclick="scrollToSection('home')"><a class=" text-decoration-none  text-white"
             href="{{ route('beranda') }}">BERANDA</a></div>
     <div class="nav-option" onclick="scrollToSection('products')"><a class=" text-decoration-none  text-white"
@@ -47,5 +48,6 @@
     <div class="nav-option" onclick="toggleAbout()"><a class=" text-decoration-none  text-white"
             href="{{ route('tentangkami') }}">TENTANG KAMI</a>
     </div>
+</div>
 </div>
 <link href="{{ asset('user/user-style.css') }}" rel="stylesheet" type="text/css">

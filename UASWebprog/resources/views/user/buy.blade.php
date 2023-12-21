@@ -15,7 +15,7 @@
 
 <body class="buy" style="background-image: url('user/asset gambar/backgroundweb.jpg'); background-size: cover;">
     @include('user.navbar')
-    <br><br><br><br><br><br><br><br>
+    <br>
     <div class="container">
         <div class="row">
             <div class="col-md-6 order-md-2">
