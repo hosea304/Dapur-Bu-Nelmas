@@ -1,16 +1,10 @@
 @extends('layouts.backend') @section('title') Menu @endsection
 @section('headerScripts')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<link
-    rel="stylesheet"
-    href="{{ asset('datatable/dataTables.bootstrap4.min.css') }}"
-/>
-<link
-    href="
+<link rel="stylesheet" href="{{ asset('datatable/dataTables.bootstrap4.min.css') }}" />
+<link href="
 https://cdn.jsdelivr.net/npm/sweetalert2@11.10.0/dist/sweetalert2.min.css
-"
-    rel="stylesheet"
-/>
+" rel="stylesheet" />
 @endsection @section('heading') Halaman Menu @endsection @section('subHeading')
 Menu @endsection @section('content')
 <div class="row">
@@ -23,23 +17,11 @@ Menu @endsection @section('content')
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12 table-responsive">
-                        <table
-                            id="tableMenu"
-                            class="table table-bordered table-striped"
-                        >
+                        <table id="tableMenu" class="table table-bordered table-striped">
                             <label for="">Tanggal</label>
-                            <input
-                                placeholder=""
-                                type="date"
-                                name=""
-                                id="date"
-                                class="form-control mb-3 w-25"
-                            />
+                            <input placeholder="" type="date" name="" id="date" class="form-control mb-3 w-25" />
                             <div>
-                                <button
-                                    class="btn btn-primary mb-3"
-                                    id="btnPerDay"
-                                >
+                                <button class="btn btn-primary mb-3" id="btnPerDay">
                                     Cari Order Harian Berdasarkan Tanggal
                                 </button>
                             </div>
@@ -52,11 +34,7 @@ Menu @endsection @section('content')
                                     <th>Alamat</th>
                                     <th>
                                         Action <br />
-                                        <button
-                                            id="delAllBtn"
-                                            type="submit"
-                                            class="btn btn-danger"
-                                        >
+                                        <button id="delAllBtn" type="submit" class="btn btn-danger">
                                             Hapus
                                         </button>
                                     </th>

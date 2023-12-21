@@ -218,7 +218,12 @@ class HomepageController extends Controller
 
         $user = Auth::user();
 
-        return view('user.directCheckout.index', compact('beli', 'user'));
+        $jumlahDataCart = Carts::where("user_id", Auth::id())
+            ->where("checked_out", false)
+            ->whereDay("carts.created_at", now()->day)
+            ->count();
+
+        return view('user.directCheckout.index', compact('beli', 'user', 'jumlahDataCart'));
     }
 
     public function removefromdirect(Request $request)
