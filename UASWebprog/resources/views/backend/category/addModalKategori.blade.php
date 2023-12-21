@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <label for="">Gambar</label>
-                        <input type="file" name="photo" class="form-control">
+                        <input type="file" name="photo" class="form-control" accept=".png">
                         <span class="text-danger error-text photo_error"></span>
                     </div>
                     <div class="modal-footer">
