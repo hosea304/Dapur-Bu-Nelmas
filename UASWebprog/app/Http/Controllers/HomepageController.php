@@ -241,6 +241,8 @@ class HomepageController extends Controller
     {
         $dataOrderLine = Orders::with(["orderline", "orderline.food"])
             ->where('orders.name', Auth::user()->name)
+            ->orderByRaw("CASE WHEN status = 1 THEN 0 WHEN status = 0 THEN 1 ELSE 2 END")
+            ->orderByRaw('DATE(created_at) DESC')
             ->get();
 
         foreach ($dataOrderLine as $value) {
