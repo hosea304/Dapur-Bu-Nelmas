@@ -51,6 +51,11 @@
     <x-text-input id="alamat" name="alamat" type="text" class="mt-1 block w-full form-control" :value="old('alamat', $user->alamat)" required />
     <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
 </div>
+<div>
+    <x-input-label for="noTelp" :value="__('No. Telepon')" />
+    <x-text-input id="noTelp" name="noTelp" type="text" class="mt-1 block w-full form-control" :value="old('noTelp', $user->noTelp)" required />
+    <x-input-error class="mt-2" :messages="$errors->get('noTelp')" />
+</div>
 
 <br>
         <div class="flex items-center gap-4">

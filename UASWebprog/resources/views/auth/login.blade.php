@@ -219,27 +219,11 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-
-                                    <div class="mb-3 form-check">
-                                        <input type="checkbox" class="form-check-input" name="remember" id="remember">
-                                        <label class="form-check-label" for="remember" style="font-size:20px;">
-                                            Remember me
-                                        </label>
-                                    </div>
-
                                     <div>
                                         <button type="submit" class="btn btn-primary mx-auto d-block">
                                             Log in
                                         </button>
                                     </div>
-
-                                    @if (Route::has('password.request'))
-                                        <p class="forgot-password">
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                Forgot your password?
-                                            </a>
-                                        </p>
-                                    @endif
                                 </form>
                             </div>
                         </div>

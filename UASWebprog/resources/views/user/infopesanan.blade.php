@@ -51,11 +51,14 @@
                             Rp.
                             {{ number_format($order->subtotal, 0, ',', '.') }}
                         </td>
-                        <td>
-                            @if ($order->status == 0) Pesanan diproses
-                            @elseif ($order->status == 1) Pesanan diantar
-                            @else Pesanan selesai @endif
-                        </td>
+                        <td style="padding: 5px; text-align: center; border-radius: 5px;
+                                @if ($order->status == 0) background-color: red; color: white;
+                                @elseif ($order->status == 1) background-color: yellow; color: black;
+                                @else background-color: green; color: white; @endif">
+                                @if ($order->status == 0) Pesanan diproses
+                                @elseif ($order->status == 1) Pesanan diantar
+                                @else Pesanan selesai @endif
+                            </td>
                         <td>
                             {{ $order->created_at->format('d F Y H:i:s') }}
                         </td>
